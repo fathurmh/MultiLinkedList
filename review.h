@@ -25,8 +25,6 @@ struct review {
 struct elementReview {
 	// variabel data review pada elemen saat ini
 	review data;
-	// pointer menuju elemen sebelumnya
-	addressReview prev;
 	// pointer menuju elemen selanjutnya
 	addressReview next;
 	// pointer menuju elemen reviewer
@@ -39,8 +37,6 @@ struct elementReview {
 struct listReview {
 	// pointer menuju elemen pertama pada list
 	addressReview first;
-	// pointer menuju elemen terakhir pada list
-	addressReview last;
 };
 
 // prosedur membuat list baru
@@ -71,5 +67,8 @@ int countList(listReview listReview);
 void cetakReview(addressReview addressReview);
 // prosedur cetak list data review
 void cetakList(listReview listReview);
+
+// prosedur melihat top 10 movie berdasarkan ulasan terbanyak
+void viewTopTenMovie(listReview listReview);
 
 #endif // REVIEW_H

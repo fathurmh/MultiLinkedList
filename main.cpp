@@ -58,7 +58,7 @@ int main() {
     // check kondisi pilihan
     switch (mainMenu) {
         case '1' : { //  View Top 10 By Review
-            printHeader();
+            viewTopTenMovie(listReview);
             getch();
 
             // menuju label main menu

@@ -5,6 +5,7 @@
 // include library buatan
 #include "common.h"
 #include "adminarea.h"
+#include "guestarea.h"
 #include "reviewer.h"
 #include "movie.h"
 #include "review.h"
@@ -232,9 +233,6 @@ void inisialisasiDataReview(ListReview &ListReview, listReviewer listReviewer, l
     addressReviewer addressReviewer;
     addressMovie addressMovie;
 
-    cetak(ListReview);
-    getch();
-
     // data dibuat menjadi elemen reviewer
     newReview = createReview(5, "GREAT MOVIE!!!");
     // cari pointer reviewer yang mereview
@@ -246,26 +244,17 @@ void inisialisasiDataReview(ListReview &ListReview, listReviewer listReviewer, l
     // alamat memory reviewer dimasukan kedalam list dengan metode insert last
     insertFirst(ListReview, newAddressReview);
 
-    cetak(ListReview);
-    getch();
-
     newReview = createReview(5, "Pretty good super hero film.");
     addressReviewer = searchByUsername(listReviewer, "fatri");
     addressMovie = searchByTitle(listMovie, "AQUAMAN");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
 
-    cetak(newAddressReview);
-    getch();
-
     newReview = createReview(5, "Insane scary loved it.");
     addressReviewer = searchByUsername(listReviewer, "fathur");
     addressMovie = searchByTitle(listMovie, "BIRD BOX");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
-
-    cetak(ListReview);
-    getch();
 
     newReview = createReview(5, "Excellent movie! How queen became queen");
     addressReviewer = searchByUsername(listReviewer, "eri");

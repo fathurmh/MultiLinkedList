@@ -1,14 +1,10 @@
 // include library c++
 #include <iostream>
 #include <conio.h>
-#include <string>
 
 // include library buatan
 #include "common.h"
 #include "review.h"
-
-// using namespace
-using namespace std;
 
 // prosedur membuat list baru
 void createList(ListReview &ListReview) {

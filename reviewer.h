@@ -65,9 +65,4 @@ void cetakReviewer(addressReviewer addressReviewer);
 // prosedur cetak list data reviewer
 void cetakList(listReviewer listReviewer);
 
-// fungsi sign in
-loginUser signIn(listReviewer listReviewer);
-// prosedur sign up
-void signUp(listReviewer &listReviewer);
-
 #endif // REVIEWER_H

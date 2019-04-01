@@ -10,6 +10,10 @@
 #define next(p) p->next
 // pointer menuju elemen sebelumnya
 #define prev(p) p->prev
+// pointer menuju elemen reviewer
+#define reviewer(p) p->reviewer
+// pointer menuju elemen movie
+#define movie(p) p->movie
 // pointer menuju elemen pertama
 #define first(r) (r).first
 // pointer menuju elemen terakhir

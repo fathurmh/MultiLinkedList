@@ -108,6 +108,14 @@ void inputDataMovie(listMovie listMovie) {
 	string genre;
 	string runningTime;
 	string releaseDate;
+    int retryTitleCount;
+    bool titleSudahAda;
+
+    // inisialisasi variabel pengulangan input username
+    retryTitleCount = 0;
+
+    // label input title
+    InputTitleLabel:
 
     // cetak header
     printHeader();
@@ -116,6 +124,32 @@ void inputDataMovie(listMovie listMovie) {
     // input title
     cout << "Title: ";
     getline(cin, title);
+
+    // cek title didalam list
+    titleSudahAda = searchByTitle(listMovie, title) != NULL;
+
+    // cek title jika sudah ada didalam list atau tidak menginputkan karakter
+    if (titleSudahAda || title.empty()) {
+        // cek title jika tidak menginputkan karakter
+        if (title.empty()) {
+            // cetak bahwa title tidak boleh kosong
+            warning("\nTitle tidak boleh kosong.");
+        } else {
+            // cetak bahwa title sudah ada didalam list
+            failed("\nTitle sudah ada.");
+        }
+
+        getch();
+
+        // cek maksimal mengulang kesalahan input
+        if (++retryTitleCount < MAX_RETRY_COUNT) {
+            // mengulang menginput username
+            goto InputTitleLabel;
+        } else {
+            // menuju final label
+            goto FinalLabel;
+        }
+    }
 
     // input director
     cout << "Director: ";
@@ -146,11 +180,18 @@ void inputDataMovie(listMovie listMovie) {
     // alamat memory movie dimasukan kedalam list dengan metode insert last
     insertLast(listMovie, addressMovie);
 
-    // cetak bahwa input data berhasil
-    printHeader();
-    printTitle("DATA MOVIE");
-    cetakMovie(addressMovie);
-    success("Input Data berhasil.");
+    FinalLabel:
+    // cek jika maksimal mengulang kesalahan input tercapai
+    if (retryTitleCount == MAX_RETRY_COUNT) {
+        // sign up dinyatakan gagal
+        failed("Input Data gagal.");
+    } else {
+        // cetak bahwa input data berhasil
+        printHeader();
+        printTitle("DATA MOVIE");
+        cetakMovie(addressMovie);
+        success("Input Data berhasil.");
+    }
     getch();
 }
 

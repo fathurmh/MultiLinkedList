@@ -2,6 +2,10 @@
 .vs/
 .vscode/
 
+# Artifacts folder
+[Bb]in/
+[Oo]bj/
+
 # Prerequisites
 *.d
 

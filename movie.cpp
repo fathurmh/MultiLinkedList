@@ -214,6 +214,32 @@ void deleteLast(listMovie &listMovie) {
     }
 }
 
+// fungsi cari movie by title pada list
+addressMovie searchByTitle(listMovie &listMovie, string title) {
+    // inisialisasi variabel ketemu
+    bool ketemu = false;
+
+    // inisialisasi variabel dataKetemu dengan null
+    addressMovie dataKetemu = NULL;
+
+    // inisialisasi variabel iterator dengan elemen pertama pada list
+    addressMovie current = first(listMovie);
+
+    // loop selama tidak ketemu dan iterator tidak sama dengan null
+    while (!ketemu && current != NULL) {
+        // jika title iterator sama dengan parameter title maka ketemu
+        if (data(current).title == title) {
+            ketemu = true;
+            dataKetemu = current;
+        }
+        // variabel iterator diisi dengan elemen selanjutnya
+        current = next(current);
+    }
+
+    // kembalikan data
+    return dataKetemu;
+}
+
 // fungsi cari movie by id pada list
 addressMovie searchById(listMovie &listMovie, int id) {
     // inisialisasi variabel ketemu

@@ -7,6 +7,7 @@
 #include "adminarea.h"
 #include "reviewer.h"
 #include "movie.h"
+#include "review.h"
 
 // using namespace
 using namespace std;
@@ -15,6 +16,8 @@ using namespace std;
 void inisialisasiDataReviewer(listReviewer &listReviewer);
 // prosedur inisialisasi data movie
 void inisialisasiDataMovie(listMovie &listMovie);
+// prosedur inisialisasi data review
+void inisialisasiDataReview(listReview &listReview, listReviewer listReviewer, listMovie listMovie);
 
 // main program
 int main() {
@@ -22,14 +25,17 @@ int main() {
     char mainMenu;
     listReviewer listReviewer;
     listMovie listMovie;
+    listReview listReview;
 
     // create list
     createList(listReviewer);
     createList(listMovie);
+    createList(listReview);
 
     // inisialisasi data
     inisialisasiDataReviewer(listReviewer);
     inisialisasiDataMovie(listMovie);
+    inisialisasiDataReview(listReview, listReviewer, listMovie);
 
     // label main menu
     MainMenuLabel:
@@ -127,37 +133,37 @@ void inisialisasiDataReviewer(listReviewer &listReviewer) {
     newAddressReviewer = alokasiReviewer(newReviewer);
     insertLast(listReviewer, newAddressReviewer);
 
-    // newReviewer = createReviewer("Fathur", "fathur", "fathur123");
-    // newAddressReviewer = alokasiReviewer(newReviewer);
-    // insertLast(listReviewer, newAddressReviewer);
+    newReviewer = createReviewer("Fathur", "fathur", "fathur123");
+    newAddressReviewer = alokasiReviewer(newReviewer);
+    insertLast(listReviewer, newAddressReviewer);
 
-    // newReviewer = createReviewer("Eri", "eri", "eri123");
-    // newAddressReviewer = alokasiReviewer(newReviewer);
-    // insertLast(listReviewer, newAddressReviewer);
+    newReviewer = createReviewer("Eri", "eri", "eri123");
+    newAddressReviewer = alokasiReviewer(newReviewer);
+    insertLast(listReviewer, newAddressReviewer);
 
-    // newReviewer = createReviewer("Nanda", "nanda", "nanda123");
-    // newAddressReviewer = alokasiReviewer(newReviewer);
-    // insertLast(listReviewer, newAddressReviewer);
+    newReviewer = createReviewer("Nanda", "nanda", "nanda123");
+    newAddressReviewer = alokasiReviewer(newReviewer);
+    insertLast(listReviewer, newAddressReviewer);
 
-    // newReviewer = createReviewer("Tubagus", "tubagus", "tubagus123");
-    // newAddressReviewer = alokasiReviewer(newReviewer);
-    // insertLast(listReviewer, newAddressReviewer);
+    newReviewer = createReviewer("Tubagus", "tubagus", "tubagus123");
+    newAddressReviewer = alokasiReviewer(newReviewer);
+    insertLast(listReviewer, newAddressReviewer);
 
-    // newReviewer = createReviewer("Arib", "arib", "arib123");
-    // newAddressReviewer = alokasiReviewer(newReviewer);
-    // insertLast(listReviewer, newAddressReviewer);
+    newReviewer = createReviewer("Arib", "arib", "arib123");
+    newAddressReviewer = alokasiReviewer(newReviewer);
+    insertLast(listReviewer, newAddressReviewer);
 
-    // newReviewer = createReviewer("Nugi Ganteng", "nugiganteng", "nugi123");
-    // newAddressReviewer = alokasiReviewer(newReviewer);
-    // insertLast(listReviewer, newAddressReviewer);
+    newReviewer = createReviewer("Nugi Ganteng", "nugiganteng", "nugi123");
+    newAddressReviewer = alokasiReviewer(newReviewer);
+    insertLast(listReviewer, newAddressReviewer);
 
-    // newReviewer = createReviewer("Fathur Fathur", "fathurfathur", "fathurfathur");
-    // newAddressReviewer = alokasiReviewer(newReviewer);
-    // insertLast(listReviewer, newAddressReviewer);
+    newReviewer = createReviewer("Fathur Fathur", "fathurfathur", "fathurfathur");
+    newAddressReviewer = alokasiReviewer(newReviewer);
+    insertLast(listReviewer, newAddressReviewer);
 
-    // newReviewer = createReviewer("Nugi Nugi", "nuginugi", "nuginugi");
-    // newAddressReviewer = alokasiReviewer(newReviewer);
-    // insertLast(listReviewer, newAddressReviewer);
+    newReviewer = createReviewer("Nugi Nugi", "nuginugi", "nuginugi");
+    newAddressReviewer = alokasiReviewer(newReviewer);
+    insertLast(listReviewer, newAddressReviewer);
 }
 
 // prosedur inisialisasi data movie
@@ -216,4 +222,78 @@ void inisialisasiDataMovie(listMovie &listMovie) {
     newMovie = createMovie("US", "Jordan Peele", "Nyong'o, Winston Duke, Anna Diop, Yahya Abdul-Matern II", "Mystery, Thriller", "2 hour 1 minute", "20 September 2019");
     newAddressMovie = alokasiMovie(newMovie);
     insertLast(listMovie, newAddressMovie);
+}
+
+// prosedur inisialisasi data review
+void inisialisasiDataReview(listReview &listReview, listReviewer listReviewer, listMovie listMovie) {
+    // deklarasi variabel
+    review newReview;
+    addressReview newAddressReview;
+    addressReviewer addressReviewer;
+    addressMovie addressMovie;
+
+    // data dibuat menjadi elemen reviewer
+    newReview = createReview(5, "GREAT MOVIE!!!");
+    // cari pointer reviewer yang mereview
+    addressReviewer = searchByUsername(listReviewer, "nugi");
+    // cari pointer movie yang direview
+    addressMovie = searchByTitle(listMovie, "A STARS IS BORN");
+    // elemen reviewer dialokasikan pada memory
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    // alamat memory reviewer dimasukan kedalam list dengan metode insert last
+    insertFirst(listReview, newAddressReview);
+
+    newReview = createReview(5, "Pretty good super hero film.");
+    addressReviewer = searchByUsername(listReviewer, "fatri");
+    addressMovie = searchByTitle(listMovie, "AQUAMAN");
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    insertFirst(listReview, newAddressReview);
+
+    newReview = createReview(5, "Insane scary loved it.");
+    addressReviewer = searchByUsername(listReviewer, "fathur");
+    addressMovie = searchByTitle(listMovie, "BIRD BOX");
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    insertFirst(listReview, newAddressReview);
+
+    newReview = createReview(5, "Excellent movie! How queen became queen");
+    addressReviewer = searchByUsername(listReviewer, "eri");
+    addressMovie = searchByTitle(listMovie, "BOHEMIAN RHAPSODY");
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    insertFirst(listReview, newAddressReview);
+
+    newReview = createReview(5, "Loved it!!! Awsome Movie!!!");
+    addressReviewer = searchByUsername(listReviewer, "nanda");
+    addressMovie = searchByTitle(listMovie, "BUMBLEBEE");
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    insertFirst(listReview, newAddressReview);
+
+    newReview = createReview(5, "Best movie!!! Carol is awesome!");
+    addressReviewer = searchByUsername(listReviewer, "tubagus");
+    addressMovie = searchByTitle(listMovie, "CAPTAIN MARVEL");
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    insertFirst(listReview, newAddressReview);
+
+    newReview = createReview(5, "Absolutely Amazing!!");
+    addressReviewer = searchByUsername(listReviewer, "arib");
+    addressMovie = searchByTitle(listMovie, "How To Train Your Dragon:The Hidden World");
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    insertFirst(listReview, newAddressReview);
+
+    newReview = createReview(4, "Great movie and funny");
+    addressReviewer = searchByUsername(listReviewer, "nugiganteng");
+    addressMovie = searchByTitle(listMovie, "ISN'T IT ROMANTIC");
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    insertFirst(listReview, newAddressReview);
+
+    newReview = createReview(5, "Amazing movie stan lee");
+    addressReviewer = searchByUsername(listReviewer, "fathurfathur");
+    addressMovie = searchByTitle(listMovie, "SPIDER-MAN:INTO THE SPIDER-VERSE");
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    insertFirst(listReview, newAddressReview);
+
+    newReview = createReview(5, "FANTASTIC MOVIE!!!");
+    addressReviewer = searchByUsername(listReviewer, "nuginugi");
+    addressMovie = searchByTitle(listMovie, "FANTASTIC BEASTS:THE CRIMES OF GRINDELWALD");
+    newAddressReview = alokasiReview(newReview, addressReviewer, addressMovie);
+    insertFirst(listReview, newAddressReview);
 }

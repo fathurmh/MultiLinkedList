@@ -59,6 +59,8 @@ void deleteAll(listMovie &listMovie);
 void deleteFirst(listMovie &listMovie);
 // prosedur delete last movie
 void deleteLast(listMovie &listMovie);
+// fungsi cari movie by title pada list
+addressMovie searchByTitle(listMovie &listMovie, string title);
 // fungsi cari movie by id pada list
 addressMovie searchById(listMovie &listMovie, int id);
 // fungsi hitung total elemen pada list

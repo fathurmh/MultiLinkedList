@@ -1,7 +1,8 @@
-#ifndef ADMINAREA_H_INCLUDED
-#define ADMINAREA_H_INCLUDED
+#ifndef ADMIN_AREA_H_INCLUDED
+#define ADMIN_AREA_H_INCLUDED
 
 // include library buatan
+#include "common.h"
 #include "reviewer.h"
 #include "movie.h"
 
@@ -20,4 +21,4 @@ void viewDataReviewer(listReviewer listReviewer);
 // prosedur delete data reviewer
 void deleteDataReviewer(listReviewer &listReviewer);
 
-#endif // ADMINAREA_H_INCLUDED
+#endif // ADMIN_AREA_H_INCLUDED

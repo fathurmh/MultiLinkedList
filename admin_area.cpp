@@ -6,8 +6,7 @@
 #include <sstream>
 
 // include library buatan
-#include "common.h"
-#include "adminarea.h"
+#include "admin_area.h"
 
 // using namespace
 using namespace std;

@@ -1,5 +1,5 @@
-#ifndef GUESTAREA_H_INCLUDED
-#define GUESTAREA_H_INCLUDED
+#ifndef GUEST_AREA_H_INCLUDED
+#define GUEST_AREA_H_INCLUDED
 
 // include library buatan
 #include "common.h"
@@ -10,4 +10,4 @@ loginUser signIn(listReviewer listReviewer);
 // prosedur sign up
 void signUp(listReviewer &listReviewer);
 
-#endif // GUESTAREA_H_INCLUDED
+#endif // GUEST_AREA_H_INCLUDED

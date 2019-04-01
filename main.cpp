@@ -4,8 +4,8 @@
 
 // include library buatan
 #include "common.h"
-#include "adminarea.h"
-#include "guestarea.h"
+#include "admin_area.h"
+#include "guest_area.h"
 #include "reviewer.h"
 #include "movie.h"
 #include "review.h"

@@ -1,5 +1,5 @@
-#ifndef REVIEW_H
-#define REVIEW_H
+#ifndef REVIEW_H_INCLUDED
+#define REVIEW_H_INCLUDED
 
 // include library c++
 #include <string>
@@ -34,41 +34,43 @@ struct elementReview {
 };
 
 // tipe bentukan list review
-struct listReview {
+struct ListReview {
 	// pointer menuju elemen pertama pada list
 	addressReview first;
 };
 
 // prosedur membuat list baru
-void createList(listReview &newListReview);
+void createList(ListReview &ListReview);
 // fungsi membuat data review
 review createReview(int rating, string description);
-// fungsi alokasi review
-addressReview alokasiReview(review newReview, addressReviewer addressReviewer, addressMovie addressMovie);
-// prosedur insert first review
-void insertFirst(listReview &listReview, addressReview newAddressReview);
-// prosedur insert last review
-void insertLast(listReview &listReview, addressReview newAddressReview);
-// prosedur update review
-void updateReview(addressReview review, int newRating, string newDescription);
-// prosedur delete review
-void deleteReview(listReview &listReview, addressReview review);
-// prosedur delete all review
-void deleteAll(listReview &listReview);
-// prosedur delete first review
-void deleteFirst(listReview &listReview);
-// prosedur delete last review
-void deleteLast(listReview &listReview);
+
+// fungsi alokasi
+addressReview allocate(review review, addressReviewer addressReviewer, addressMovie addressMovie);
+// prosedur dealokasi
+void deallocate(addressReview &addressReview);
+
+// prosedur insert first
+void insertFirst(ListReview &ListReview, addressReview newAddressReview);
+// prosedur insert last
+void insertLast(ListReview &ListReview, addressReview newAddressReview);
+
+// prosedur update
+void update(addressReview review, int newRating, string newDescription);
+
+// prosedur delete first
+void deleteFirst(ListReview &ListReview);
+// prosedur delete last
+void deleteLast(ListReview &ListReview);
+// prosedur delete last
+void deleteReview(ListReview &ListReview, addressReview deleteAddressReview);
+
 // fungsi cari review by id pada list
-addressReview searchById(listReview &listReview, int id);
+addressReview findById(ListReview ListReview, int id);
 // fungsi hitung total elemen pada list
-int countList(listReview listReview);
+int count(ListReview ListReview);
 // prosedur cetak data review
-void cetakReview(addressReview addressReview);
+void cetak(addressReview addressReview);
 // prosedur cetak list data review
-void cetakList(listReview listReview);
+void cetak(ListReview ListReview);
 
-// prosedur melihat top 10 movie berdasarkan ulasan terbanyak
-void viewTopTenMovie(listReview listReview);
-
-#endif // REVIEW_H
+#endif // REVIEW_H_INCLUDED

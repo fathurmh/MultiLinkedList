@@ -1,5 +1,5 @@
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef COMMON_H_INCLUDED
+#define COMMON_H_INCLUDED
 
 // include library c++
 #include <string>
@@ -55,4 +55,4 @@ void information(const char* text);
 // fungsi agar input password menjadi simbol *
 std::string getPass(const char *prompt, bool show_asterisk = true);
 
-#endif // COMMON_H
+#endif // COMMON_H_INCLUDED

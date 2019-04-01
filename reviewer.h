@@ -1,5 +1,5 @@
-#ifndef REVIEWER_H
-#define REVIEWER_H
+#ifndef REVIEWER_H_INCLUDED
+#define REVIEWER_H_INCLUDED
 
 // include library c++
 #include <string>
@@ -65,4 +65,4 @@ void cetakReviewer(addressReviewer addressReviewer);
 // prosedur cetak list data reviewer
 void cetakList(listReviewer listReviewer);
 
-#endif // REVIEWER_H
+#endif // REVIEWER_H_INCLUDED

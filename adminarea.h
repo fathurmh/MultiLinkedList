@@ -1,5 +1,5 @@
-#ifndef ADMINAREA_H
-#define ADMINAREA_H
+#ifndef ADMINAREA_H_INCLUDED
+#define ADMINAREA_H_INCLUDED
 
 // include library buatan
 #include "reviewer.h"
@@ -20,4 +20,4 @@ void viewDataReviewer(listReviewer listReviewer);
 // prosedur delete data reviewer
 void deleteDataReviewer(listReviewer &listReviewer);
 
-#endif // ADMINAREA_H
+#endif // ADMINAREA_H_INCLUDED

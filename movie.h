@@ -1,5 +1,5 @@
-#ifndef MOVIE_H
-#define MOVIE_H
+#ifndef MOVIE_H_INCLUDED
+#define MOVIE_H_INCLUDED
 
 // include library c++
 #include <string>
@@ -70,4 +70,4 @@ void cetakMovie(addressMovie addressMovie);
 // prosedur cetak list data movie
 void cetakList(listMovie listMovie);
 
-#endif // MOVIE_H
+#endif // MOVIE_H_INCLUDED

@@ -5,38 +5,43 @@
 #include <string>
 
 // include library buatan
-#include "movie.h"
+#include "list_movie.h"
 #include "reviewer.h"
 
 // using namespace
 using namespace std;
+
+// pointer menuju elemen reviewer
+#define REVIEWER(p) p->reviewer
+// pointer menuju elemen movie
+#define MOVIE(p) p->movie
 
 // pointer alamat memory review
 typedef struct elementReview *addressReview;
 
 // tipe bentukan data review
 struct review {
-	int id;
-	int rating;
+    int id;
+    int rating;
     string description;
 };
 
 // tipe bentukan elemen review
 struct elementReview {
-	// variabel data review pada elemen saat ini
-	review data;
-	// pointer menuju elemen selanjutnya
-	addressReview next;
-	// pointer menuju elemen reviewer
-	addressReviewer reviewer;
-	// pointer menuju elemen movie
-	addressMovie movie;
+    // variabel data review pada elemen saat ini
+    review data;
+    // pointer menuju elemen selanjutnya
+    addressReview next;
+    // pointer menuju elemen reviewer
+    addressReviewer reviewer;
+    // pointer menuju elemen movie
+    AddressMovie movie;
 };
 
 // tipe bentukan list review
 struct ListReview {
-	// pointer menuju elemen pertama pada list
-	addressReview first;
+    // pointer menuju elemen pertama pada list
+    addressReview first;
 };
 
 // prosedur membuat list baru
@@ -45,9 +50,11 @@ void createList(ListReview &ListReview);
 review createReview(int rating, string description);
 
 // fungsi alokasi
-addressReview allocate(review review, addressReviewer addressReviewer, addressMovie addressMovie);
+addressReview allocate(review review, addressReviewer addressReviewer, AddressMovie addressMovie);
 // prosedur dealokasi
 void deallocate(addressReview &addressReview);
+// fungsi alokasi array
+addressReview *allocate(int size);
 
 // prosedur insert first
 void insertFirst(ListReview &ListReview, addressReview newAddressReview);

@@ -2,16 +2,18 @@
 #define GUEST_AREA_H_INCLUDED
 
 // include library buatan
-#include "common.h"
 #include "reviewer.h"
-#include "movie.h"
+#include "list_movie.h"
 #include "review.h"
 
+// using namespace
+using namespace std;
+
 // fungsi sign in
-loginUser signIn(listReviewer listReviewer);
+LoginUser signIn(listReviewer listReviewer);
 // prosedur sign up
 void signUp(listReviewer &listReviewer);
 // view top 10 movie dengan ulasan terbanyak
-void viewTopTenMovie(ListReview ListReview, listMovie listMovie);
+void viewTopTenMovie(ListReview ListReview, ListMovie listMovie);
 
 #endif // GUEST_AREA_H_INCLUDED

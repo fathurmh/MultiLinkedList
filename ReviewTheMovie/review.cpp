@@ -9,7 +9,7 @@
 // prosedur membuat list baru
 void createList(ListReview &ListReview) {
     // inisialisasi elemen pertama dengan null
-    first(ListReview) = NULL;
+    FIRST(ListReview) = NULL;
 }
 
 // fungsi membuat data review
@@ -30,20 +30,20 @@ review createReview(int rating, string description) {
 }
 
 // fungsi alokasi
-addressReview allocate(review newReview, addressReviewer addressReviewer, addressMovie addressMovie) {
+addressReview allocate(review newReview, addressReviewer addressReviewer, AddressMovie addressMovie) {
     // deklarasi pointer review
     addressReview newAddressReview;
     // instansiasi pointer dengan elemen review
     newAddressReview = new elementReview();
 
     // inisialisasi data pada pointer dengan parameter review
-    data(newAddressReview) = newReview;
+    DATA(newAddressReview) = newReview;
     // inisialisasi data reviewer pada pointer dengan parameter addressReviewer
-    reviewer(newAddressReview) = addressReviewer;
+    REVIEWER(newAddressReview) = addressReviewer;
     // inisialisasi data movie pada pointer dengan parameter addressMovie
-    movie(newAddressReview) = addressMovie;
+    MOVIE(newAddressReview) = addressMovie;
     // inisialisasi pointer menuju elemen selanjutnya dengan null
-    next(newAddressReview) = NULL;
+    NEXT(newAddressReview) = NULL;
 
     // kembalikan pointer
     return newAddressReview;
@@ -54,47 +54,61 @@ void deallocate(addressReview &addressReview) {
     delete addressReview;
 }
 
+addressReview *allocate(int size)
+{
+    // instansiasi pointer array
+    addressReview *array = new addressReview[size];
+    for (int i = 0; i < size; i++)
+    {
+        // setiap array diisikan null
+        array[i] = NULL;
+    }
+
+    // kembalikan array
+    return array;
+}
+
 // prosedur insert first
 void insertFirst(ListReview &ListReview, addressReview newAddressReview) {
     // pengecekan jika list masih kosong
-    if (first(ListReview) == NULL) {
+    if (FIRST(ListReview) == NULL) {
         // inisiasi elemen selanjutnya dengan elemen itu sendiri
-        next(newAddressReview) = newAddressReview;
+        NEXT(newAddressReview) = newAddressReview;
         // inisialisasi elemen pertama dengan pointer review baru
-        first(ListReview) = newAddressReview;
+        FIRST(ListReview) = newAddressReview;
     } else {
         // inisialisasi variabel lastReview dengan elemen pertama pada list
-        addressReview lastReview = first(ListReview);
+        addressReview lastReview = FIRST(ListReview);
         // cari pointer elemen terakhir yang menuju ke elemen pertama
-        while(next(lastReview) != first(ListReview)) {
-            lastReview = next(lastReview);
+        while(NEXT(lastReview) != FIRST(ListReview)) {
+            lastReview = NEXT(lastReview);
         }
         // inisialisasi pointer elemen terakhir menuju elemen selanjutnya dengan elemen baru
-        next(lastReview) = newAddressReview;
+        NEXT(lastReview) = newAddressReview;
         // inisialisasi pointer review baru menuju elemen selanjutnya dengan elemen pertama pada list
-        next(newAddressReview) = first(ListReview);
+        NEXT(newAddressReview) = FIRST(ListReview);
         // inisialisasi elemen pertama pada list dengan pointer review baru
-        first(ListReview) = newAddressReview;
+        FIRST(ListReview) = newAddressReview;
     }
 }
 
 // prosedur insert last
 void insertLast(ListReview &ListReview, addressReview newAddressReview) {
     // pengecekan jika list masih kosong
-    if (first(ListReview) == NULL) {
+    if (FIRST(ListReview) == NULL) {
         // jika list kosong maka insert first
         insertFirst(ListReview, newAddressReview);
     } else {
         // inisialisasi variabel lastReview dengan elemen pertama pada list
-        addressReview lastReview = first(ListReview);
+        addressReview lastReview = FIRST(ListReview);
         // cari pointer elemen terakhir yang menuju ke elemen pertama
-        while(next(lastReview) != first(ListReview)) {
-            lastReview = next(lastReview);
+        while(NEXT(lastReview) != FIRST(ListReview)) {
+            lastReview = NEXT(lastReview);
         }
         // inisialisasi pointer review baru menuju elemen selanjutnya dengan elemen pertama pada list
-        next(newAddressReview) = first(ListReview);
+        NEXT(newAddressReview) = FIRST(ListReview);
         // inisialisasi pointer elemen terakhir menuju elemen selanjutnya dengan elemen baru
-        next(lastReview) = newAddressReview;
+        NEXT(lastReview) = newAddressReview;
     }
 }
 
@@ -102,16 +116,16 @@ void insertLast(ListReview &ListReview, addressReview newAddressReview) {
 void update(addressReview review, int newRating, string newDescription) {
     // cek jika review kosong
     if (review == NULL) {
-        warning("Tidak ada data.");
+        Warning("Tidak ada data.");
         getch();
     } else {
         // update data rating
-        data(review).rating = newRating;
+        DATA(review).rating = newRating;
 
         // cek jika variabel baru tidak kosong
         if (!newDescription.empty()) {
             // jika tidak kosong maka update data description
-            data(review).description = newDescription;
+            DATA(review).description = newDescription;
         }
     }
 }
@@ -119,29 +133,29 @@ void update(addressReview review, int newRating, string newDescription) {
 // prosedur delete first
 void deleteFirst(ListReview &ListReview) {
     // cek jika elemen pertama null (list kosong)
-    if (first(ListReview) == NULL) {
-        warning("Tidak ada data.");
+    if (FIRST(ListReview) == NULL) {
+        Warning("Tidak ada data.");
         getch();
     } else {
         // inisialisasi lastReview dan firstReview
-        addressReview lastReview = first(ListReview);
-        addressReview firstReview = first(ListReview);
+        addressReview lastReview = FIRST(ListReview);
+        addressReview firstReview = FIRST(ListReview);
 
         // jika list hanya mempunyai satu elemen
-        if (next(firstReview) == firstReview) {
+        if (NEXT(firstReview) == firstReview) {
             // delete
-            first(ListReview) = NULL;
+            FIRST(ListReview) = NULL;
             // dealokasi elemen pertama
             deallocate(firstReview);
         } else {
             // cari elemen terakhir
-            while(next(lastReview) != first(ListReview)){
-                lastReview = next(lastReview);
+            while(NEXT(lastReview) != FIRST(ListReview)){
+                lastReview = NEXT(lastReview);
             }
             // hubungkan elemen terakhir dengan elemen kedua
-            next(lastReview) = next(firstReview);
+            NEXT(lastReview) = NEXT(firstReview);
             // elemen pertama diisi oleh elemen kedua
-            first(ListReview) = next(firstReview);
+            FIRST(ListReview) = NEXT(firstReview);
             // dealokasi elemen pertama
             deallocate(firstReview);
         }
@@ -151,26 +165,26 @@ void deleteFirst(ListReview &ListReview) {
 // prosedur delete last
 void deleteLast(ListReview &ListReview) {
     // cek jika elemen pertama null (list kosong)
-    if (first(ListReview) == NULL) {
-        warning("Tidak ada data.");
+    if (FIRST(ListReview) == NULL) {
+        Warning("Tidak ada data.");
         getch();
     } else {
         // inisialisasi secondLastReview dan lastReview
-        addressReview secondLastReview = first(ListReview);
-        addressReview lastReview = first(ListReview);
+        addressReview secondLastReview = FIRST(ListReview);
+        addressReview lastReview = FIRST(ListReview);
 
         // jika list hanya mempunyai satu elemen
-        if (next(lastReview) == lastReview) {
+        if (NEXT(lastReview) == lastReview) {
             // delete first
             deleteFirst(ListReview);
         } else {
             // cari elemen terakhir dan kedua terakhir
-            while(next(lastReview) != first(ListReview)){
+            while(NEXT(lastReview) != FIRST(ListReview)){
                 secondLastReview = lastReview;
-                lastReview = next(lastReview);
+                lastReview = NEXT(lastReview);
             }
             // hubungkan elemen kedua terakhir dengan elemen terakhir
-            next(secondLastReview) = next(lastReview);
+            NEXT(secondLastReview) = NEXT(lastReview);
             // dealokasi elemen terakhir
             deallocate(lastReview);
         }
@@ -180,32 +194,32 @@ void deleteLast(ListReview &ListReview) {
 // prosedur delete last
 void deleteReview(ListReview &ListReview, addressReview deleteAddressReview) {
     // cek jika elemen pertama null (list kosong)
-    if (first(ListReview) == NULL) {
-        warning("Tidak ada data.");
+    if (FIRST(ListReview) == NULL) {
+        Warning("Tidak ada data.");
         getch();
     } else if (deleteAddressReview != NULL){
         // jika list hanya mempunyai satu elemen
-        if (next(deleteAddressReview) == first(ListReview)) {
+        if (NEXT(deleteAddressReview) == FIRST(ListReview)) {
             // delete first
             deleteFirst(ListReview);
         } else {
             // jika elemen yang dihapus adalah elemen pertama
-            if (deleteAddressReview == first(ListReview)) {
+            if (deleteAddressReview == FIRST(ListReview)) {
                 // delete first
                 deleteFirst(ListReview);
-            } else if (next(deleteAddressReview) == first(ListReview)) {
+            } else if (NEXT(deleteAddressReview) == FIRST(ListReview)) {
                 // jika elemen yang dihapus adalah elemen terakhir
                 // delete last
                 deleteLast(ListReview);
             } else {
                 // inisialisasi variabel prevReview dengan elemen pertama pada list
-                addressReview prevReview = first(ListReview);
+                addressReview prevReview = FIRST(ListReview);
                 // cari pointer elemen yang menuju ke elemen yang akan dihapus
-                while(next(prevReview) != deleteAddressReview) {
-                    prevReview = next(prevReview);
+                while(NEXT(prevReview) != deleteAddressReview) {
+                    prevReview = NEXT(prevReview);
                 }
                 // inisialisasi elemen yang menuju ke elemen yang dihapus dengan elemen selanjutnya dari elemen yang dihapus
-                next(prevReview) = next(deleteAddressReview);
+                NEXT(prevReview) = NEXT(deleteAddressReview);
                 // dealokasi elemen yang dihapus
                 deallocate(deleteAddressReview);
             }
@@ -221,18 +235,18 @@ addressReview findById(ListReview ListReview, int id) {
     addressReview dataKetemu = NULL;
 
     // cek jika elemen pertama tidak null (list berisi)
-    if (first(ListReview) != NULL) {
+    if (FIRST(ListReview) != NULL) {
         // inisialisasi variabel current dengan elemen pertama pada list
-        addressReview current = first(ListReview);
+        addressReview current = FIRST(ListReview);
         do {
             // variabel current diisi dengan elemen selanjutnya
-            current = next(current);
+            current = NEXT(current);
             // jika id current sama dengan parameter id yang dicari maka ketemu
-            if (data(current).id == id) {
+            if (DATA(current).id == id) {
                 ketemu = true;
                 dataKetemu = current;
             }
-        } while (!ketemu && current != first(ListReview)); // loop selama tidak ketemu dan current elemen tidak sama dengan elemen pertama
+        } while (!ketemu && current != FIRST(ListReview)); // loop selama tidak ketemu dan current elemen tidak sama dengan elemen pertama
     }
 
     // kembalikan data
@@ -242,25 +256,25 @@ addressReview findById(ListReview ListReview, int id) {
 // fungsi cari review by movie id pada list
 void findByMovieId(ListReview &Result, ListReview ListReview, int id) {
     // cek jika elemen pertama tidak null (list berisi)
-    if (first(ListReview) != NULL) {
+    if (FIRST(ListReview) != NULL) {
         // convert to array
         int totalReview = count(ListReview);
-        addressReview arrayReview[totalReview] = { 0 };
+        addressReview *arrayReview = allocate(totalReview);
         // inisialisasi variabel current dengan elemen pertama pada list
-        addressReview current = first(ListReview);
-        addressMovie currentMovie;
+        addressReview current = FIRST(ListReview);
+        AddressMovie currentMovie;
         addressReviewer currentReviewer;
         do {
             // variabel current diisi dengan elemen selanjutnya
-            current = next(current);
-            currentMovie = movie(current);
-            currentReviewer = reviewer(current);
-            if (data(currentMovie).id == id) {
+            current = NEXT(current);
+            currentMovie = MOVIE(current);
+            currentReviewer = REVIEWER(current);
+            if (DATA(currentMovie).id == id) {
                 // alokasi review dan insert pada list baru
-                addressReview newReview = allocate(data(current), reviewer(current), currentMovie);
+                addressReview newReview = allocate(DATA(current), REVIEWER(current), currentMovie);
                 insertLast(Result, newReview);
             }
-        } while (current != first(ListReview)); // loop selama current elemen tidak sama dengan elemen pertama
+        } while (current != FIRST(ListReview)); // loop selama current elemen tidak sama dengan elemen pertama
     }
 }
 
@@ -270,14 +284,14 @@ int count(ListReview ListReview) {
     int count = 0;
 
     // cek jika elemen pertama tidak null (list berisi)
-    if (first(ListReview) != NULL) {
+    if (FIRST(ListReview) != NULL) {
         // inisialisasi variabel current dengan elemen pertama pada list
-        addressReview current = first(ListReview);
+        addressReview current = FIRST(ListReview);
         do {
             // variabel current diisi dengan elemen selanjutnya
-            current = next(current);
+            current = NEXT(current);
             count++;
-        } while (current != first(ListReview)); // loop selama tidak ketemu dan current elemen tidak sama dengan elemen pertama
+        } while (current != FIRST(ListReview)); // loop selama tidak ketemu dan current elemen tidak sama dengan elemen pertama
     }
 
     // kembalikan hasil hitung
@@ -287,9 +301,9 @@ int count(ListReview ListReview) {
 // prosedur cetak data review
 void cetak(addressReview addressReview) {
     // cetak data review
-    cout << "ID         : " << data(addressReview).id << endl
-         << "Rating     : " << data(addressReview).rating << endl
-         << "Description: " << data(addressReview).description << endl << endl;
+    cout << "ID         : " << DATA(addressReview).id << endl
+         << "Rating     : " << DATA(addressReview).rating << endl
+         << "Description: " << DATA(addressReview).description << endl << endl;
 }
 
 // prosedur cetak list data review
@@ -297,21 +311,21 @@ void cetak(ListReview ListReview) {
     // inisialisasi count
     int count = 0;
 
-    printTitle("VIEW LIST REVIEW");
-    if (first(ListReview) == NULL) {
+    PrintTitle("VIEW LIST REVIEW");
+    if (FIRST(ListReview) == NULL) {
         // cetak info tidak ada data
-        warning("Tidak ada data.");
+        Warning("Tidak ada data.");
         getch();
     } else {
         // inisialisasi variabel current dengan elemen pertama pada list
-        addressReview current = first(ListReview);
+        addressReview current = FIRST(ListReview);
         do {
             // cetak review
             cetak(current);
             // variabel current diisi dengan elemen selanjutnya
-            current = next(current);
+            current = NEXT(current);
             count++;
-        } while (current != first(ListReview)); // loop selama tidak ketemu dan current elemen tidak sama dengan elemen pertama
+        } while (current != FIRST(ListReview)); // loop selama tidak ketemu dan current elemen tidak sama dengan elemen pertama
 
         // cetak total review
         cout << "Total Review: " << count << endl;

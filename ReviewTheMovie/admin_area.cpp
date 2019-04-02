@@ -1,18 +1,23 @@
 // include library c++
-#include <iostream>
 #include <conio.h>
 #include <cstdio>
 #include <cstdlib>
+#include <iostream>
 #include <sstream>
+#include <string>
 
 // include library buatan
+#include "common.h"
+#include "reviewer.h"
+#include "list_movie.h"
+#include "review.h"
 #include "admin_area.h"
 
 // using namespace
 using namespace std;
 
 // prosedur menu admin
-void menuAdmin(listReviewer &listReviewer, listMovie &listMovie, ListReview listReview) {
+void menuAdmin(listReviewer &listReviewer, ListMovie &listMovie, ListReview listReview) {
     // deklarasi variabel
     char mainMenu;
 
@@ -20,10 +25,10 @@ void menuAdmin(listReviewer &listReviewer, listMovie &listMovie, ListReview list
     MainMenuLabel:
 
     // cetak header
-    printHeader();
+    PrintHeader();
 
     // cetak menu utama
-    printTitle("MAIN MENU");
+    PrintTitle("MAIN MENU");
     cout << "1. Input Data Movie" << endl
          << "2. Update Data Movie" << endl
          << "3. View Data Movie" << endl
@@ -78,13 +83,13 @@ void menuAdmin(listReviewer &listReviewer, listMovie &listMovie, ListReview list
         }
         case '9' : { // Sign Out
             cout << endl;
-            success("Signed out, see you next time.");
+            Success("Signed out, see you next time.");
             getch();
         }
         break;
         case '0' : { // Exit
             cout << endl;
-            success("Good bye, see you next time.");
+            Success("Good bye, see you next time.");
             getch();
             exit(0);
         }
@@ -97,16 +102,16 @@ void menuAdmin(listReviewer &listReviewer, listMovie &listMovie, ListReview list
 }
 
 // prosedur input data movie
-void inputDataMovie(listMovie listMovie) {
+void inputDataMovie(ListMovie listMovie) {
     // deklarasi variabel
-    movie movie;
-    addressMovie addressMovie;
+    Movie movie;
+    AddressMovie addressMovie;
     string title;
     string director;
     string actors;
-	string genre;
-	string runningTime;
-	string releaseDate;
+    string genre;
+    string runningTime;
+    string releaseDate;
     int retryTitleCount;
     bool titleSudahAda;
 
@@ -117,25 +122,25 @@ void inputDataMovie(listMovie listMovie) {
     InputTitleLabel:
 
     // cetak header
-    printHeader();
-    printTitle("INPUT DATA MOVIE");
+    PrintHeader();
+    PrintTitle("INPUT DATA MOVIE");
 
     // input title
     cout << "Title: ";
     getline(cin, title);
 
     // cek title didalam list
-    titleSudahAda = searchByTitle(listMovie, title) != NULL;
+    titleSudahAda = FindByTitle(listMovie, title) != NULL;
 
     // cek title jika sudah ada didalam list atau tidak menginputkan karakter
     if (titleSudahAda || title.empty()) {
         // cek title jika tidak menginputkan karakter
         if (title.empty()) {
             // cetak bahwa title tidak boleh kosong
-            warning("\nTitle tidak boleh kosong.");
+            Warning("\nTitle tidak boleh kosong.");
         } else {
             // cetak bahwa title sudah ada didalam list
-            failed("\nTitle sudah ada.");
+            Failed("\nTitle sudah ada.");
         }
 
         getch();
@@ -170,32 +175,32 @@ void inputDataMovie(listMovie listMovie) {
     cout << "ReleaseDate: ";
     getline(cin, releaseDate);
 
-    // data hasil input dibuat menjadi elemen movie
-    movie = createMovie(title, director, actors, genre, runningTime, releaseDate);
-
-    // elemen movie dialokasikan pada memory
-    addressMovie = alokasiMovie(movie);
-
-    // alamat memory movie dimasukan kedalam list dengan metode insert last
-    insertLast(listMovie, addressMovie);
-
     FinalLabel:
     // cek jika maksimal mengulang kesalahan input tercapai
     if (retryTitleCount == MAX_RETRY_COUNT) {
         // sign up dinyatakan gagal
-        failed("Input Data gagal.");
+        Failed("Input Data gagal.");
     } else {
+        // data hasil input dibuat menjadi elemen movie
+        movie = CreateMovie(title, director, actors, genre, runningTime, releaseDate);
+
+        // elemen movie dialokasikan pada memory
+        addressMovie = Allocate(movie);
+
+        // alamat memory movie dimasukan kedalam list dengan metode insert last
+        InsertLast(listMovie, addressMovie);
+
         // cetak bahwa input data berhasil
-        printHeader();
-        printTitle("DATA MOVIE");
-        cetakMovie(addressMovie);
-        success("Input Data berhasil.");
+        PrintHeader();
+        PrintTitle("DATA MOVIE");
+        Cetak(addressMovie);
+        Success("Input Data berhasil.");
     }
     getch();
 }
 
 // prosedur update data movie
-void updateDataMovie(listMovie listMovie) {
+void updateDataMovie(ListMovie listMovie) {
     // deklarasi variabel
     int id;
     string pilihId;
@@ -206,22 +211,22 @@ void updateDataMovie(listMovie listMovie) {
     string runningTime;
     string releaseDate;
     string ensureUpdate;
-    addressMovie movie;
+    AddressMovie movie;
 
     // label view
     ViewLabel:
 
     // cetak header
-    printHeader();
+    PrintHeader();
 
     // cetak list movie
-    cetakList(listMovie);
+    Cetak(listMovie);
 
     // jika terdapat movie dalam list
-    if (first(listMovie) != NULL) {
+    if (FIRST(listMovie) != NULL) {
         // info
-        warning("\n- Masukan ID movie yang akan diupdate.");
-        warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
+        Warning("\n- Masukan ID movie yang akan diupdate.");
+        Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
         cout << "Input: ";
@@ -241,20 +246,20 @@ void updateDataMovie(listMovie listMovie) {
             goto ExitLabel;
         } else if (pilihId == stream.str() && id > 0) {
             // cetak header
-            printHeader();
-            printTitle("UPDATE DATA MOVIE");
+            PrintHeader();
+            PrintTitle("UPDATE DATA MOVIE");
 
             // cari movie by id
-            movie = searchById(listMovie, id);
+            movie = FindById(listMovie, id);
 
             // cek pointer movie
             if (movie == NULL) {
-                warning("Movie tidak ditemukan.");
+                Warning("Movie tidak ditemukan.");
             } else {
                 // cetak detail movie
-                warning("Jangan inputkan data untuk mengisi field seperti default.\n");
-                warning("Default data:");
-                cetakMovie(movie);
+                Warning("Jangan inputkan data untuk mengisi field seperti default.\n");
+                Warning("Default data:");
+                Cetak(movie);
 
                 // input title
                 cout << "Title: ";
@@ -262,8 +267,8 @@ void updateDataMovie(listMovie listMovie) {
 
                 // cek jika inputan kosong, tampilkan default
                 if (title.empty()) {
-                    removeLastLine();
-                    cout << "Title: " << data(movie).title << endl;
+                    RemoveLastLine();
+                    cout << "Title: " << DATA(movie).title << endl;
                 }
 
                 // input director
@@ -272,8 +277,8 @@ void updateDataMovie(listMovie listMovie) {
 
                 // cek jika inputan kosong, tampilkan default
                 if (director.empty()) {
-                    removeLastLine();
-                    cout << "Director: " << data(movie).director << endl;
+                    RemoveLastLine();
+                    cout << "Director: " << DATA(movie).director << endl;
                 }
 
                 // input actors
@@ -282,8 +287,8 @@ void updateDataMovie(listMovie listMovie) {
 
                 // cek jika inputan kosong, tampilkan default
                 if (actors.empty()) {
-                    removeLastLine();
-                    cout << "Actors: " << data(movie).actors << endl;
+                    RemoveLastLine();
+                    cout << "Actors: " << DATA(movie).actors << endl;
                 }
 
                 // input genre
@@ -292,8 +297,8 @@ void updateDataMovie(listMovie listMovie) {
 
                 // cek jika inputan kosong, tampilkan default
                 if (genre.empty()) {
-                    removeLastLine();
-                    cout << "Genre: " << data(movie).genre << endl;
+                    RemoveLastLine();
+                    cout << "Genre: " << DATA(movie).genre << endl;
                 }
 
                 // input runningTime
@@ -302,8 +307,8 @@ void updateDataMovie(listMovie listMovie) {
 
                 // cek jika inputan kosong, tampilkan default
                 if (runningTime.empty()) {
-                    removeLastLine();
-                    cout << "Running Time: " << data(movie).runningTime << endl;
+                    RemoveLastLine();
+                    cout << "Running Time: " << DATA(movie).running_time << endl;
                 }
 
                 // input releaseDate
@@ -312,22 +317,22 @@ void updateDataMovie(listMovie listMovie) {
 
                 // cek jika inputan kosong, tampilkan default
                 if (releaseDate.empty()) {
-                    removeLastLine();
-                    cout << "Release Date: " << data(movie).releaseDate << endl;
+                    RemoveLastLine();
+                    cout << "Release Date: " << DATA(movie).release_date << endl;
                 }
 
                 // ensure
-                warning("Anda yakin ingin mengupdate?");
+                Warning("Anda yakin ingin mengupdate?");
                 cout << "Jawaban (y/n): ";
                 getline(cin, ensureUpdate);
 
                 // update jika jawaban Y atau y
                 if (ensureUpdate == "Y" || ensureUpdate == "y") {
                     // update movie
-                    updateMovie(movie, title, director, actors, genre, runningTime, releaseDate);
-                    success("\nData berhasil diupdate.");
+                    UpdateMovie(movie, title, director, actors, genre, runningTime, releaseDate);
+                    Success("\nData berhasil diupdate.");
                 } else {
-                    success("\nData tidak diupdate.");
+                    Success("\nData tidak diupdate.");
                 }
             }
 
@@ -345,26 +350,26 @@ void updateDataMovie(listMovie listMovie) {
 }
 
 // prosedur view data movie
-void viewDataMovie(listMovie listMovie, ListReview listReview) {
+void viewDataMovie(ListMovie listMovie, ListReview listReview) {
     // deklarasi variabel
     int id;
     string pilihId;
-    addressMovie movie;
+    AddressMovie movie;
 
     // label view
     ViewLabel:
 
     // cetak header
-    printHeader();
+    PrintHeader();
 
     // cetak list movie
-    cetakList(listMovie);
+    Cetak(listMovie);
 
     // jika terdapat movie dalam list
-    if (first(listMovie) != NULL) {
+    if (FIRST(listMovie) != NULL) {
         // info
-        warning("\n- Masukan ID movie untuk melihat detail.");
-        warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
+        Warning("\n- Masukan ID movie untuk melihat detail.");
+        Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
         cout << "Input: ";
@@ -384,15 +389,15 @@ void viewDataMovie(listMovie listMovie, ListReview listReview) {
             goto ExitLabel;
         } else if (pilihId == stream.str() && id > 0) {
             // cetak header
-            printHeader();
-            printTitle("VIEW DETAIL DATA MOVIE");
+            PrintHeader();
+            PrintTitle("VIEW DETAIL DATA MOVIE");
 
             // cari movie by id
-            movie = searchById(listMovie, id);
+            movie = FindById(listMovie, id);
 
             // cek pointer movie
             if (movie == NULL) {
-                warning("Movie tidak ditemukan.");
+                Warning("Movie tidak ditemukan.");
             } else {
                 // deklarasi review
                 ListReview listReviewByMovie;
@@ -402,7 +407,7 @@ void viewDataMovie(listMovie listMovie, ListReview listReview) {
                 findByMovieId(listReviewByMovie, listReview, id);
 
                 // cetak detail movie
-                cetakMovie(movie);
+                Cetak(movie);
                 cetak(listReviewByMovie);
             }
 
@@ -420,27 +425,27 @@ void viewDataMovie(listMovie listMovie, ListReview listReview) {
 }
 
 // prosedur delete data movie
-void deleteDataMovie(listMovie &listMovie) {
+void deleteDataMovie(ListMovie &listMovie) {
     // deklarasi variabel
     int id;
     string pilihId;
     string ensureUpdate;
-    addressMovie movie;
+    AddressMovie movie;
 
     // label view
     ViewLabel:
 
     // cetak header
-    printHeader();
+    PrintHeader();
 
     // cetak list movie
-    cetakList(listMovie);
+    Cetak(listMovie);
 
     // jika terdapat movie dalam list
-    if (first(listMovie) != NULL) {
+    if (FIRST(listMovie) != NULL) {
         // info
-        warning("\n- Masukan ID movie yang akan dihapus.");
-        warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
+        Warning("\n- Masukan ID movie yang akan dihapus.");
+        Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
         cout << "Input: ";
@@ -460,31 +465,31 @@ void deleteDataMovie(listMovie &listMovie) {
             goto ExitLabel;
         } else if (pilihId == stream.str() && id > 0) {
             // cetak header
-            printHeader();
-            printTitle("DELETE DATA MOVIE");
+            PrintHeader();
+            PrintTitle("DELETE DATA MOVIE");
 
             // cari movie by id
-            movie = searchById(listMovie, id);
+            movie = FindById(listMovie, id);
 
             // cek pointer movie
             if (movie == NULL) {
-                warning("Movie tidak ditemukan.");
+                Warning("Movie tidak ditemukan.");
             } else {
                 // cetak detail movie
-                cetakMovie(movie);
+                Cetak(movie);
 
                 // ensure
-                warning("Anda yakin ingin menghapus?");
+                Warning("Anda yakin ingin menghapus?");
                 cout << "Jawaban (y/n): ";
                 getline(cin, ensureUpdate);
 
                 // hapus jika jawaban Y atau y
                 if (ensureUpdate == "Y" || ensureUpdate == "y") {
                     // delete movie
-                    deleteMovie(listMovie, movie);
-                    success("\nData berhasil dihapus.");
+                    DeleteMovie(listMovie, movie);
+                    Success("\nData berhasil dihapus.");
                 } else {
-                    success("\nData tidak dihapus.");
+                    Success("\nData tidak dihapus.");
                 }
             }
 
@@ -512,16 +517,16 @@ void viewDataReviewer(listReviewer listReviewer) {
     ViewLabel:
 
     // cetak header
-    printHeader();
+    PrintHeader();
 
     // cetak list reviewer
     cetakList(listReviewer);
 
     // jika terdapat reviewer dalam list
-    if (first(listReviewer) != NULL) {
+    if (FIRST(listReviewer) != NULL) {
         // info
-        warning("\n- Masukan ID reviewer untuk melihat detail.");
-        warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
+        Warning("\n- Masukan ID reviewer untuk melihat detail.");
+        Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
         cout << "Input: ";
@@ -541,15 +546,15 @@ void viewDataReviewer(listReviewer listReviewer) {
             goto ExitLabel;
         } else if (pilihId == stream.str() && id > 0) {
             // cetak header
-            printHeader();
-            printTitle("VIEW DETAIL DATA REVIEWER");
+            PrintHeader();
+            PrintTitle("VIEW DETAIL DATA REVIEWER");
 
             // cari reviewer by id
             reviewer = searchById(listReviewer, id);
 
             // cek pointer reviewer
             if (reviewer == NULL) {
-                warning("Reviewer tidak ditemukan.");
+                Warning("Reviewer tidak ditemukan.");
             } else {
                 // cetak detail reviewer
                 cetakReviewer(reviewer);
@@ -580,16 +585,16 @@ void deleteDataReviewer(listReviewer &listReviewer) {
     ViewLabel:
 
     // cetak header
-    printHeader();
+    PrintHeader();
 
     // cetak list reviewer
     cetakList(listReviewer);
 
     // jika terdapat reviewer dalam list
-    if (first(listReviewer) != NULL) {
+    if (FIRST(listReviewer) != NULL) {
         // info
-        warning("\n- Masukan ID reviewer yang akan dihapus.");
-        warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
+        Warning("\n- Masukan ID reviewer yang akan dihapus.");
+        Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
         cout << "Input: ";
@@ -609,21 +614,21 @@ void deleteDataReviewer(listReviewer &listReviewer) {
             goto ExitLabel;
         } else if (pilihId == stream.str() && id > 0) {
             // cetak header
-            printHeader();
-            printTitle("DELETE DATA REVIEWER");
+            PrintHeader();
+            PrintTitle("DELETE DATA REVIEWER");
 
             // cari reviewer by id
             reviewer = searchById(listReviewer, id);
 
             // cek pointer reviewer
             if (reviewer == NULL) {
-                warning("Reviewer tidak ditemukan.");
+                Warning("Reviewer tidak ditemukan.");
             } else {
                 // cetak detail reviewer
                 cetakReviewer(reviewer);
 
                 // ensure
-                warning("Anda yakin ingin menghapus?");
+                Warning("Anda yakin ingin menghapus?");
                 cout << "Jawaban (y/n): ";
                 getline(cin, ensureUpdate);
 
@@ -631,9 +636,9 @@ void deleteDataReviewer(listReviewer &listReviewer) {
                 if (ensureUpdate == "Y" || ensureUpdate == "y") {
                     // delete reviewer
                     deleteReviewer(listReviewer, reviewer);
-                    success("\nData berhasil dihapus.");
+                    Success("\nData berhasil dihapus.");
                 } else {
-                    success("\nData tidak dihapus.");
+                    Success("\nData tidak dihapus.");
                 }
             }
 

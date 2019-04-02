@@ -2,21 +2,20 @@
 #define ADMIN_AREA_H_INCLUDED
 
 // include library buatan
-#include "common.h"
 #include "reviewer.h"
-#include "movie.h"
+#include "list_movie.h"
 #include "review.h"
 
 // prosedur menu admin
-void menuAdmin(listReviewer &listReviewer, listMovie &listMovie, ListReview ListReview);
+void menuAdmin(listReviewer &listReviewer, ListMovie &listMovie, ListReview ListReview);
 // prosedur input data movie
-void inputDataMovie(listMovie listMovie);
+void inputDataMovie(ListMovie listMovie);
 // prosedur update data movie
-void updateDataMovie(listMovie listMovie);
+void updateDataMovie(ListMovie listMovie);
 // prosedur view data movie
-void viewDataMovie(listMovie listMovie, ListReview listReview);
+void viewDataMovie(ListMovie listMovie, ListReview listReview);
 // prosedur delete data movie
-void deleteDataMovie(listMovie &listMovie);
+void deleteDataMovie(ListMovie &listMovie);
 // prosedur view data reviewer
 void viewDataReviewer(listReviewer listReviewer);
 // prosedur delete data reviewer

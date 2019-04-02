@@ -4,20 +4,23 @@
 // include library c++
 #include <string>
 
+// using namespace
+using namespace std;
+
+// DEFINE MACRO FUNCTION
+
 // pointer menuju data pada elemen
-#define data(p) p->data
+#define DATA(p) p->data
 // pointer menuju elemen selanjutnya
-#define next(p) p->next
+#define NEXT(p) p->next
 // pointer menuju elemen sebelumnya
-#define prev(p) p->prev
-// pointer menuju elemen reviewer
-#define reviewer(p) p->reviewer
-// pointer menuju elemen movie
-#define movie(p) p->movie
+#define PREV(p) p->prev
 // pointer menuju elemen pertama
-#define first(r) (r).first
+#define FIRST(r) (r).first
 // pointer menuju elemen terakhir
-#define last(r) (r).last
+#define LAST(r) (r).last
+
+#define getch() _getch()
 
 // default admin username
 const char ADMIN_USERNAME[] = "admin";
@@ -27,7 +30,7 @@ const char ADMIN_PASSWORD[] = "a";
 const int MAX_RETRY_COUNT = 3;
 
 // enum tipe login user
-enum loginUser {
+enum LoginUser {
     // login user administrator
     Administrator,
     // login user reviewer
@@ -36,23 +39,30 @@ enum loginUser {
     Guest
 };
 
-// prosedur cetak text header
-void printHeader();
-// prosedur cetak text title
-void printTitle(const char* text);
+// alokasi array
+int *AllocateArray(int size);
+// dealokasi array
+void DeallocateArray(int &array);
+
 // prosedur menghapus text pada console
-void clearScreen();
+void ClearScreen();
 // prosedur menghapus console last line
-void removeLastLine();
+void RemoveLastLine();
+
+// prosedur cetak text header
+void PrintHeader();
+// prosedur cetak text title
+void PrintTitle(const char* text);
 // prosedur cetak text failed
-void failed(const char* text);
+void Failed(const char* text);
 // prosedur cetak text success
-void success(const char* text);
+void Success(const char* text);
 // prosedur cetak text warning
-void warning(const char* text);
+void Warning(const char* text);
 // prosedur cetak text information
-void information(const char* text);
+void Information(const char* text);
+
 // fungsi agar input password menjadi simbol *
-std::string getPass(const char *prompt, bool show_asterisk = true);
+string GetPass(const char *prompt, bool show_asterisk = true);
 
 #endif // COMMON_H_INCLUDED

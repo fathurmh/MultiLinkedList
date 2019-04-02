@@ -2,6 +2,10 @@
 #define REVIEWER_H_INCLUDED
 
 // include library c++
+#include <conio.h>
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
 #include <string>
 
 // using namespace
@@ -12,7 +16,7 @@ typedef struct elementReviewer *addressReviewer;
 
 // tipe bentukan data reviewer
 struct reviewer {
-	int id;
+    int id;
     string nama;
     string username;
     string password;
@@ -20,20 +24,20 @@ struct reviewer {
 
 // tipe bentukan elemen reviewer
 struct elementReviewer {
-	// variabel data reviewer pada elemen saat ini
-	reviewer data;
-	// pointer menuju elemen sebelumnya
-	addressReviewer prev;
-	// pointer menuju elemen selanjutnya
-	addressReviewer next;
+    // variabel data reviewer pada elemen saat ini
+    reviewer data;
+    // pointer menuju elemen sebelumnya
+    addressReviewer prev;
+    // pointer menuju elemen selanjutnya
+    addressReviewer next;
 };
 
 // tipe bentukan list reviewer
 struct listReviewer {
-	// pointer menuju elemen pertama pada list
-	addressReviewer first;
-	// pointer menuju elemen terakhir pada list
-	addressReviewer last;
+    // pointer menuju elemen pertama pada list
+    addressReviewer first;
+    // pointer menuju elemen terakhir pada list
+    addressReviewer last;
 };
 
 // prosedur membuat list baru

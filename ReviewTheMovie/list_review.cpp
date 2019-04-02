@@ -1,6 +1,6 @@
 // include library c++
-#include <iostream>
 #include <conio.h>
+#include <iostream>
 #include <string>
 
 // include library buatan
@@ -8,6 +8,9 @@
 #include "list_reviewer.h"
 #include "list_movie.h"
 #include "list_review.h"
+
+// using namespace
+using namespace std;
 
 // prosedur membuat list baru
 void CreateList(ListReview &list_review)

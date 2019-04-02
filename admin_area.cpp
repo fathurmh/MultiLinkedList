@@ -12,7 +12,7 @@
 using namespace std;
 
 // prosedur menu admin
-void menuAdmin(listReviewer &listReviewer, listMovie &listMovie) {
+void menuAdmin(listReviewer &listReviewer, listMovie &listMovie, ListReview listReview) {
     // deklarasi variabel
     char mainMenu;
 
@@ -53,7 +53,7 @@ void menuAdmin(listReviewer &listReviewer, listMovie &listMovie) {
             goto MainMenuLabel;
         }
         case '3' : { // View Data Movie
-            viewDataMovie(listMovie);
+            viewDataMovie(listMovie, listReview);
 
             // menuju label main menu
             goto MainMenuLabel;
@@ -345,7 +345,7 @@ void updateDataMovie(listMovie listMovie) {
 }
 
 // prosedur view data movie
-void viewDataMovie(listMovie listMovie) {
+void viewDataMovie(listMovie listMovie, ListReview listReview) {
     // deklarasi variabel
     int id;
     string pilihId;
@@ -394,8 +394,16 @@ void viewDataMovie(listMovie listMovie) {
             if (movie == NULL) {
                 warning("Movie tidak ditemukan.");
             } else {
+                // deklarasi review
+                ListReview listReviewByMovie;
+                createList(listReviewByMovie);
+
+                // cari review berdasarkan movie id
+                findByMovieId(listReviewByMovie, listReview, id);
+
                 // cetak detail movie
                 cetakMovie(movie);
+                cetak(listReviewByMovie);
             }
 
             getch();

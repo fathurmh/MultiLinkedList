@@ -1,6 +1,7 @@
 // include library c++
 #include <iostream>
 #include <conio.h>
+#include <cstdlib>
 
 // include library buatan
 #include "guest_area.h"
@@ -169,5 +170,77 @@ void signUp(listReviewer &listReviewer) {
         cetakReviewer(addressReviewer);
         success("Sign Up berhasil.");
         success("Silahkan melakukan Sign In.");
+    }
+}
+
+int findIndex(addressMovie *arrayMovie, int arraySize, addressMovie searchMovie) {
+    for(int i = 0; i < arraySize; i++)
+    {
+        if(data(arrayMovie[i]).id == data(searchMovie).id)
+            return i;
+    }
+    return -1;
+}
+
+int compare(const void *pa, const void *pb) {
+    int *a = (int *)pa;
+    int *b = (int *)pb;
+    if(a[0] == b[0])
+        return a[1] - b[1];
+    else
+        return a[0] - b[0];
+}
+
+// view top 10 movie dengan ulasan terbanyak
+void viewTopTenMovie(ListReview listReview, listMovie listMovie) {
+    if (first(listMovie) != NULL && last(listMovie) != NULL){
+        // preprocessing
+        int totalMovie = countList(listMovie), i = 0;
+        addressMovie arrayMovie[totalMovie] = { NULL };
+        addressMovie temp = first(listMovie);
+
+        while(temp != NULL){
+            arrayMovie[i] = temp;
+            temp = next(temp);
+            i++;
+        }
+
+
+        ListReview result;
+        createList(result);
+        findByMovieId(result, listReview, 1);
+
+        // process
+        int idxMovie = 0;
+        int arrayMovieReviewCount[totalMovie][2] = { 0 };
+
+        for(int i = 0; i < totalMovie; i++)
+        {
+
+        }
+
+
+        // addressReview current = first(ListReview);
+        // addressMovie currentMovie = movie(current);
+        // do {
+        //     current = next(current);
+        //     currentMovie = movie(current);
+        //     idxMovie = findIndex(arrayMovie, totalMovie, currentMovie);
+        //     arrayMovieReviewCount[idxMovie][0]++;
+        //     arrayMovieReviewCount[idxMovie][1] = idxMovie;
+        // } while (current != first(ListReview));
+
+        for(i = 0; i < totalMovie; i++){
+            printf("Count: %d\tIndex: %d\n", arrayMovieReviewCount[i][0], arrayMovieReviewCount[i][1]);
+        }
+
+        qsort(arrayMovieReviewCount, totalMovie, sizeof(*arrayMovieReviewCount), compare);
+
+        printf("\n\ndata\tindex\n");
+        for(i = 0; i < totalMovie; i++){
+            printf("Count: %d\tIndex: %d\n", arrayMovieReviewCount[i][0], arrayMovieReviewCount[i][1]);
+        }
+
+        getch();
     }
 }

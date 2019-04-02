@@ -239,6 +239,31 @@ addressReview findById(ListReview ListReview, int id) {
     return dataKetemu;
 }
 
+// fungsi cari review by movie id pada list
+void findByMovieId(ListReview &Result, ListReview ListReview, int id) {
+    // cek jika elemen pertama tidak null (list berisi)
+    if (first(ListReview) != NULL) {
+        // convert to array
+        int totalReview = count(ListReview);
+        addressReview arrayReview[totalReview] = { 0 };
+        // inisialisasi variabel current dengan elemen pertama pada list
+        addressReview current = first(ListReview);
+        addressMovie currentMovie;
+        addressReviewer currentReviewer;
+        do {
+            // variabel current diisi dengan elemen selanjutnya
+            current = next(current);
+            currentMovie = movie(current);
+            currentReviewer = reviewer(current);
+            if (data(currentMovie).id == id) {
+                // alokasi review dan insert pada list baru
+                addressReview newReview = allocate(data(current), reviewer(current), currentMovie);
+                insertLast(Result, newReview);
+            }
+        } while (current != first(ListReview)); // loop selama current elemen tidak sama dengan elemen pertama
+    }
+}
+
 // fungsi hitung total elemen pada list
 int count(ListReview ListReview) {
     // inisialisasi count

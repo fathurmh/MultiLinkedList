@@ -59,7 +59,7 @@ int main() {
     // check kondisi pilihan
     switch (mainMenu) {
         case '1' : { //  View Top 10 By Review
-            // viewTopTenMovie(ListReview);
+            viewTopTenMovie(ListReview, listMovie);
             getch();
 
             // menuju label main menu
@@ -76,7 +76,7 @@ int main() {
                 success("Anda masuk sebagai Administrator.");
                 getch();
                 // masuk ke menu admin
-                menuAdmin(listReviewer, listMovie);
+                menuAdmin(listReviewer, listMovie, ListReview);
             } else if (userLogin == Reviewer) {
                 // sign in reviewer berhasil
                 success("\nSign in berhasil.");

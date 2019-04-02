@@ -5,15 +5,16 @@
 #include "common.h"
 #include "reviewer.h"
 #include "movie.h"
+#include "review.h"
 
 // prosedur menu admin
-void menuAdmin(listReviewer &listReviewer, listMovie &listMovie);
+void menuAdmin(listReviewer &listReviewer, listMovie &listMovie, ListReview ListReview);
 // prosedur input data movie
 void inputDataMovie(listMovie listMovie);
 // prosedur update data movie
 void updateDataMovie(listMovie listMovie);
 // prosedur view data movie
-void viewDataMovie(listMovie listMovie);
+void viewDataMovie(listMovie listMovie, ListReview listReview);
 // prosedur delete data movie
 void deleteDataMovie(listMovie &listMovie);
 // prosedur view data reviewer

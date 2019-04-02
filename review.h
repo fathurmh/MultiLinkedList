@@ -66,6 +66,8 @@ void deleteReview(ListReview &ListReview, addressReview deleteAddressReview);
 
 // fungsi cari review by id pada list
 addressReview findById(ListReview ListReview, int id);
+// fungsi cari review by movie id pada list
+void findByMovieId(ListReview &Result, ListReview ListReview, int id);
 // fungsi hitung total elemen pada list
 int count(ListReview ListReview);
 // prosedur cetak data review

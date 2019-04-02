@@ -21,7 +21,7 @@ void createList(listMovie &newListMovie) {
 // fungsi membuat data movie
 movie createMovie(string title, string director, string actors, string genre, string runningTime, string releaseDate) {
     // inisialisasi id static agar otomatis bertambah saat membuat movie baru
-    static int id = 0;
+    static int id = 5;
 
     // deklarasi variabel data movie
     movie newMovie;

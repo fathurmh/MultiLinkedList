@@ -23,7 +23,7 @@ void CreateList(ListMovie &list_movie)
 Movie CreateMovie(string title, string director, string actors, string genre, string running_time, string release_date)
 {
     // inisialisasi id static agar otomatis bertambah saat membuat movie baru
-    static int id = 5;
+    static int id = 0;
 
     // deklarasi variabel data movie
     Movie movie;
@@ -262,6 +262,7 @@ void DeleteMovie(ListMovie &list_movie, AddressMovie address_movie)
             // inisialisasi elemen sebelumnya dari elemen selanjutnya dari movie yang akan dihapus dengan elemen sebelumnya dari movie yang akan dihapus
             PREV(NEXT(address_movie)) = PREV(address_movie);
 
+            // dealokasi elemen
             Deallocate(address_movie);
         }
     }

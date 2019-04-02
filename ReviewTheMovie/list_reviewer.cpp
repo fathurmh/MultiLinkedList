@@ -244,6 +244,7 @@ void DeleteReviewer(ListReviewer &list_reviewer, AddressReviewer address_reviewe
             // inisialisasi elemen sebelumnya dari elemen selanjutnya dari reviewer yang akan dihapus dengan elemen sebelumnya dari movie yang akan dihapus
             PREV(NEXT(address_reviewer)) = PREV(address_reviewer);
 
+            // dealokasi elemen
             Deallocate(address_reviewer);
         }
     }

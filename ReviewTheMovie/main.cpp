@@ -9,7 +9,7 @@
 #include "common.h"
 #include "list_reviewer.h"
 #include "list_movie.h"
-#include "review.h"
+#include "list_review.h"
 #include "admin_area.h"
 #include "guest_area.h"
 
@@ -34,7 +34,7 @@ int main() {
     // create list
     CreateList(listReviewer);
     CreateList(listMovie);
-    createList(ListReview);
+    CreateList(ListReview);
 
     // inisialisasi data
     inisialisasiDataReviewer(listReviewer);
@@ -231,73 +231,73 @@ void inisialisasiDataMovie(ListMovie &listMovie) {
 // prosedur inisialisasi data review
 void inisialisasiDataReview(ListReview &ListReview, ListReviewer listReviewer, ListMovie listMovie) {
     // deklarasi variabel
-    review newReview;
-    addressReview newAddressReview;
+    Review newReview;
+    AddressReview newAddressReview;
     AddressReviewer addressReviewer;
     AddressMovie addressMovie;
 
     // data dibuat menjadi elemen reviewer
-    newReview = createReview(5, "GREAT MOVIE!!!");
+    newReview = CreateReview(5, "GREAT MOVIE!!!");
     // cari pointer reviewer yang mereview
     addressReviewer = FindByUsername(listReviewer, "nugi");
     // cari pointer movie yang direview
     addressMovie = FindByTitle(listMovie, "A STARS IS BORN");
     // elemen reviewer dialokasikan pada memory
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
     // alamat memory reviewer dimasukan kedalam list dengan metode insert last
-    insertFirst(ListReview, newAddressReview);
+    InsertFirst(ListReview, newAddressReview);
 
-    newReview = createReview(5, "Pretty good super hero film.");
+    newReview = CreateReview(5, "Pretty good super hero film.");
     addressReviewer = FindByUsername(listReviewer, "fatri");
     addressMovie = FindByTitle(listMovie, "AQUAMAN");
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
-    insertFirst(ListReview, newAddressReview);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    InsertFirst(ListReview, newAddressReview);
 
-    newReview = createReview(5, "Insane scary loved it.");
+    newReview = CreateReview(5, "Insane scary loved it.");
     addressReviewer = FindByUsername(listReviewer, "fathur");
     addressMovie = FindByTitle(listMovie, "BIRD BOX");
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
-    insertFirst(ListReview, newAddressReview);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    InsertFirst(ListReview, newAddressReview);
 
-    newReview = createReview(5, "Excellent movie! How queen became queen");
+    newReview = CreateReview(5, "Excellent movie! How queen became queen");
     addressReviewer = FindByUsername(listReviewer, "eri");
     addressMovie = FindByTitle(listMovie, "BOHEMIAN RHAPSODY");
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
-    insertFirst(ListReview, newAddressReview);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    InsertFirst(ListReview, newAddressReview);
 
-    newReview = createReview(5, "Loved it!!! Awsome Movie!!!");
+    newReview = CreateReview(5, "Loved it!!! Awsome Movie!!!");
     addressReviewer = FindByUsername(listReviewer, "nanda");
     addressMovie = FindByTitle(listMovie, "BUMBLEBEE");
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
-    insertFirst(ListReview, newAddressReview);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    InsertFirst(ListReview, newAddressReview);
 
-    newReview = createReview(5, "Best movie!!! Carol is awesome!");
+    newReview = CreateReview(5, "Best movie!!! Carol is awesome!");
     addressReviewer = FindByUsername(listReviewer, "tubagus");
     addressMovie = FindByTitle(listMovie, "CAPTAIN MARVEL");
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
-    insertFirst(ListReview, newAddressReview);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    InsertFirst(ListReview, newAddressReview);
 
-    newReview = createReview(5, "Absolutely Amazing!!");
+    newReview = CreateReview(5, "Absolutely Amazing!!");
     addressReviewer = FindByUsername(listReviewer, "arib");
     addressMovie = FindByTitle(listMovie, "How To Train Your Dragon:The Hidden World");
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
-    insertFirst(ListReview, newAddressReview);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    InsertFirst(ListReview, newAddressReview);
 
-    newReview = createReview(4, "Great movie and funny");
+    newReview = CreateReview(4, "Great movie and funny");
     addressReviewer = FindByUsername(listReviewer, "nugiganteng");
     addressMovie = FindByTitle(listMovie, "ISN'T IT ROMANTIC");
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
-    insertFirst(ListReview, newAddressReview);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    InsertFirst(ListReview, newAddressReview);
 
-    newReview = createReview(5, "Amazing movie stan lee");
+    newReview = CreateReview(5, "Amazing movie stan lee");
     addressReviewer = FindByUsername(listReviewer, "fathurfathur");
     addressMovie = FindByTitle(listMovie, "SPIDER-MAN:INTO THE SPIDER-VERSE");
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
-    insertFirst(ListReview, newAddressReview);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    InsertFirst(ListReview, newAddressReview);
 
-    newReview = createReview(5, "FANTASTIC MOVIE!!!");
+    newReview = CreateReview(5, "FANTASTIC MOVIE!!!");
     addressReviewer = FindByUsername(listReviewer, "nuginugi");
     addressMovie = FindByTitle(listMovie, "FANTASTIC BEASTS:THE CRIMES OF GRINDELWALD");
-    newAddressReview = allocate(newReview, addressReviewer, addressMovie);
-    insertFirst(ListReview, newAddressReview);
+    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    InsertFirst(ListReview, newAddressReview);
 }

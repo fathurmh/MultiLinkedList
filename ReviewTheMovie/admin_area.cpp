@@ -10,7 +10,7 @@
 #include "common.h"
 #include "list_reviewer.h"
 #include "list_movie.h"
-#include "review.h"
+#include "list_review.h"
 #include "admin_area.h"
 
 // using namespace
@@ -401,14 +401,14 @@ void viewDataMovie(ListMovie listMovie, ListReview listReview) {
             } else {
                 // deklarasi review
                 ListReview listReviewByMovie;
-                createList(listReviewByMovie);
+                CreateList(listReviewByMovie);
 
                 // cari review berdasarkan movie id
-                findByMovieId(listReviewByMovie, listReview, id);
+                FindByMovieId(listReviewByMovie, listReview, id);
 
                 // cetak detail movie
                 Cetak(movie);
-                cetak(listReviewByMovie);
+                Cetak(listReviewByMovie);
             }
 
             getch();

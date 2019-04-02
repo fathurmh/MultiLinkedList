@@ -9,7 +9,7 @@
 #include "common.h"
 #include "list_reviewer.h"
 #include "list_movie.h"
-#include "review.h"
+#include "list_review.h"
 #include "guest_area.h"
 
 // using namespace
@@ -216,8 +216,8 @@ void viewTopTenMovie(ListReview listReview, ListMovie listMovie) {
 
 
     //    ListReview result;
-    //    createList(result);
-    //    findByMovieId(result, listReview, 1);
+    //    CreateList(result);
+    //    FindByMovieId(result, listReview, 1);
 
     //    // process
     //    int idxMovie = 0;
@@ -229,7 +229,7 @@ void viewTopTenMovie(ListReview listReview, ListMovie listMovie) {
     //    }
 
 
-    //    // addressReview current = first(ListReview);
+    //    // AddressReview current = first(ListReview);
     //    // addressMovie currentMovie = movie(current);
     //    // do {
     //    //     current = next(current);

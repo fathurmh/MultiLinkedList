@@ -68,8 +68,10 @@ void DeleteMovie(ListMovie &list_movie, AddressMovie address_movie);
 AddressMovie FindByTitle(ListMovie &list_movie, string title);
 // fungsi cari movie by id pada list
 AddressMovie FindById(ListMovie &list_movie, int id);
+
 // fungsi hitung total elemen pada list
 int Count(ListMovie list_movie);
+
 // prosedur cetak data movie
 void Cetak(AddressMovie address_movie);
 // prosedur cetak list data movie

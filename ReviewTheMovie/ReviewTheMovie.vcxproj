@@ -24,7 +24,7 @@
     <ClCompile Include="guest_area.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="list_movie.cpp" />
-    <ClCompile Include="review.cpp" />
+    <ClCompile Include="list_review.cpp" />
     <ClCompile Include="list_reviewer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -32,7 +32,7 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="guest_area.h" />
     <ClInclude Include="list_movie.h" />
-    <ClInclude Include="review.h" />
+    <ClInclude Include="list_review.h" />
     <ClInclude Include="list_reviewer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

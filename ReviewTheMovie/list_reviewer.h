@@ -68,8 +68,10 @@ void DeleteReviewer(ListReviewer &list_reviewer, AddressReviewer address_reviewe
 AddressReviewer FindByUsername(ListReviewer &list_reviewer, string username);
 // fungsi cari reviewer by id pada list
 AddressReviewer FindById(ListReviewer &list_reviewer, int id);
+
 // fungsi hitung total elemen pada list
 int Count(ListReviewer list_reviewer);
+
 // prosedur cetak data reviewer
 void Cetak(AddressReviewer address_reviewer);
 // prosedur cetak list data reviewer

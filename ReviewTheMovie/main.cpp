@@ -1,7 +1,5 @@
 // include library c++
 #include <conio.h>
-#include <cstdio>
-#include <cstdlib>
 #include <iostream>
 #include <string>
 
@@ -10,36 +8,38 @@
 #include "list_reviewer.h"
 #include "list_movie.h"
 #include "list_review.h"
-#include "admin_area.h"
 #include "guest_area.h"
+#include "admin_area.h"
 
 // using namespace
 using namespace std;
 
 // prosedur inisialisasi data reviewer
-void inisialisasiDataReviewer(ListReviewer &listReviewer);
+void InitDataReviewer(ListReviewer &list_reviewer);
 // prosedur inisialisasi data movie
-void inisialisasiDataMovie(ListMovie &listMovie);
+void InitDataMovie(ListMovie &list_movie);
 // prosedur inisialisasi data review
-void inisialisasiDataReview(ListReview &ListReview, ListReviewer listReviewer, ListMovie listMovie);
+void InitDataReview(ListReview &list_review, ListReviewer list_reviewer, ListMovie list_movie);
 
 // main program
 int main() {
     // deklarasi variabel
-    char mainMenu;
-    ListReviewer listReviewer;
-    ListMovie listMovie;
-    ListReview ListReview;
+    char main_menu;
+    LoginUser user_login;
+
+    ListReviewer list_reviewer;
+    ListMovie list_movie;
+    ListReview list_review;
 
     // create list
-    CreateList(listReviewer);
-    CreateList(listMovie);
-    CreateList(ListReview);
+    CreateList(list_reviewer);
+    CreateList(list_movie);
+    CreateList(list_review);
 
     // inisialisasi data
-    inisialisasiDataReviewer(listReviewer);
-    inisialisasiDataMovie(listMovie);
-    inisialisasiDataReview(ListReview, listReviewer, listMovie);
+    InitDataReviewer(list_reviewer);
+    InitDataMovie(list_movie);
+    InitDataReview(list_review, list_reviewer, list_movie);
 
     // label main menu
     MainMenuLabel:
@@ -56,13 +56,13 @@ int main() {
     cout << "Pilih Menu: ";
 
     // input pilihan menu
-    cin >> mainMenu;
+    cin >> main_menu;
     cin.ignore();
 
     // check kondisi pilihan
-    switch (mainMenu) {
+    switch (main_menu) {
         case '1' : { //  View Top 10 By Review
-            viewTopTenMovie(ListReview, listMovie);
+            viewTopTenMovie(list_review, list_movie);
             getch();
 
             // menuju label main menu
@@ -70,17 +70,17 @@ int main() {
         }
         case '2' : { // Sign In
             // sign in user
-            LoginUser userLogin = signIn(listReviewer);
+            user_login = signIn(list_reviewer);
 
             // cek user login
-            if (userLogin == ADMINISTRATOR) {
+            if (user_login == ADMINISTRATOR) {
                 // sign in administrator berhasil
                 Success("\nSign in berhasil.");
                 Success("Anda masuk sebagai Administrator.");
                 getch();
                 // masuk ke menu admin
-                menuAdmin(listReviewer, listMovie, ListReview);
-            } else if (userLogin == REVIEWER) {
+                menuAdmin(list_reviewer, list_movie, list_review);
+            } else if (user_login == REVIEWER) {
                 // sign in reviewer berhasil
                 Success("\nSign in berhasil.");
                 Success("Anda masuk sebagai Reviewer.");
@@ -98,7 +98,7 @@ int main() {
         }
         case '3' : { // Sign Up
             // sign up reviewer
-            signUp(listReviewer);
+            signUp(list_reviewer);
             getch();
 
             // menuju label main menu
@@ -121,183 +121,183 @@ int main() {
 }
 
 // prosedur inisialisasi data reviewer
-void inisialisasiDataReviewer(ListReviewer &listReviewer) {
+void InitDataReviewer(ListReviewer &list_reviewer) {
     // deklarasi variabel
-    Reviewer newReviewer;
-    AddressReviewer newAddressReviewer;
+    Reviewer reviewer;
+    AddressReviewer address_reviewer;
 
     // data dibuat menjadi elemen reviewer
-    newReviewer = CreateReviewer("Nugi", "nugi", "nugi123");
+    reviewer = CreateReviewer("Nugi", "nugi", "nugi123");
     // elemen reviewer dialokasikan pada memory
-    newAddressReviewer = Allocate(newReviewer);
+    address_reviewer = Allocate(reviewer);
     // alamat memory reviewer dimasukan kedalam list dengan metode insert last
-    InsertLast(listReviewer, newAddressReviewer);
+    InsertLast(list_reviewer, address_reviewer);
 
-    newReviewer = CreateReviewer("Fatri", "fatri", "fatri123");
-    newAddressReviewer = Allocate(newReviewer);
-    InsertLast(listReviewer, newAddressReviewer);
+    reviewer = CreateReviewer("Fatri", "fatri", "fatri123");
+    address_reviewer = Allocate(reviewer);
+    InsertLast(list_reviewer, address_reviewer);
 
-    newReviewer = CreateReviewer("Fathur", "fathur", "fathur123");
-    newAddressReviewer = Allocate(newReviewer);
-    InsertLast(listReviewer, newAddressReviewer);
+    reviewer = CreateReviewer("Fathur", "fathur", "fathur123");
+    address_reviewer = Allocate(reviewer);
+    InsertLast(list_reviewer, address_reviewer);
 
-    newReviewer = CreateReviewer("Eri", "eri", "eri123");
-    newAddressReviewer = Allocate(newReviewer);
-    InsertLast(listReviewer, newAddressReviewer);
+    reviewer = CreateReviewer("Eri", "eri", "eri123");
+    address_reviewer = Allocate(reviewer);
+    InsertLast(list_reviewer, address_reviewer);
 
-    newReviewer = CreateReviewer("Nanda", "nanda", "nanda123");
-    newAddressReviewer = Allocate(newReviewer);
-    InsertLast(listReviewer, newAddressReviewer);
+    reviewer = CreateReviewer("Nanda", "nanda", "nanda123");
+    address_reviewer = Allocate(reviewer);
+    InsertLast(list_reviewer, address_reviewer);
 
-    newReviewer = CreateReviewer("Tubagus", "tubagus", "tubagus123");
-    newAddressReviewer = Allocate(newReviewer);
-    InsertLast(listReviewer, newAddressReviewer);
+    reviewer = CreateReviewer("Tubagus", "tubagus", "tubagus123");
+    address_reviewer = Allocate(reviewer);
+    InsertLast(list_reviewer, address_reviewer);
 
-    newReviewer = CreateReviewer("Arib", "arib", "arib123");
-    newAddressReviewer = Allocate(newReviewer);
-    InsertLast(listReviewer, newAddressReviewer);
+    reviewer = CreateReviewer("Arib", "arib", "arib123");
+    address_reviewer = Allocate(reviewer);
+    InsertLast(list_reviewer, address_reviewer);
 
-    newReviewer = CreateReviewer("Nugi Ganteng", "nugiganteng", "nugi123");
-    newAddressReviewer = Allocate(newReviewer);
-    InsertLast(listReviewer, newAddressReviewer);
+    reviewer = CreateReviewer("Nugi Ganteng", "nugiganteng", "nugi123");
+    address_reviewer = Allocate(reviewer);
+    InsertLast(list_reviewer, address_reviewer);
 
-    newReviewer = CreateReviewer("Fathur Fathur", "fathurfathur", "fathurfathur");
-    newAddressReviewer = Allocate(newReviewer);
-    InsertLast(listReviewer, newAddressReviewer);
+    reviewer = CreateReviewer("Fathur Fathur", "fathurfathur", "fathurfathur");
+    address_reviewer = Allocate(reviewer);
+    InsertLast(list_reviewer, address_reviewer);
 
-    newReviewer = CreateReviewer("Nugi Nugi", "nuginugi", "nuginugi");
-    newAddressReviewer = Allocate(newReviewer);
-    InsertLast(listReviewer, newAddressReviewer);
+    reviewer = CreateReviewer("Nugi Nugi", "nuginugi", "nuginugi");
+    address_reviewer = Allocate(reviewer);
+    InsertLast(list_reviewer, address_reviewer);
 }
 
 // prosedur inisialisasi data movie
-void inisialisasiDataMovie(ListMovie &listMovie) {
+void InitDataMovie(ListMovie &list_movie) {
     // deklarasi variabel
-    Movie newMovie;
-    AddressMovie newAddressMovie;
+    Movie movie;
+    AddressMovie address_movie;
 
     // data dibuat menjadi elemen movie
-    newMovie = CreateMovie("A STARS IS BORN", "Bradley Cooper", "Bradley Cooper, Lady Gaga, Sam Elliott, Dave Chappelle, Anthony Ramos", "Drama, Romance", "2 hour 14 minute", "19 October 2018");
+    movie = CreateMovie("A STARS IS BORN", "Bradley Cooper", "Bradley Cooper, Lady Gaga, Sam Elliott, Dave Chappelle, Anthony Ramos", "Drama, Romance", "2 hour 14 minute", "19 October 2018");
     // elemen movie dialokasikan pada memory
-    newAddressMovie = Allocate(newMovie);
+    address_movie = Allocate(movie);
     // alamat memory movie dimasukan kedalam list dengan metode insert last
-    InsertLast(listMovie, newAddressMovie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("AQUAMAN", "James Wan", "Jason Momoa, Amber Heard, Patrick Wilson, Nicole Kidman, Dolph Lundgren", "Action, Adventure, Fantasy", "2 hour 22 minute", "21 December 2018");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("AQUAMAN", "James Wan", "Jason Momoa, Amber Heard, Patrick Wilson, Nicole Kidman, Dolph Lundgren", "Action, Adventure, Fantasy", "2 hour 22 minute", "21 December 2018");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("BIRD BOX", "Susanne Bier", "Sandra Bullock, Trevante Rhodes, Sarah Paulson, John Malkovich, Machine Gun Kelly", "Drama, Thriller", "2 hour 4 minute", "12 November 2018");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("BIRD BOX", "Susanne Bier", "Sandra Bullock, Trevante Rhodes, Sarah Paulson, John Malkovich, Machine Gun Kelly", "Drama, Thriller", "2 hour 4 minute", "12 November 2018");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("BOHEMIAN RHAPSODY", "Bryan Singer", "Rami Malek, Ben Hardy, Lucy Boynton, Mike Myres, Allen Leech, Joseph Mazzello", "Drama, Biography, Music", "2 hour 13 minute", "27 October 2018");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("BOHEMIAN RHAPSODY", "Bryan Singer", "Rami Malek, Ben Hardy, Lucy Boynton, Mike Myres, Allen Leech, Joseph Mazzello", "Drama, Biography, Music", "2 hour 13 minute", "27 October 2018");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("BUMBLEBEE", "Travis Knight", "Hailee Steinfeld, Dylan O'Brien, John Cena, Peter Cullen, Jorge Lendeborg Jr", "Sci-Fi, Action", "1 hour 54 minute", "19 December 2018");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("BUMBLEBEE", "Travis Knight", "Hailee Steinfeld, Dylan O'Brien, John Cena, Peter Cullen, Jorge Lendeborg Jr", "Sci-Fi, Action", "1 hour 54 minute", "19 December 2018");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("CAPTAIN MARVEL", "Anna Boden, Ryan Fleck", "Brie Larson, Samuel L.Jackson, Jude Law, Gemma Chan, Ben Memdelsohn", "Fantasy, Sci-Fi", "2 hour 5 minute", "8 March 2019");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("CAPTAIN MARVEL", "Anna Boden, Ryan Fleck", "Brie Larson, Samuel L.Jackson, Jude Law, Gemma Chan, Ben Memdelsohn", "Fantasy, Sci-Fi", "2 hour 5 minute", "8 March 2019");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("How To Train Your Dragon:The Hidden World", "Dean DeBlois", "Jay Baruchel, America Ferrera, Cate Blanchett, Kit Harington", "Action, Fantasy, Adventure", "1 hour 44 minute", "9 January 2019");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("How To Train Your Dragon:The Hidden World", "Dean DeBlois", "Jay Baruchel, America Ferrera, Cate Blanchett, Kit Harington", "Action, Fantasy, Adventure", "1 hour 44 minute", "9 January 2019");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("ISN'T IT ROMANTIC", "Todd Strauss-Schulson", "Rebel Wilson, Liam Hemsworth, Priyanka Chopra, Adam DeVine, Betty Gilpin, Tom Ellis", "Fantasy, Romance, Drama", "1 hour 29 minute", "13 February 2019");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("ISN'T IT ROMANTIC", "Todd Strauss-Schulson", "Rebel Wilson, Liam Hemsworth, Priyanka Chopra, Adam DeVine, Betty Gilpin, Tom Ellis", "Fantasy, Romance, Drama", "1 hour 29 minute", "13 February 2019");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("SPIDER-MAN:INTO THE SPIDER-VERSE", "Peter Ramsey, Bob Persichetti, Rodney Rothman", "Jake Johnson, Shameik Moore, Hailee Steinfeld, Mahershala Ali, Nicolas Cage", "Fantasy, Sci-Fi", "1 hour 56 minute", "12 December 2018");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("SPIDER-MAN:INTO THE SPIDER-VERSE", "Peter Ramsey, Bob Persichetti, Rodney Rothman", "Jake Johnson, Shameik Moore, Hailee Steinfeld, Mahershala Ali, Nicolas Cage", "Fantasy, Sci-Fi", "1 hour 56 minute", "12 December 2018");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("FANTASTIC BEASTS:THE CRIMES OF GRINDELWALD", "David Yates", "Eddie Redmayne, Jude Law, Johnny Depp, Ezra Miller, Dan Fogler", "Drama, Fantasy, Adventure", "2 hour 13 minute", "14 November 2018");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("FANTASTIC BEASTS:THE CRIMES OF GRINDELWALD", "David Yates", "Eddie Redmayne, Jude Law, Johnny Depp, Ezra Miller, Dan Fogler", "Drama, Fantasy, Adventure", "2 hour 13 minute", "14 November 2018");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("CRAZY RICH ASIANS", "Jon M.Chu", "Awkwafina, Henry Golding, Ken Jeong, Constance Wu, Gemma Chan", "Comedy, Romance", "2 hour 1 minute", "15 August 2018");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("CRAZY RICH ASIANS", "Jon M.Chu", "Awkwafina, Henry Golding, Ken Jeong, Constance Wu, Gemma Chan", "Comedy, Romance", "2 hour 1 minute", "15 August 2018");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 
-    newMovie = CreateMovie("US", "Jordan Peele", "Nyong'o, Winston Duke, Anna Diop, Yahya Abdul-Matern II", "Mystery, Thriller", "2 hour 1 minute", "20 September 2019");
-    newAddressMovie = Allocate(newMovie);
-    InsertLast(listMovie, newAddressMovie);
+    movie = CreateMovie("US", "Jordan Peele", "Nyong'o, Winston Duke, Anna Diop, Yahya Abdul-Matern II", "Mystery, Thriller", "2 hour 1 minute", "20 September 2019");
+    address_movie = Allocate(movie);
+    InsertLast(list_movie, address_movie);
 }
 
 // prosedur inisialisasi data review
-void inisialisasiDataReview(ListReview &ListReview, ListReviewer listReviewer, ListMovie listMovie) {
+void InitDataReview(ListReview &list_review, ListReviewer list_reviewer, ListMovie list_movie) {
     // deklarasi variabel
-    Review newReview;
-    AddressReview newAddressReview;
-    AddressReviewer addressReviewer;
-    AddressMovie addressMovie;
+    Review review;
+    AddressReview address_review;
+    AddressReviewer address_reviewer;
+    AddressMovie address_movie;
 
     // data dibuat menjadi elemen reviewer
-    newReview = CreateReview(5, "GREAT MOVIE!!!");
+    review = CreateReview(5, "GREAT MOVIE!!!");
     // cari pointer reviewer yang mereview
-    addressReviewer = FindByUsername(listReviewer, "nugi");
+    address_reviewer = FindByUsername(list_reviewer, "nugi");
     // cari pointer movie yang direview
-    addressMovie = FindByTitle(listMovie, "A STARS IS BORN");
+    address_movie = FindByTitle(list_movie, "A STARS IS BORN");
     // elemen reviewer dialokasikan pada memory
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
+    address_review = Allocate(review, address_reviewer, address_movie);
     // alamat memory reviewer dimasukan kedalam list dengan metode insert last
-    InsertFirst(ListReview, newAddressReview);
+    InsertFirst(list_review, address_review);
 
-    newReview = CreateReview(5, "Pretty good super hero film.");
-    addressReviewer = FindByUsername(listReviewer, "fatri");
-    addressMovie = FindByTitle(listMovie, "AQUAMAN");
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
-    InsertFirst(ListReview, newAddressReview);
+    review = CreateReview(5, "Pretty good super hero film.");
+    address_reviewer = FindByUsername(list_reviewer, "fatri");
+    address_movie = FindByTitle(list_movie, "AQUAMAN");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
 
-    newReview = CreateReview(5, "Insane scary loved it.");
-    addressReviewer = FindByUsername(listReviewer, "fathur");
-    addressMovie = FindByTitle(listMovie, "BIRD BOX");
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
-    InsertFirst(ListReview, newAddressReview);
+    review = CreateReview(5, "Insane scary loved it.");
+    address_reviewer = FindByUsername(list_reviewer, "fathur");
+    address_movie = FindByTitle(list_movie, "BIRD BOX");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
 
-    newReview = CreateReview(5, "Excellent movie! How queen became queen");
-    addressReviewer = FindByUsername(listReviewer, "eri");
-    addressMovie = FindByTitle(listMovie, "BOHEMIAN RHAPSODY");
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
-    InsertFirst(ListReview, newAddressReview);
+    review = CreateReview(5, "Excellent movie! How queen became queen");
+    address_reviewer = FindByUsername(list_reviewer, "eri");
+    address_movie = FindByTitle(list_movie, "BOHEMIAN RHAPSODY");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
 
-    newReview = CreateReview(5, "Loved it!!! Awsome Movie!!!");
-    addressReviewer = FindByUsername(listReviewer, "nanda");
-    addressMovie = FindByTitle(listMovie, "BUMBLEBEE");
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
-    InsertFirst(ListReview, newAddressReview);
+    review = CreateReview(5, "Loved it!!! Awsome Movie!!!");
+    address_reviewer = FindByUsername(list_reviewer, "nanda");
+    address_movie = FindByTitle(list_movie, "BUMBLEBEE");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
 
-    newReview = CreateReview(5, "Best movie!!! Carol is awesome!");
-    addressReviewer = FindByUsername(listReviewer, "tubagus");
-    addressMovie = FindByTitle(listMovie, "CAPTAIN MARVEL");
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
-    InsertFirst(ListReview, newAddressReview);
+    review = CreateReview(5, "Best movie!!! Carol is awesome!");
+    address_reviewer = FindByUsername(list_reviewer, "tubagus");
+    address_movie = FindByTitle(list_movie, "CAPTAIN MARVEL");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
 
-    newReview = CreateReview(5, "Absolutely Amazing!!");
-    addressReviewer = FindByUsername(listReviewer, "arib");
-    addressMovie = FindByTitle(listMovie, "How To Train Your Dragon:The Hidden World");
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
-    InsertFirst(ListReview, newAddressReview);
+    review = CreateReview(5, "Absolutely Amazing!!");
+    address_reviewer = FindByUsername(list_reviewer, "arib");
+    address_movie = FindByTitle(list_movie, "How To Train Your Dragon:The Hidden World");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
 
-    newReview = CreateReview(4, "Great movie and funny");
-    addressReviewer = FindByUsername(listReviewer, "nugiganteng");
-    addressMovie = FindByTitle(listMovie, "ISN'T IT ROMANTIC");
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
-    InsertFirst(ListReview, newAddressReview);
+    review = CreateReview(4, "Great movie and funny");
+    address_reviewer = FindByUsername(list_reviewer, "nugiganteng");
+    address_movie = FindByTitle(list_movie, "ISN'T IT ROMANTIC");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
 
-    newReview = CreateReview(5, "Amazing movie stan lee");
-    addressReviewer = FindByUsername(listReviewer, "fathurfathur");
-    addressMovie = FindByTitle(listMovie, "SPIDER-MAN:INTO THE SPIDER-VERSE");
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
-    InsertFirst(ListReview, newAddressReview);
+    review = CreateReview(5, "Amazing movie stan lee");
+    address_reviewer = FindByUsername(list_reviewer, "fathurfathur");
+    address_movie = FindByTitle(list_movie, "SPIDER-MAN:INTO THE SPIDER-VERSE");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
 
-    newReview = CreateReview(5, "FANTASTIC MOVIE!!!");
-    addressReviewer = FindByUsername(listReviewer, "nuginugi");
-    addressMovie = FindByTitle(listMovie, "FANTASTIC BEASTS:THE CRIMES OF GRINDELWALD");
-    newAddressReview = Allocate(newReview, addressReviewer, addressMovie);
-    InsertFirst(ListReview, newAddressReview);
+    review = CreateReview(5, "FANTASTIC MOVIE!!!");
+    address_reviewer = FindByUsername(list_reviewer, "nuginugi");
+    address_movie = FindByTitle(list_movie, "FANTASTIC BEASTS:THE CRIMES OF GRINDELWALD");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
 }

@@ -31,12 +31,12 @@ const int MAX_RETRY_COUNT = 3;
 
 // enum tipe login user
 enum LoginUser {
+    // login user guest
+    GUEST,
     // login user administrator
     ADMINISTRATOR,
     // login user reviewer
-    REVIEWER,
-    // login user guest
-    GUEST
+    REVIEWER
 };
 
 // alokasi array

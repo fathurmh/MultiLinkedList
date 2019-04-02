@@ -25,7 +25,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="list_movie.cpp" />
     <ClCompile Include="review.cpp" />
-    <ClCompile Include="reviewer.cpp" />
+    <ClCompile Include="list_reviewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="admin_area.h" />
@@ -33,7 +33,7 @@
     <ClInclude Include="guest_area.h" />
     <ClInclude Include="list_movie.h" />
     <ClInclude Include="review.h" />
-    <ClInclude Include="reviewer.h" />
+    <ClInclude Include="list_reviewer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

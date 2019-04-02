@@ -8,7 +8,7 @@
 
 // include library buatan
 #include "common.h"
-#include "reviewer.h"
+#include "list_reviewer.h"
 #include "list_movie.h"
 #include "review.h"
 #include "admin_area.h"
@@ -17,7 +17,7 @@
 using namespace std;
 
 // prosedur menu admin
-void menuAdmin(listReviewer &listReviewer, ListMovie &listMovie, ListReview listReview) {
+void menuAdmin(ListReviewer &listReviewer, ListMovie &listMovie, ListReview listReview) {
     // deklarasi variabel
     char mainMenu;
 
@@ -507,11 +507,11 @@ void deleteDataMovie(ListMovie &listMovie) {
 }
 
 // prosedur view data reviewer
-void viewDataReviewer(listReviewer listReviewer) {
+void viewDataReviewer(ListReviewer listReviewer) {
     // deklarasi variabel
     int id;
     string pilihId;
-    addressReviewer reviewer;
+    AddressReviewer reviewer;
 
     // label view
     ViewLabel:
@@ -520,7 +520,7 @@ void viewDataReviewer(listReviewer listReviewer) {
     PrintHeader();
 
     // cetak list reviewer
-    cetakList(listReviewer);
+    Cetak(listReviewer);
 
     // jika terdapat reviewer dalam list
     if (FIRST(listReviewer) != NULL) {
@@ -550,14 +550,14 @@ void viewDataReviewer(listReviewer listReviewer) {
             PrintTitle("VIEW DETAIL DATA REVIEWER");
 
             // cari reviewer by id
-            reviewer = searchById(listReviewer, id);
+            reviewer = FindById(listReviewer, id);
 
             // cek pointer reviewer
             if (reviewer == NULL) {
                 Warning("Reviewer tidak ditemukan.");
             } else {
                 // cetak detail reviewer
-                cetakReviewer(reviewer);
+                Cetak(reviewer);
             }
 
             getch();
@@ -574,12 +574,12 @@ void viewDataReviewer(listReviewer listReviewer) {
 }
 
 // prosedur delete data reviewer
-void deleteDataReviewer(listReviewer &listReviewer) {
+void deleteDataReviewer(ListReviewer &listReviewer) {
     // deklarasi variabel
     int id;
     string pilihId;
     string ensureUpdate;
-    addressReviewer reviewer;
+    AddressReviewer reviewer;
 
     // label view
     ViewLabel:
@@ -588,7 +588,7 @@ void deleteDataReviewer(listReviewer &listReviewer) {
     PrintHeader();
 
     // cetak list reviewer
-    cetakList(listReviewer);
+    Cetak(listReviewer);
 
     // jika terdapat reviewer dalam list
     if (FIRST(listReviewer) != NULL) {
@@ -618,14 +618,14 @@ void deleteDataReviewer(listReviewer &listReviewer) {
             PrintTitle("DELETE DATA REVIEWER");
 
             // cari reviewer by id
-            reviewer = searchById(listReviewer, id);
+            reviewer = FindById(listReviewer, id);
 
             // cek pointer reviewer
             if (reviewer == NULL) {
                 Warning("Reviewer tidak ditemukan.");
             } else {
                 // cetak detail reviewer
-                cetakReviewer(reviewer);
+                Cetak(reviewer);
 
                 // ensure
                 Warning("Anda yakin ingin menghapus?");
@@ -635,7 +635,7 @@ void deleteDataReviewer(listReviewer &listReviewer) {
                 // hapus jika jawaban Y atau y
                 if (ensureUpdate == "Y" || ensureUpdate == "y") {
                     // delete reviewer
-                    deleteReviewer(listReviewer, reviewer);
+                    DeleteReviewer(listReviewer, reviewer);
                     Success("\nData berhasil dihapus.");
                 } else {
                     Success("\nData tidak dihapus.");

@@ -1,7 +1,5 @@
 // include library c++
 #include <conio.h>
-#include <cstdio>
-#include <cstdlib>
 #include <iostream>
 #include <string>
 
@@ -207,7 +205,7 @@ void DeleteLast(ListMovie &list_movie)
     }
     else
     {
-        // inisialisasi first_movie
+        // inisialisasi last_movie
         AddressMovie last_movie = LAST(list_movie);
 
         // jika list hanya mempunyai satu elemen
@@ -243,7 +241,7 @@ void DeleteMovie(ListMovie &list_movie, AddressMovie address_movie)
     {
         // inisialisasi first_movie
         AddressMovie first_movie = FIRST(list_movie);
-        // inisialisasi first_movie
+        // inisialisasi last_movie
         AddressMovie last_movie = LAST(list_movie);
 
         // jika elemen yang dihapus adalah elemen pertama
@@ -275,8 +273,8 @@ AddressMovie FindByTitle(ListMovie &list_movie, string title)
     // inisialisasi variabel ketemu
     bool ketemu = false;
 
-    // inisialisasi variabel dataKetemu dengan null
-    AddressMovie dataKetemu = NULL;
+    // inisialisasi variabel data_ketemu dengan null
+    AddressMovie data_ketemu = NULL;
 
     // inisialisasi variabel current dengan elemen pertama pada list
     AddressMovie current = FIRST(list_movie);
@@ -288,14 +286,14 @@ AddressMovie FindByTitle(ListMovie &list_movie, string title)
         if (DATA(current).title == title)
         {
             ketemu = true;
-            dataKetemu = current;
+            data_ketemu = current;
         }
         // variabel current diisi dengan elemen selanjutnya
         current = NEXT(current);
     }
 
     // kembalikan data
-    return dataKetemu;
+    return data_ketemu;
 }
 
 // fungsi cari movie by id pada list
@@ -304,8 +302,8 @@ AddressMovie FindById(ListMovie &list_movie, int id)
     // inisialisasi variabel ketemu
     bool ketemu = false;
 
-    // inisialisasi variabel dataKetemu dengan null
-    AddressMovie dataKetemu = NULL;
+    // inisialisasi variabel data_ketemu dengan null
+    AddressMovie data_ketemu = NULL;
 
     // inisialisasi variabel current dengan elemen pertama pada list
     AddressMovie current = FIRST(list_movie);
@@ -317,14 +315,14 @@ AddressMovie FindById(ListMovie &list_movie, int id)
         if (DATA(current).id == id)
         {
             ketemu = true;
-            dataKetemu = current;
+            data_ketemu = current;
         }
         // variabel current diisi dengan elemen selanjutnya
         current = NEXT(current);
     }
 
     // kembalikan data
-    return dataKetemu;
+    return data_ketemu;
 }
 
 // fungsi hitung total elemen pada list

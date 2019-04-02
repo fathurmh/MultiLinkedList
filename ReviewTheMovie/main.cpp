@@ -7,32 +7,32 @@
 
 // include library buatan
 #include "common.h"
-#include "admin_area.h"
-#include "guest_area.h"
-#include "reviewer.h"
+#include "list_reviewer.h"
 #include "list_movie.h"
 #include "review.h"
+#include "admin_area.h"
+#include "guest_area.h"
 
 // using namespace
 using namespace std;
 
 // prosedur inisialisasi data reviewer
-void inisialisasiDataReviewer(listReviewer &listReviewer);
+void inisialisasiDataReviewer(ListReviewer &listReviewer);
 // prosedur inisialisasi data movie
 void inisialisasiDataMovie(ListMovie &listMovie);
 // prosedur inisialisasi data review
-void inisialisasiDataReview(ListReview &ListReview, listReviewer listReviewer, ListMovie listMovie);
+void inisialisasiDataReview(ListReview &ListReview, ListReviewer listReviewer, ListMovie listMovie);
 
 // main program
 int main() {
     // deklarasi variabel
     char mainMenu;
-    listReviewer listReviewer;
+    ListReviewer listReviewer;
     ListMovie listMovie;
     ListReview ListReview;
 
     // create list
-    createList(listReviewer);
+    CreateList(listReviewer);
     CreateList(listMovie);
     createList(ListReview);
 
@@ -73,14 +73,14 @@ int main() {
             LoginUser userLogin = signIn(listReviewer);
 
             // cek user login
-            if (userLogin == Administrator) {
+            if (userLogin == ADMINISTRATOR) {
                 // sign in administrator berhasil
                 Success("\nSign in berhasil.");
                 Success("Anda masuk sebagai Administrator.");
                 getch();
                 // masuk ke menu admin
                 menuAdmin(listReviewer, listMovie, ListReview);
-            } else if (userLogin == Reviewer) {
+            } else if (userLogin == REVIEWER) {
                 // sign in reviewer berhasil
                 Success("\nSign in berhasil.");
                 Success("Anda masuk sebagai Reviewer.");
@@ -121,53 +121,53 @@ int main() {
 }
 
 // prosedur inisialisasi data reviewer
-void inisialisasiDataReviewer(listReviewer &listReviewer) {
+void inisialisasiDataReviewer(ListReviewer &listReviewer) {
     // deklarasi variabel
-    reviewer newReviewer;
-    addressReviewer newAddressReviewer;
+    Reviewer newReviewer;
+    AddressReviewer newAddressReviewer;
 
     // data dibuat menjadi elemen reviewer
-    newReviewer = createReviewer("Nugi", "nugi", "nugi123");
+    newReviewer = CreateReviewer("Nugi", "nugi", "nugi123");
     // elemen reviewer dialokasikan pada memory
-    newAddressReviewer = alokasiReviewer(newReviewer);
+    newAddressReviewer = Allocate(newReviewer);
     // alamat memory reviewer dimasukan kedalam list dengan metode insert last
-    insertLast(listReviewer, newAddressReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 
-    newReviewer = createReviewer("Fatri", "fatri", "fatri123");
-    newAddressReviewer = alokasiReviewer(newReviewer);
-    insertLast(listReviewer, newAddressReviewer);
+    newReviewer = CreateReviewer("Fatri", "fatri", "fatri123");
+    newAddressReviewer = Allocate(newReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 
-    newReviewer = createReviewer("Fathur", "fathur", "fathur123");
-    newAddressReviewer = alokasiReviewer(newReviewer);
-    insertLast(listReviewer, newAddressReviewer);
+    newReviewer = CreateReviewer("Fathur", "fathur", "fathur123");
+    newAddressReviewer = Allocate(newReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 
-    newReviewer = createReviewer("Eri", "eri", "eri123");
-    newAddressReviewer = alokasiReviewer(newReviewer);
-    insertLast(listReviewer, newAddressReviewer);
+    newReviewer = CreateReviewer("Eri", "eri", "eri123");
+    newAddressReviewer = Allocate(newReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 
-    newReviewer = createReviewer("Nanda", "nanda", "nanda123");
-    newAddressReviewer = alokasiReviewer(newReviewer);
-    insertLast(listReviewer, newAddressReviewer);
+    newReviewer = CreateReviewer("Nanda", "nanda", "nanda123");
+    newAddressReviewer = Allocate(newReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 
-    newReviewer = createReviewer("Tubagus", "tubagus", "tubagus123");
-    newAddressReviewer = alokasiReviewer(newReviewer);
-    insertLast(listReviewer, newAddressReviewer);
+    newReviewer = CreateReviewer("Tubagus", "tubagus", "tubagus123");
+    newAddressReviewer = Allocate(newReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 
-    newReviewer = createReviewer("Arib", "arib", "arib123");
-    newAddressReviewer = alokasiReviewer(newReviewer);
-    insertLast(listReviewer, newAddressReviewer);
+    newReviewer = CreateReviewer("Arib", "arib", "arib123");
+    newAddressReviewer = Allocate(newReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 
-    newReviewer = createReviewer("Nugi Ganteng", "nugiganteng", "nugi123");
-    newAddressReviewer = alokasiReviewer(newReviewer);
-    insertLast(listReviewer, newAddressReviewer);
+    newReviewer = CreateReviewer("Nugi Ganteng", "nugiganteng", "nugi123");
+    newAddressReviewer = Allocate(newReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 
-    newReviewer = createReviewer("Fathur Fathur", "fathurfathur", "fathurfathur");
-    newAddressReviewer = alokasiReviewer(newReviewer);
-    insertLast(listReviewer, newAddressReviewer);
+    newReviewer = CreateReviewer("Fathur Fathur", "fathurfathur", "fathurfathur");
+    newAddressReviewer = Allocate(newReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 
-    newReviewer = createReviewer("Nugi Nugi", "nuginugi", "nuginugi");
-    newAddressReviewer = alokasiReviewer(newReviewer);
-    insertLast(listReviewer, newAddressReviewer);
+    newReviewer = CreateReviewer("Nugi Nugi", "nuginugi", "nuginugi");
+    newAddressReviewer = Allocate(newReviewer);
+    InsertLast(listReviewer, newAddressReviewer);
 }
 
 // prosedur inisialisasi data movie
@@ -229,17 +229,17 @@ void inisialisasiDataMovie(ListMovie &listMovie) {
 }
 
 // prosedur inisialisasi data review
-void inisialisasiDataReview(ListReview &ListReview, listReviewer listReviewer, ListMovie listMovie) {
+void inisialisasiDataReview(ListReview &ListReview, ListReviewer listReviewer, ListMovie listMovie) {
     // deklarasi variabel
     review newReview;
     addressReview newAddressReview;
-    addressReviewer addressReviewer;
+    AddressReviewer addressReviewer;
     AddressMovie addressMovie;
 
     // data dibuat menjadi elemen reviewer
     newReview = createReview(5, "GREAT MOVIE!!!");
     // cari pointer reviewer yang mereview
-    addressReviewer = searchByUsername(listReviewer, "nugi");
+    addressReviewer = FindByUsername(listReviewer, "nugi");
     // cari pointer movie yang direview
     addressMovie = FindByTitle(listMovie, "A STARS IS BORN");
     // elemen reviewer dialokasikan pada memory
@@ -248,55 +248,55 @@ void inisialisasiDataReview(ListReview &ListReview, listReviewer listReviewer, L
     insertFirst(ListReview, newAddressReview);
 
     newReview = createReview(5, "Pretty good super hero film.");
-    addressReviewer = searchByUsername(listReviewer, "fatri");
+    addressReviewer = FindByUsername(listReviewer, "fatri");
     addressMovie = FindByTitle(listMovie, "AQUAMAN");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
 
     newReview = createReview(5, "Insane scary loved it.");
-    addressReviewer = searchByUsername(listReviewer, "fathur");
+    addressReviewer = FindByUsername(listReviewer, "fathur");
     addressMovie = FindByTitle(listMovie, "BIRD BOX");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
 
     newReview = createReview(5, "Excellent movie! How queen became queen");
-    addressReviewer = searchByUsername(listReviewer, "eri");
+    addressReviewer = FindByUsername(listReviewer, "eri");
     addressMovie = FindByTitle(listMovie, "BOHEMIAN RHAPSODY");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
 
     newReview = createReview(5, "Loved it!!! Awsome Movie!!!");
-    addressReviewer = searchByUsername(listReviewer, "nanda");
+    addressReviewer = FindByUsername(listReviewer, "nanda");
     addressMovie = FindByTitle(listMovie, "BUMBLEBEE");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
 
     newReview = createReview(5, "Best movie!!! Carol is awesome!");
-    addressReviewer = searchByUsername(listReviewer, "tubagus");
+    addressReviewer = FindByUsername(listReviewer, "tubagus");
     addressMovie = FindByTitle(listMovie, "CAPTAIN MARVEL");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
 
     newReview = createReview(5, "Absolutely Amazing!!");
-    addressReviewer = searchByUsername(listReviewer, "arib");
+    addressReviewer = FindByUsername(listReviewer, "arib");
     addressMovie = FindByTitle(listMovie, "How To Train Your Dragon:The Hidden World");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
 
     newReview = createReview(4, "Great movie and funny");
-    addressReviewer = searchByUsername(listReviewer, "nugiganteng");
+    addressReviewer = FindByUsername(listReviewer, "nugiganteng");
     addressMovie = FindByTitle(listMovie, "ISN'T IT ROMANTIC");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
 
     newReview = createReview(5, "Amazing movie stan lee");
-    addressReviewer = searchByUsername(listReviewer, "fathurfathur");
+    addressReviewer = FindByUsername(listReviewer, "fathurfathur");
     addressMovie = FindByTitle(listMovie, "SPIDER-MAN:INTO THE SPIDER-VERSE");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);
 
     newReview = createReview(5, "FANTASTIC MOVIE!!!");
-    addressReviewer = searchByUsername(listReviewer, "nuginugi");
+    addressReviewer = FindByUsername(listReviewer, "nuginugi");
     addressMovie = FindByTitle(listMovie, "FANTASTIC BEASTS:THE CRIMES OF GRINDELWALD");
     newAddressReview = allocate(newReview, addressReviewer, addressMovie);
     insertFirst(ListReview, newAddressReview);

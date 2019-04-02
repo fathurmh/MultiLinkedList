@@ -5,8 +5,8 @@
 #include <string>
 
 // include library buatan
+#include "list_reviewer.h"
 #include "list_movie.h"
-#include "reviewer.h"
 
 // using namespace
 using namespace std;
@@ -33,7 +33,7 @@ struct elementReview {
     // pointer menuju elemen selanjutnya
     addressReview next;
     // pointer menuju elemen reviewer
-    addressReviewer reviewer;
+    AddressReviewer reviewer;
     // pointer menuju elemen movie
     AddressMovie movie;
 };
@@ -50,7 +50,7 @@ void createList(ListReview &ListReview);
 review createReview(int rating, string description);
 
 // fungsi alokasi
-addressReview allocate(review review, addressReviewer addressReviewer, AddressMovie addressMovie);
+addressReview allocate(review review, AddressReviewer addressReviewer, AddressMovie addressMovie);
 // prosedur dealokasi
 void deallocate(addressReview &addressReview);
 // fungsi alokasi array

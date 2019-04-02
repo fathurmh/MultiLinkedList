@@ -1,9 +1,12 @@
 // include library c++
 #include <iostream>
 #include <conio.h>
+#include <string>
 
 // include library buatan
 #include "common.h"
+#include "list_reviewer.h"
+#include "list_movie.h"
 #include "review.h"
 
 // prosedur membuat list baru
@@ -30,7 +33,7 @@ review createReview(int rating, string description) {
 }
 
 // fungsi alokasi
-addressReview allocate(review newReview, addressReviewer addressReviewer, AddressMovie addressMovie) {
+addressReview allocate(review newReview, AddressReviewer addressReviewer, AddressMovie addressMovie) {
     // deklarasi pointer review
     addressReview newAddressReview;
     // instansiasi pointer dengan elemen review
@@ -263,7 +266,7 @@ void findByMovieId(ListReview &Result, ListReview ListReview, int id) {
         // inisialisasi variabel current dengan elemen pertama pada list
         addressReview current = FIRST(ListReview);
         AddressMovie currentMovie;
-        addressReviewer currentReviewer;
+        AddressReviewer currentReviewer;
         do {
             // variabel current diisi dengan elemen selanjutnya
             current = NEXT(current);

@@ -30,10 +30,10 @@
     <ClCompile Include="review.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reviewer.cpp">
+    <ClCompile Include="list_movie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="list_movie.cpp">
+    <ClCompile Include="list_reviewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,10 +50,10 @@
     <ClInclude Include="review.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="reviewer.h">
+    <ClInclude Include="list_movie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="list_movie.h">
+    <ClInclude Include="list_reviewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

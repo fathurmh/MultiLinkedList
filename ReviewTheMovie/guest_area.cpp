@@ -7,7 +7,7 @@
 
 // include library buatan
 #include "common.h"
-#include "reviewer.h"
+#include "list_reviewer.h"
 #include "list_movie.h"
 #include "review.h"
 #include "guest_area.h"
@@ -16,14 +16,14 @@
 using namespace std;
 
 // fungsi sign in
-LoginUser signIn(listReviewer listReviewer) {
+LoginUser signIn(ListReviewer listReviewer) {
     // deklarasi variabel
     string username;
     string password;
-    addressReviewer reviewer;
+    AddressReviewer reviewer;
 
     // inisialisasi login user guest
-    LoginUser loginUser = Guest;
+    LoginUser loginUser = GUEST;
 
     // cetak header
     PrintHeader();
@@ -39,15 +39,15 @@ LoginUser signIn(listReviewer listReviewer) {
     // cek jika user adalah administrator
     if (username == ADMIN_USERNAME && password == ADMIN_PASSWORD) {
         // login user diisi administrator
-        loginUser = Administrator;
+        loginUser = ADMINISTRATOR;
     } else {
         // cari reviewer dengan username yang diinputkan
-        reviewer = searchByUsername(listReviewer, username);
+        reviewer = FindByUsername(listReviewer, username);
 
         // cek jika reviewer tidak sama dengan null dan passwordnya sama dengan yang diinputkan
         if (reviewer != NULL && DATA(reviewer).password == password) {
             // login user diisi reviewer
-            loginUser = Reviewer;
+            loginUser = REVIEWER;
         }
     }
 
@@ -55,10 +55,10 @@ LoginUser signIn(listReviewer listReviewer) {
 }
 
 // prosedur sign up
-void signUp(listReviewer &listReviewer) {
+void signUp(ListReviewer &listReviewer) {
     // deklarasi variabel
-    reviewer reviewer;
-    addressReviewer addressReviewer;
+    Reviewer reviewer;
+    AddressReviewer addressReviewer;
     string name;
     string username;
     string password;
@@ -71,7 +71,7 @@ void signUp(listReviewer &listReviewer) {
     PrintHeader();
     PrintTitle("SIGN UP");
 
-    // input nama
+    // input name
     cout << "Nama: ";
     getline(cin, name);
 
@@ -93,7 +93,7 @@ void signUp(listReviewer &listReviewer) {
     getline(cin, username);
 
     // cek username didalam list
-    usernameSudahAda = searchByUsername(listReviewer, username) != NULL;
+    usernameSudahAda = FindByUsername(listReviewer, username) != NULL;
 
     // cek username jika sama dengan admin atau sudah ada didalam list atau tidak menginputkan karakter
     if (username == ADMIN_USERNAME || usernameSudahAda || username.empty()) {
@@ -168,15 +168,15 @@ void signUp(listReviewer &listReviewer) {
         Failed("Sign Up gagal.");
     } else {
         // data sign up dibuat menjadi elemen reviewer
-        reviewer = createReviewer(name, username, password);
+        reviewer = CreateReviewer(name, username, password);
         // elemen reviewer dialokasikan pada memory
-        addressReviewer = alokasiReviewer(reviewer);
+        addressReviewer = Allocate(reviewer);
         // alamat memory reviewer dimasukan kedalam list dengan metode insert last
-        insertLast(listReviewer, addressReviewer);
+        InsertLast(listReviewer, addressReviewer);
         // cetak bahwa sign up berhasil
         PrintHeader();
         PrintTitle("DATA REVIEWER");
-        cetakReviewer(addressReviewer);
+        Cetak(addressReviewer);
         Success("Sign Up berhasil.");
         Success("Silahkan melakukan Sign In.");
     }
@@ -204,7 +204,7 @@ int compare(const void *pa, const void *pb) {
 void viewTopTenMovie(ListReview listReview, ListMovie listMovie) {
     //if (FIRST(listMovie) != NULL && LAST(listMovie) != NULL){
     //    // preprocessing
-    //    int totalMovie = countList(listMovie), i = 0;
+    //    int totalMovie = Count(listMovie), i = 0;
     //    addressMovie arrayMovie[totalMovie] = { NULL };
     //    addressMovie temp = FIRST(listMovie);
 

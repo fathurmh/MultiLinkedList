@@ -10,10 +10,11 @@
 using namespace std;
 
 // fungsi sign in
-LoginUser signIn(ListReviewer listReviewer);
+LoginUser SignIn(ListReviewer list_reviewer);
 // prosedur sign up
-void signUp(ListReviewer &listReviewer);
+void SignUp(ListReviewer &list_reviewer);
+
 // view top 10 movie dengan ulasan terbanyak
-void viewTopTenMovie(ListReview ListReview, ListMovie listMovie);
+void ViewTopTenMovie(ListReview list_review, ListMovie list_movie);
 
 #endif // GUEST_AREA_H_INCLUDED

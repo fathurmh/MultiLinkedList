@@ -83,7 +83,7 @@ void Information(const char* text) {
 
 // fungsi agar input password menjadi simbol *
 // http://www.cplusplus.com/articles/E6vU7k9E/
-std::string GetPass(const char *prompt, bool show_asterisk) {
+std::string GetPassword(const char *prompt, bool show_asterisk) {
     const char BACKSPACE = 8;
     const char RETURN = 13;
     unsigned char ch=0;

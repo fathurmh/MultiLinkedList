@@ -63,6 +63,6 @@ void Warning(const char* text);
 void Information(const char* text);
 
 // fungsi agar input password menjadi simbol *
-string GetPass(const char *prompt, bool show_asterisk = true);
+string GetPassword(const char *prompt, bool show_asterisk = true);
 
 #endif // COMMON_H_INCLUDED

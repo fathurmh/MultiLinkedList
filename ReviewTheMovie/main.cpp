@@ -22,7 +22,8 @@ void InitDataMovie(ListMovie &list_movie);
 void InitDataReview(ListReview &list_review, ListReviewer list_reviewer, ListMovie list_movie);
 
 // main program
-int main() {
+int main()
+{
     // deklarasi variabel
     char main_menu;
     LoginUser user_login;
@@ -42,7 +43,7 @@ int main() {
     InitDataReview(list_review, list_reviewer, list_movie);
 
     // label main menu
-    MainMenuLabel:
+MainMenuLabel:
 
     // cetak header
     PrintHeader();
@@ -50,9 +51,9 @@ int main() {
     // cetak menu utama
     PrintTitle("MAIN MENU");
     cout << "1. View Top 10 By Review" << endl << endl
-         << "2. Sign In" << endl
-         << "3. Sign Up" << endl << endl
-         << "0. Exit" << endl << endl;
+        << "2. Sign In" << endl
+        << "3. Sign Up" << endl << endl
+        << "0. Exit" << endl << endl;
     cout << "Pilih Menu: ";
 
     // input pilihan menu
@@ -60,68 +61,80 @@ int main() {
     cin.ignore();
 
     // check kondisi pilihan
-    switch (main_menu) {
-        case '1' : { //  View Top 10 By Review
-            viewTopTenMovie(list_review, list_movie);
+    switch (main_menu)
+    {
+    case '1':
+    { //  View Top 10 By Review
+        ViewTopTenMovie(list_review, list_movie);
+        getch();
+
+        // menuju label main menu
+        goto MainMenuLabel;
+    }
+    case '2':
+    { // Sign In
+// sign in user
+        user_login = SignIn(list_reviewer);
+
+        // cek user login
+        if (user_login == ADMINISTRATOR)
+        {
+            // sign in administrator berhasil
+            Success("\nSign in berhasil.");
+            Success("Anda masuk sebagai Administrator.");
             getch();
-
-            // menuju label main menu
-            goto MainMenuLabel;
+            // masuk ke menu admin
+            menuAdmin(list_reviewer, list_movie, list_review);
         }
-        case '2' : { // Sign In
-            // sign in user
-            user_login = signIn(list_reviewer);
-
-            // cek user login
-            if (user_login == ADMINISTRATOR) {
-                // sign in administrator berhasil
-                Success("\nSign in berhasil.");
-                Success("Anda masuk sebagai Administrator.");
-                getch();
-                // masuk ke menu admin
-                menuAdmin(list_reviewer, list_movie, list_review);
-            } else if (user_login == REVIEWER) {
-                // sign in reviewer berhasil
-                Success("\nSign in berhasil.");
-                Success("Anda masuk sebagai Reviewer.");
-                getch();
-            } else {
-                // sign in gagal
-                Warning("\nUser tidak ditemukan atau username dan password tidak cocok.");
-                Failed("Sign in gagal.");
-                Success("Anda tetap masuk sebagai Guest.");
-                getch();
-            }
-
-            // menuju label main menu
-            goto MainMenuLabel;
-        }
-        case '3' : { // Sign Up
-            // sign up reviewer
-            signUp(list_reviewer);
-            getch();
-
-            // menuju label main menu
-            goto MainMenuLabel;
-        }
-        case '0' : { // Exit
-            // exit
-            cout << endl;
-            Success("Good bye, see you next time.");
+        else if (user_login == REVIEWER)
+        {
+            // sign in reviewer berhasil
+            Success("\nSign in berhasil.");
+            Success("Anda masuk sebagai Reviewer.");
             getch();
         }
-        break;
-        default : { // default
-            // menuju label main menu
-            goto MainMenuLabel;
+        else
+        {
+            // sign in gagal
+            Warning("\nUser tidak ditemukan atau username dan password tidak cocok.");
+            Failed("Sign in gagal.");
+            Success("Anda tetap masuk sebagai Guest.");
+            getch();
         }
+
+        // menuju label main menu
+        goto MainMenuLabel;
+    }
+    case '3':
+    { // Sign Up
+// sign up reviewer
+        SignUp(list_reviewer);
+        getch();
+
+        // menuju label main menu
+        goto MainMenuLabel;
+    }
+    case '0':
+    { // Exit
+// exit
+        cout << endl;
+        Success("Good bye, see you next time.");
+        getch();
+    }
+    break;
+    default:
+    { // default
+// menuju label main menu
+        goto MainMenuLabel;
+    }
     }
 
     return 0;
 }
 
 // prosedur inisialisasi data reviewer
-void InitDataReviewer(ListReviewer &list_reviewer) {
+void InitDataReviewer(ListReviewer &list_reviewer)
+{
     // deklarasi variabel
     Reviewer reviewer;
     AddressReviewer address_reviewer;
@@ -171,7 +184,8 @@ void InitDataReviewer(ListReviewer &list_reviewer) {
 }
 
 // prosedur inisialisasi data movie
-void InitDataMovie(ListMovie &list_movie) {
+void InitDataMovie(ListMovie &list_movie)
+{
     // deklarasi variabel
     Movie movie;
     AddressMovie address_movie;
@@ -229,7 +243,8 @@ void InitDataMovie(ListMovie &list_movie) {
 }
 
 // prosedur inisialisasi data review
-void InitDataReview(ListReview &list_review, ListReviewer list_reviewer, ListMovie list_movie) {
+void InitDataReview(ListReview &list_review, ListReviewer list_reviewer, ListMovie list_movie)
+{
     // deklarasi variabel
     Review review;
     AddressReview address_review;

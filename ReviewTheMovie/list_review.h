@@ -56,7 +56,7 @@ AddressReview *Allocate(int size);
 // prosedur dealokasi
 void Deallocate(AddressReview &address_review);
 // prosedur dealokasi array
-void Deallocate(AddressReview *(&array_review));
+void Deallocate(AddressReview *(&address_review));
 
 // prosedur insert first
 void InsertFirst(ListReview &list_review, AddressReview address_review);
@@ -72,18 +72,36 @@ void DeleteFirst(ListReview &list_review);
 void DeleteLast(ListReview &list_review);
 // prosedur delete last
 void DeleteReview(ListReview &list_review, AddressReview address_review);
+// prosedur delete all
+void DeleteAll(ListReview &list_review);
+// prosedur delete reviewer with all reviews
+void DeleteReviewerWithReview(ListReview &list_review, ListReviewer &list_reviewer, AddressReviewer address_reviewer);
+// prosedur delete movie with all reviews
+void DeleteMovieWithReview(ListReview &list_review, ListMovie &list_movie, AddressMovie address_movie);
 
 // fungsi cari review by id pada list
 AddressReview FindById(ListReview list_review, int id);
 // fungsi cari review by movie id pada list
-void FindByMovieId(ListReview &result, ListReview list_review, int id);
+AddressReview *FindByMovieId(ListReview list_review, int id);
+// fungsi cari review by reviewer id pada list
+AddressReview *FindByReviewerId(ListReview list_review, int id);
 
 // fungsi hitung total elemen pada list
 int Count(ListReview list_review);
+// fungsi hitung total elemen pada array
+int Count(AddressReview *address_review);
 
 // prosedur cetak data review
 void Cetak(AddressReview address_review);
+// prosedur cetak data review with reviewer
+void CetakWithReviewer(AddressReview address_review);
+// prosedur cetak data review with movie
+void CetakWithMovie(AddressReview address_review);
 // prosedur cetak list data review
 void Cetak(ListReview list_review);
+// prosedur cetak list data review dan reviewernya
+void CetakReviewerWithReview(ListReview list_review, AddressReviewer address_reviewer);
+// prosedur cetak list data review dan movienya
+void CetakMovieWithReview(ListReview list_review, AddressMovie address_movie);
 
 #endif // LIST_REVIEW_H_INCLUDED

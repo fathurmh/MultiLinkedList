@@ -39,11 +39,6 @@ enum LoginUser {
     REVIEWER
 };
 
-// alokasi array
-int *AllocateArray(int size);
-// dealokasi array
-void DeallocateArray(int &array);
-
 // prosedur menghapus text pada console
 void ClearScreen();
 // prosedur menghapus console last line

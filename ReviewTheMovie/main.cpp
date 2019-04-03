@@ -84,7 +84,7 @@ MainMenuLabel:
             Success("Anda masuk sebagai Administrator.");
             getch();
             // masuk ke menu admin
-            menuAdmin(list_reviewer, list_movie, list_review);
+            MenuAdmin(list_reviewer, list_movie, list_review);
         }
         else if (user_login == REVIEWER)
         {
@@ -288,6 +288,12 @@ void InitDataReview(ListReview &list_review, ListReviewer list_reviewer, ListMov
 
     review = CreateReview(5, "Best movie!!! Carol is awesome!");
     address_reviewer = FindByUsername(list_reviewer, "tubagus");
+    address_movie = FindByTitle(list_movie, "CAPTAIN MARVEL");
+    address_review = Allocate(review, address_reviewer, address_movie);
+    InsertFirst(list_review, address_review);
+
+    review = CreateReview(5, "AWESOME MOVIE!!!");
+    address_reviewer = FindByUsername(list_reviewer, "fathur");
     address_movie = FindByTitle(list_movie, "CAPTAIN MARVEL");
     address_review = Allocate(review, address_reviewer, address_movie);
     InsertFirst(list_review, address_review);

@@ -67,9 +67,12 @@ void SignUp(ListReviewer &list_reviewer)
     string username;
     string password;
     string retype_password;
-    int retry_password_count;
-    int retry_username_count;
     bool username_sudah_ada;
+
+    // inisialisasi variabel pengulangan input username
+    int retry_username_count = 0;
+    // inisialisasi variabel pengulangan input password
+    int retry_password_count = 0;
 
     // cetak header
     PrintHeader();
@@ -78,9 +81,6 @@ void SignUp(ListReviewer &list_reviewer)
     // input name
     cout << "Nama: ";
     getline(cin, name);
-
-    // inisialisasi variabel pengulangan input username
-    retry_username_count = 0;
 
     // label input username
 InputUsernameLabel:
@@ -128,9 +128,6 @@ InputUsernameLabel:
             goto FinalLabel;
         }
     }
-
-    // inisialisasi variabel pengulangan input password
-    retry_password_count = 0;
 
     // label input username
 InputPasswordLabel:

@@ -9,27 +9,6 @@
 // using namespace
 using namespace std;
 
-// alokasi array
-int *AllocateArray(int size)
-{
-    // alokasi array
-    int *arr = new int[size];
-
-    // semua array diisi 0
-    for (int i = 0; i < size; i++)
-        arr[i] = 0;
-
-    // kembalikan array
-    return arr;
-}
-
-// dealokasi array
-void DeallocateArray(int &array)
-{
-    // hapus memory
-    delete[] & array;
-}
-
 // prosedur menghapus text pada console
 void ClearScreen() {
     system("cls");

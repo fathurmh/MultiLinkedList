@@ -1,6 +1,7 @@
 // include library c++
 #include <conio.h>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 // include library buatan
@@ -201,77 +202,84 @@ FinalLabel:
     }
 }
 
-int findIndex(AddressMovie *arrayMovie, int arraySize, AddressMovie searchMovie)
-{
-    for (int i = 0; i < arraySize; i++)
-    {
-        if (DATA(arrayMovie[i]).id == DATA(searchMovie).id)
-            return i;
-    }
-    return -1;
-}
-
-int compare(const void *pa, const void *pb)
-{
-    int *a = (int *)pa;
-    int *b = (int *)pb;
-    if (a[0] == b[0])
-        return a[1] - b[1];
-    else
-        return a[0] - b[0];
-}
-
 // view top 10 movie dengan ulasan terbanyak
-void ViewTopTenMovie(ListReview listReview, ListMovie listMovie)
+void ViewTopTenMovie(ListMovie list_movie, ListReview list_review)
 {
-    //if (FIRST(listMovie) != NULL && LAST(listMovie) != NULL){
-    //    // preprocessing
-    //    int totalMovie = Count(listMovie), i = 0;
-    //    addressMovie arrayMovie[totalMovie] = { NULL };
-    //    addressMovie temp = FIRST(listMovie);
+    // deklarasi variabel
+    AddressMovie address_movie;
+    int id;
+    string pilih_id;
 
-    //    while(temp != NULL){
-    //        arrayMovie[i] = temp;
-    //        temp = NEXT(temp);
-    //        i++;
-    //    }
+    // generate data top ten movie
+    ListMovie top_movies = TopTenMovies(list_movie, list_review);
 
+    // label view
+ViewLabel:
 
-    //    ListReview result;
-    //    CreateList(result);
-    //    FindByMovieId(result, listReview, 1);
+    // cetak header
+    PrintHeader();
 
-    //    // process
-    //    int idxMovie = 0;
-    //    int arrayMovieReviewCount[totalMovie][2] = { 0 };
+    // cetak list movie
+    PrintTitle("TOP 10 MOVIES");
+    Cetak(top_movies);
 
-    //    for(int i = 0; i < totalMovie; i++)
-    //    {
+    // jika terdapat movie dalam list
+    if (FIRST(top_movies) != NULL)
+    {
+        // info
+        Warning("\n- Masukan ID movie untuk melihat detail.");
+        Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
-    //    }
+        // input nomor untuk detail
+        cout << "Input: ";
+        getline(cin, pilih_id);
 
+        // convert input string ke integer
+        istringstream int_stream(pilih_id);
+        int_stream >> id;
 
-    //    // AddressReview current = first(ListReview);
-    //    // addressMovie currentMovie = movie(current);
-    //    // do {
-    //    //     current = next(current);
-    //    //     currentMovie = movie(current);
-    //    //     idxMovie = findIndex(arrayMovie, totalMovie, currentMovie);
-    //    //     arrayMovieReviewCount[idxMovie][0]++;
-    //    //     arrayMovieReviewCount[idxMovie][1] = idxMovie;
-    //    // } while (current != first(ListReview));
+        // convert integer ke string stream
+        stringstream stream;
+        stream << id;
 
-    //    for(i = 0; i < totalMovie; i++){
-    //        printf("Count: %d\tIndex: %d\n", arrayMovieReviewCount[i][0], arrayMovieReviewCount[i][1]);
-    //    }
+        // cek hasil convert
+        if (pilih_id == "0")
+        {
+            // menuju exit label
+            goto ExitLabel;
+        }
+        else if (pilih_id == stream.str() && id > 0)
+        {
+            // cetak header
+            PrintHeader();
+            PrintTitle("VIEW DETAIL DATA MOVIE");
 
-    //    qsort(arrayMovieReviewCount, totalMovie, sizeof(*arrayMovieReviewCount), compare);
+            // cari movie by id
+            address_movie = FindById(top_movies, id);
 
-    //    printf("\n\ndata\tindex\n");
-    //    for(i = 0; i < totalMovie; i++){
-    //        printf("Count: %d\tIndex: %d\n", arrayMovieReviewCount[i][0], arrayMovieReviewCount[i][1]);
-    //    }
+            // cek pointer movie
+            if (address_movie == NULL)
+            {
+                Warning("Movie tidak ditemukan.");
+            }
+            else
+            {
+                CetakMovieWithReview(list_review, address_movie);
+            }
 
-    //    getch();
-    //}
+            getch();
+
+            // menuju view label
+            goto ViewLabel;
+        }
+        else
+        {
+            // menuju view label
+            goto ViewLabel;
+        }
+    }
+
+ExitLabel:
+    // delete all data to save memory
+    DeleteAll(top_movies);
 }

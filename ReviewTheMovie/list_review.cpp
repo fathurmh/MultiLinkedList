@@ -287,21 +287,25 @@ void DeleteReview(ListReview &list_review, AddressReview address_review)
 
 void DeleteAll(ListReview &list_review)
 {
-    // inisialisasi variabel current dengan elemen kedua pada list
-    AddressReview current = NEXT(FIRST(list_review));
-
-    // loop selama current tidak sama dengan elemen pertama
-    while (current != FIRST(list_review))
+    // cek jika elemen pertama null (list kosong)
+    if (FIRST(list_review) != NULL)
     {
-        AddressReview delete_current = current;
-        current = NEXT(current);
+        // inisialisasi variabel current dengan elemen kedua pada list
+        AddressReview current = NEXT(FIRST(list_review));
 
-        // delete current
-        DeleteReview(list_review, delete_current);
+        // loop selama current tidak sama dengan elemen pertama
+        while (current != FIRST(list_review))
+        {
+            AddressReview delete_current = current;
+            current = NEXT(current);
+
+            // delete current
+            DeleteReview(list_review, delete_current);
+        }
+
+        // delete elemen pertama
+        DeleteFirst(list_review);
     }
-
-    // delete elemen pertama
-    DeleteFirst(list_review);
 }
 
 // prosedur delete reviewer with all reviews
@@ -506,6 +510,93 @@ AddressReview *FindByReviewerId(ListReview list_review, int id)
 
     // kembalikan array hasil
     return result;
+}
+
+// fungsi generate top 10 movie
+ListMovie TopTenMovies(ListMovie list_movie, ListReview list_review)
+{
+    ListMovie top_movies;
+    CreateList(top_movies);
+
+    if (FIRST(list_movie) != NULL && LAST(list_movie) != NULL)
+    {
+        // inisialisasi total movie
+        int total_movie = Count(list_movie);
+
+        // alokasi array
+        int **movie_reviews_count = Allocate(total_movie, 2);
+        int index = 0;
+
+        // inisialisasi variabel current dengan elemen pertama pada list
+        AddressMovie current_movie = FIRST(list_movie);
+
+        // hitung review selama current movie tidak sama dengan null
+        while (current_movie != NULL)
+        {
+            // masukan id movie kedalam variabel
+            int current_movie_id = DATA(current_movie).id;
+
+            // inisialisasi array review by movie id
+            AddressReview *current_movie_reviews = FindByMovieId(list_review, current_movie_id);
+            // hitung total reviews;
+            int total_reviews = Count(current_movie_reviews);
+
+            // masukan id movie kedalam array kolom 0
+            movie_reviews_count[index][0] = current_movie_id;
+            // masukan total review kedalam array kolom 1
+            movie_reviews_count[index][1] = total_reviews;
+
+            // dealokasi memory array
+            Deallocate(current_movie_reviews);
+
+            // next movie
+            current_movie = NEXT(current_movie);
+            index++;
+        }
+
+        // menggunakan algoritma bubble sort
+        bool swapped;
+        for (int i = 0; i < total_movie - 1; i++)
+        {
+            swapped = false;
+            for (int j = 0; j < total_movie - i - 1; j++)
+            {
+                // cek jika review count ke j lebih kecil dari j+1 maka tukar
+                if (movie_reviews_count[j][1] < movie_reviews_count[j + 1][1])
+                {
+                    // tukar movie id
+                    Tukar(&movie_reviews_count[j][0], &movie_reviews_count[j + 1][0]);
+
+                    // tukar review count
+                    Tukar(&movie_reviews_count[j][1], &movie_reviews_count[j + 1][1]);
+
+                    // tandai sudah ditukar
+                    swapped = true;
+                }
+            }
+
+            // jika tidak ada lagi yang ditukar
+            if (swapped == false)
+                break;
+        }
+
+        // insert ke list baru
+        for (int i = 0; i < 10; i++)
+        {
+            // address movie lama
+            AddressMovie address_movie = FindById(list_movie, movie_reviews_count[i][0]);
+            // alokasikan untuk list baru
+            AddressMovie new_address_movie = Allocate(DATA(address_movie));
+            // insert ke list top 10
+            InsertLast(top_movies, new_address_movie);
+        }
+
+        // dealokasi memory array
+        Deallocate(movie_reviews_count);
+    }
+
+    // kembalikan top movies
+    return top_movies;
 }
 
 // fungsi hitung total elemen pada list

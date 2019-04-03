@@ -99,6 +99,12 @@ MainMenuLabel:
         cout << endl;
         Success("Good bye, see you next time.");
         getch();
+
+        // delete all data to save memory
+        DeleteAll(list_reviewer);
+        DeleteAll(list_movie);
+        DeleteAll(list_review);
+
         exit(0);
     }
     break;
@@ -108,6 +114,7 @@ MainMenuLabel:
         goto MainMenuLabel;
     }
     }
+
 }
 
 // prosedur input data movie
@@ -446,20 +453,8 @@ ViewLabel:
             }
             else
             {
+                // cetak movie with review
                 CetakMovieWithReview(list_review, address_movie);
-                //// deklarasi review
-                //ListReview list_review_by_movie;
-                //CreateList(list_review_by_movie);
-
-                //// cari review berdasarkan movie id
-                //FindByMovieId(list_review_by_movie, list_review, id);
-
-                //// cetak detail movie
-                //Cetak(address_movie);
-                //CetakWithReviewer(list_review_by_movie);
-
-                //// delete karena sudah tidak terpakai
-                //DeleteAll(list_review_by_movie);
             }
 
             getch();
@@ -631,6 +626,7 @@ ViewLabel:
             }
             else
             {
+                // cetak reviewer with review
                 CetakReviewerWithReview(list_review, address_reviewer);
             }
 

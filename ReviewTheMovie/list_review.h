@@ -85,6 +85,8 @@ AddressReview FindById(ListReview list_review, int id);
 AddressReview *FindByMovieId(ListReview list_review, int id);
 // fungsi cari review by reviewer id pada list
 AddressReview *FindByReviewerId(ListReview list_review, int id);
+// fungsi generate top 10 movie
+ListMovie TopTenMovies(ListMovie list_movie, ListReview list_review);
 
 // fungsi hitung total elemen pada list
 int Count(ListReview list_review);

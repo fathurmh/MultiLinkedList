@@ -65,15 +65,14 @@ MainMenuLabel:
     {
     case '1':
     { //  View Top 10 By Review
-        ViewTopTenMovie(list_review, list_movie);
-        getch();
+        ViewTopTenMovie(list_movie, list_review);
 
         // menuju label main menu
         goto MainMenuLabel;
     }
     case '2':
     { // Sign In
-// sign in user
+        // sign in user
         user_login = SignIn(list_reviewer);
 
         // cek user login
@@ -107,7 +106,7 @@ MainMenuLabel:
     }
     case '3':
     { // Sign Up
-// sign up reviewer
+        // sign up reviewer
         SignUp(list_reviewer);
         getch();
 
@@ -116,7 +115,7 @@ MainMenuLabel:
     }
     case '0':
     { // Exit
-// exit
+        // exit
         cout << endl;
         Success("Good bye, see you next time.");
         getch();
@@ -124,12 +123,12 @@ MainMenuLabel:
     break;
     default:
     { // default
-// menuju label main menu
+        // menuju label main menu
         goto MainMenuLabel;
     }
     }
 
-    // delete all data
+    // delete all data to save memory
     DeleteAll(list_reviewer);
     DeleteAll(list_movie);
     DeleteAll(list_review);

@@ -129,6 +129,11 @@ MainMenuLabel:
     }
     }
 
+    // delete all data
+    DeleteAll(list_reviewer);
+    DeleteAll(list_movie);
+    DeleteAll(list_review);
+
     return 0;
 }
 

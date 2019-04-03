@@ -223,8 +223,8 @@ void DeleteReviewer(ListReviewer &list_reviewer, AddressReviewer address_reviewe
     {
         // inisialisasi first_reviewer
         AddressReviewer first_reviewer = FIRST(list_reviewer);
-        // inisialisasi last_movie
-        AddressReviewer last_movie = LAST(list_reviewer);
+        // inisialisasi last_reviewer
+        AddressReviewer last_reviewer = LAST(list_reviewer);
 
         // jika elemen yang dihapus adalah elemen pertama
         if (address_reviewer == first_reviewer)
@@ -232,20 +232,40 @@ void DeleteReviewer(ListReviewer &list_reviewer, AddressReviewer address_reviewe
             // delete first
             DeleteFirst(list_reviewer);
         }
-        else if (address_reviewer == last_movie)
+        else if (address_reviewer == last_reviewer)
         {
             // delete last
             DeleteLast(list_reviewer);
         }
         else
         {
-            // inisialisasi elemen selanjutnya dari elemen sebelumnya dari reviewer yang akan dihapus dengan elemen selanjutnya dari movie yang akan dihapus
+            // inisialisasi elemen selanjutnya dari elemen sebelumnya dari reviewer yang akan dihapus dengan elemen selanjutnya dari reviewer yang akan dihapus
             NEXT(PREV(address_reviewer)) = NEXT(address_reviewer);
-            // inisialisasi elemen sebelumnya dari elemen selanjutnya dari reviewer yang akan dihapus dengan elemen sebelumnya dari movie yang akan dihapus
+            // inisialisasi elemen sebelumnya dari elemen selanjutnya dari reviewer yang akan dihapus dengan elemen sebelumnya dari reviewer yang akan dihapus
             PREV(NEXT(address_reviewer)) = PREV(address_reviewer);
 
             // dealokasi elemen
             Deallocate(address_reviewer);
+        }
+    }
+}
+
+// prosedur delete all
+void DeleteAll(ListReviewer &list_reviewer)
+{
+    // cek jika list berisi
+    if (FIRST(list_reviewer) != NULL && LAST(list_reviewer) != NULL)
+    {
+        // deklarasi variabel next
+        AddressReviewer next;
+        // inisialisasi variabel iterator dengan elemen pertama pada list
+        AddressReviewer current = FIRST(list_reviewer);
+        // loop delete reviewer dalam list
+        while (current != NULL)
+        {
+            next = NEXT(current);
+            DeleteReviewer(list_reviewer, current);
+            current = next;
         }
     }
 }

@@ -63,6 +63,8 @@ void DeleteFirst(ListMovie &list_movie);
 void DeleteLast(ListMovie &list_movie);
 // prosedur delete movie
 void DeleteMovie(ListMovie &list_movie, AddressMovie address_movie);
+// prosedur delete all
+void DeleteAll(ListMovie &list_movie);
 
 // fungsi cari movie by title pada list
 AddressMovie FindByTitle(ListMovie &list_movie, string title);

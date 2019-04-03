@@ -63,6 +63,8 @@ void DeleteFirst(ListReviewer &list_reviewer);
 void DeleteLast(ListReviewer &list_reviewer);
 // prosedur delete reviewer
 void DeleteReviewer(ListReviewer &list_reviewer, AddressReviewer address_reviewer);
+// prosedur delete all
+void DeleteAll(ListReviewer &list_reviewer);
 
 // fungsi cari reviewer by username pada list
 AddressReviewer FindByUsername(ListReviewer &list_reviewer, string username);

@@ -268,6 +268,25 @@ void DeleteMovie(ListMovie &list_movie, AddressMovie address_movie)
     }
 }
 
+void DeleteAll(ListMovie &list_movie)
+{
+    // cek jika list berisi
+    if (FIRST(list_movie) != NULL && LAST(list_movie) != NULL)
+    {
+        // deklarasi variabel next
+        AddressMovie next;
+        // inisialisasi variabel iterator dengan elemen pertama pada list
+        AddressMovie current = FIRST(list_movie);
+        // loop delete movie dalam list
+        while (current != NULL)
+        {
+            next = NEXT(current);
+            DeleteMovie(list_movie, current);
+            current = next;
+        }
+    }
+}
+
 // fungsi cari movie by title pada list
 AddressMovie FindByTitle(ListMovie &list_movie, string title)
 {

@@ -439,8 +439,6 @@ AddressReview *FindByMovieId(ListReview list_review, int id)
         int index = 0;
         do
         {
-            // variabel current diisi dengan elemen selanjutnya
-            current = NEXT(current);
             // inisialisasi current movie
             AddressMovie current_movie = MOVIE(current);
 
@@ -450,6 +448,9 @@ AddressReview *FindByMovieId(ListReview list_review, int id)
                 // alokasi review dan insert pada list baru
                 result[index++] = current;
             }
+
+            // variabel current diisi dengan elemen selanjutnya
+            current = NEXT(current);
         } while (current != FIRST(list_review)); // loop selama current elemen tidak sama dengan elemen pertama
     }
 
@@ -474,8 +475,6 @@ AddressReview *FindByReviewerId(ListReview list_review, int id)
         int index = 0;
         do
         {
-            // variabel current diisi dengan elemen selanjutnya
-            current = NEXT(current);
             // inisialisasi current reviewer
             AddressReviewer current_reviewer = REVIEWER(current);
 
@@ -485,6 +484,9 @@ AddressReview *FindByReviewerId(ListReview list_review, int id)
                 // alokasi review dan insert pada list baru
                 result[index++] = current;
             }
+
+            // variabel current diisi dengan elemen selanjutnya
+            current = NEXT(current);
         } while (current != FIRST(list_review)); // loop selama current elemen tidak sama dengan elemen pertama
     }
 
@@ -697,7 +699,7 @@ void CetakReviewerWithReview(ListReview list_review, AddressReviewer address_rev
     }
 
     // cetak total review
-    cout << "Total Review: " << length << endl;
+    cout << "Total Review: " << length << endl << endl;
 
     // dealokasi memory array karena sudah tidak digunakan
     Deallocate(reviewer_reviews);
@@ -723,7 +725,7 @@ void CetakMovieWithReview(ListReview list_review, AddressMovie address_movie)
     }
 
     // cetak total review
-    cout << "Total Review: " << length << endl;
+    cout << "Total Review: " << length << endl << endl;
 
     // dealokasi memory array karena sudah tidak digunakan
     Deallocate(movie_reviews);

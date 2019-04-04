@@ -15,7 +15,7 @@
 using namespace std;
 
 // prosedur menu admin
-void MenuAdmin(ListReviewer &list_reviewer, ListMovie &list_movie, ListReview list_review)
+void MenuAdmin(ListReviewer &list_reviewer, ListMovie &list_movie, ListReview &list_review)
 {
     // deklarasi variabel
     char main_menu;
@@ -117,7 +117,7 @@ MainMenuLabel:
 }
 
 // prosedur input data movie
-void InputDataMovie(ListMovie list_movie)
+void InputDataMovie(ListMovie &list_movie)
 {
     // deklarasi variabel
     Movie movie;
@@ -226,7 +226,7 @@ FinalLabel:
 }
 
 // prosedur update data movie
-void UpdateDataMovie(ListMovie list_movie)
+void UpdateDataMovie(ListMovie &list_movie)
 {
     // deklarasi variabel
     AddressMovie address_movie;

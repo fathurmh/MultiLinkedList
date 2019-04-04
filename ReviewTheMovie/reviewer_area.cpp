@@ -28,9 +28,9 @@ MainMenuLabel:
 
     // cetak menu utama
     PrintTitle("MAIN MENU");
-    cout << "1. View Data Movie" << endl
-        << "2. Input Review" << endl
-        << "3. Delete Review" << endl
+    cout << "1. Input Data Review" << endl
+        << "2. Update Data Review" << endl
+        << "3. Delete Data Review" << endl
         << "4. View Review History" << endl << endl
         << "5. Update Account" << endl << endl
         << "9. Sign Out" << endl
@@ -44,19 +44,21 @@ MainMenuLabel:
     // check kondisi pilihan
     switch (main_menu)
     {
-    case '1': // View Data Movie
+    case '1': // Input Data Review
     {
+        InputDataReview(list_review, list_movie, current_address_reviewer);
 
         // menuju label main menu
         goto MainMenuLabel;
     }
-    case '2': // Input Review
+    case '2': // Update Data Review
     {
+        UpdateDataReview(list_review, current_address_reviewer);
 
         // menuju label main menu
         goto MainMenuLabel;
     }
-    case '3': // Delete Review
+    case '3': // Delete Data Review
     {
         DeleteDataReview(list_review, current_address_reviewer);
 
@@ -106,7 +108,392 @@ MainMenuLabel:
     }
 }
 
-void DeleteDataReview(ListReview list_review, AddressReviewer current_address_reviewer)
+void InputDataReview(ListReview &list_review, ListMovie list_movie, AddressReviewer current_address_reviewer)
+{
+    // deklarasi variabel
+    Review review;
+    AddressReview address_review;
+    AddressMovie address_movie;
+    int id;
+    int rating;
+    string pilih_id;
+    string pilih_rating;
+    string description;
+    int retry_rating_count;
+    int retry_description_count;
+
+    // label view
+ViewLabel:
+
+    // cetak header
+    PrintHeader();
+
+    // cetak list movie
+    Cetak(list_movie);// jika terdapat movie dalam list
+
+    if (FIRST(list_movie) != NULL)
+    {
+        // info
+        Warning("\n- Masukan ID movie yang akan direview.");
+        Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
+
+        // input nomor untuk detail
+        cout << "Input: ";
+        getline(cin, pilih_id);
+
+        // convert input string ke integer
+        istringstream int_stream(pilih_id);
+        int_stream >> id;
+
+        // convert integer ke string stream
+        stringstream stream;
+        stream << id;
+
+        // cek hasil convert
+        if (pilih_id == "0")
+        {
+            // menuju exit label
+            goto ExitLabel;
+        }
+        else if (pilih_id == stream.str() && id > 0)
+        {
+            // cetak header
+            PrintHeader();
+            PrintTitle("VIEW DETAIL DATA MOVIE");
+
+            // cari movie by id
+            address_movie = FindById(list_movie, id);
+
+            // cek pointer movie
+            if (address_movie == NULL)
+            {
+                Warning("Movie tidak ditemukan.");
+            }
+            else
+            {
+                // cetak movie with review
+                CetakMovieWithReview(list_review, address_movie);
+
+                PrintTitle("INPUT DATA REVIEW");
+
+                // inisialisasi variabel pengulangan input rating
+                retry_rating_count = 0;
+
+            InputRatingLabel:
+
+                // input rating
+                cout << "Rating: ";
+                getline(cin, pilih_rating);
+
+                // convert input string ke integer
+                istringstream int_stream(pilih_rating);
+                int_stream >> rating;
+
+                // convert integer ke string stream
+                stringstream stream;
+                stream << rating;
+
+                // cek jika inputan kosong
+                if (pilih_rating.empty() || rating <= 0 || rating > MAX_RATING)
+                {
+                    if (pilih_rating.empty())
+                    {
+                        // cetak bahwa rating tidak boleh kosong
+                        Warning("\nRating tidak boleh kosong.");
+                    }
+                    else
+                    {
+                        // cetak bahwa rating harus diantara 1 - 5
+                        Warning("\nMasukan rating hanya angka 1 sampai " + MAX_RATING + '.');
+                    }
+
+                    getch();
+
+                    // cek maksimal mengulang kesalahan input
+                    if (++retry_rating_count < MAX_RETRY_COUNT)
+                    {
+                        RemoveLastLine();
+                        RemoveLastLine();
+                        RemoveLastLine();
+
+                        // mengulang menginput rating
+                        goto InputRatingLabel;
+                    }
+                    else
+                    {
+                        // menuju final label
+                        goto FinalLabel;
+                    }
+                }
+
+                // inisialisasi variabel pengulangan input description
+                retry_description_count = 0;
+
+            InputDesctiptionLabel:
+
+                // input description
+                cout << "Description: ";
+                getline(cin, description);
+
+                // cek jika inputan kosong
+                if (description.empty())
+                {
+                    // cetak bahwa description tidak boleh kosong
+                    Warning("\nDescription tidak boleh kosong.");
+
+                    getch();
+
+                    // cek maksimal mengulang kesalahan input
+                    if (++retry_description_count < MAX_RETRY_COUNT)
+                    {
+                        RemoveLastLine();
+                        RemoveLastLine();
+                        RemoveLastLine();
+
+                        // mengulang menginput description
+                        goto InputDesctiptionLabel;
+                    }
+                    else
+                    {
+                        // menuju final label
+                        goto FinalLabel;
+                    }
+                }
+
+            FinalLabel:
+                // cek jika maksimal mengulang kesalahan input tercapai
+                if (retry_rating_count == MAX_RETRY_COUNT || retry_description_count == MAX_RETRY_COUNT)
+                {
+                    // input data dinyatakan gagal
+                    Failed("Input Data gagal.");
+                }
+                else
+                {
+                    // data hasil input dibuat menjadi elemen review
+                    review = CreateReview(rating, description);
+
+                    // elemen review dialokasikan pada memory
+                    address_review = Allocate(review, current_address_reviewer, address_movie);
+
+                    // alamat memory review dimasukan kedalam list dengan metode insert first
+                    InsertFirst(list_review, address_review);
+
+                    // cetak bahwa input data berhasil
+                    // cetak header
+                    PrintHeader();
+                    PrintTitle("VIEW DETAIL DATA MOVIE");
+
+                    // cetak movie with review
+                    CetakMovieWithReview(list_review, address_movie);
+                    Success("Input Data berhasil.");
+                }
+            }
+
+            getch();
+
+            // menuju view label
+            goto ViewLabel;
+        }
+        else
+        {
+            // menuju view label
+            goto ViewLabel;
+        }
+    }
+ExitLabel:;
+}
+
+void UpdateDataReview(ListReview &list_review, AddressReviewer current_address_reviewer)
+{
+    // deklarasi variabel
+    int id;
+    int rating;
+    string pilih_id;
+    string pilih_rating;
+    string description;
+    int retry_rating_count;
+    string ensure_update;
+    AddressReview address_review;
+
+ViewLabel:
+    // cetak header
+    PrintHeader();
+    PrintTitle("VIEW LIST REVIEW");
+
+    // inisialisasi array review by reviewer id
+    AddressReview *reviewer_reviews = FindByReviewerId(list_review, DATA(current_address_reviewer).id);
+
+    // inisialisasi panjang array
+    int length = Count(reviewer_reviews);
+
+    // jika terdapat review dalam array
+    if (length > 0)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            // cetak review with movie
+            CetakWithMovie(reviewer_reviews[i]);
+        }
+
+        // cetak total review
+        cout << "Total Review: " << length << endl;
+
+        // info
+        Warning("\n- Masukan ID review yang akan diupdate.");
+        Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
+
+        // input nomor untuk detail
+        cout << "Input: ";
+        getline(cin, pilih_id);
+
+        // convert input string ke integer
+        istringstream int_stream(pilih_id);
+        int_stream >> id;
+
+        // convert integer ke string stream
+        stringstream stream;
+        stream << id;
+
+        // cek hasil convert
+        if (pilih_id == "0")
+        {
+            // menuju exit label
+            goto ExitLabel;
+        }
+        else if (pilih_id == stream.str() && id > 0)
+        {
+            // cetak header
+            PrintHeader();
+            PrintTitle("UPDATE DATA REVIEW");
+
+            // cari review by id
+            address_review = FindById(reviewer_reviews, id);
+
+            // cek pointer review
+            if (address_review == NULL)
+            {
+                Warning("Review tidak ditemukan.");
+            }
+            else
+            {
+                // cetak detail review
+                Warning("Jangan inputkan data untuk mengisi field seperti default.\n");
+                Warning("Default data:");
+                CetakWithMovie(address_review);
+
+                // inisialisasi variabel pengulangan input rating
+                retry_rating_count = 0;
+
+                // input rating
+            InputRatingLabel:
+                cout << "Rating: ";
+                getline(cin, pilih_rating);
+
+                // cek jika inputan kosong, tampilkan default
+                if (pilih_rating.empty())
+                {
+                    rating = DATA(address_review).rating;
+                    RemoveLastLine();
+                    cout << "Rating: " << rating << endl;
+                }
+                else
+                {
+                    // convert input string ke integer
+                    istringstream int_stream(pilih_rating);
+                    int_stream >> rating;
+
+                    // cek jika inputan kosong
+                    if (rating <= 0 || rating > MAX_RATING)
+                    {
+                        // cetak bahwa rating harus diantara 1 - Max
+                        stringstream msg;
+                        msg << "\nMasukan rating hanya angka 1 sampai " << MAX_RATING << ".";
+                        Warning(msg.str().c_str());
+
+                        getch();
+
+                        // cek maksimal mengulang kesalahan input
+                        if (++retry_rating_count < MAX_RETRY_COUNT)
+                        {
+                            RemoveLastLine();
+                            RemoveLastLine();
+                            RemoveLastLine();
+
+                            // mengulang menginput rating
+                            goto InputRatingLabel;
+                        }
+                        else
+                        {
+                            // menuju final label
+                            goto FinalLabel;
+                        }
+                    }
+                }
+
+                // input description
+                cout << "Description: ";
+                getline(cin, description);
+
+                // cek jika inputan kosong, tampilkan default
+                if (description.empty())
+                {
+                    RemoveLastLine();
+                    cout << "Description: " << DATA(address_review).description << endl;
+                }
+
+            FinalLabel:
+                // cek jika maksimal mengulang kesalahan input tercapai
+                if (retry_rating_count == MAX_RETRY_COUNT)
+                {
+                    // update data dinyatakan gagal
+                    Failed("Update data gagal.");
+                }
+                else
+                {
+                    // ensure
+                    Warning("\nAnda yakin ingin mengupdate?");
+                    cout << "Jawaban (y/n): ";
+                    getline(cin, ensure_update);
+
+                    // update jika jawaban Y atau y
+                    if (ensure_update == "Y" || ensure_update == "y")
+                    {
+                        // update review
+                        UpdateReview(address_review, rating, description);
+                        Success("\nData berhasil diupdate.");
+                    }
+                    else
+                    {
+                        Success("\nData tidak diupdate.");
+                    }
+                }
+            }
+
+            getch();
+
+            // menuju view label
+            goto ViewLabel;
+        }
+        else
+        {
+            // menuju view label
+            goto ViewLabel;
+        }
+    }
+    else
+    {
+        Warning("Tidak ada data.");
+
+        getch();
+    }
+
+
+ExitLabel:;
+    // dealokasi memory array karena sudah tidak digunakan
+    Deallocate(reviewer_reviews);
+}
+
+void DeleteDataReview(ListReview &list_review, AddressReviewer current_address_reviewer)
 {
     // deklarasi variabel
     int id;
@@ -383,7 +770,7 @@ FinalLabel:
     // cek jika maksimal mengulang kesalahan input tercapai
     if (retry_password_count == MAX_RETRY_COUNT || retry_username_count == MAX_RETRY_COUNT)
     {
-        // sign up dinyatakan gagal
+        // update account dinyatakan gagal
         Failed("Update Account gagal.");
     }
     else

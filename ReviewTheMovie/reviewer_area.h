@@ -12,8 +12,12 @@ using namespace std;
 // prosedur menu reviewer
 void MenuReviewer(ListReviewer list_reviewer, ListMovie list_movie, ListReview &list_review, AddressReviewer current_address_reviewer);
 
+// prosedur input review
+void InputDataReview(ListReview &list_review, ListMovie list_movie, AddressReviewer current_address_reviewer);
+// prosedur update review
+void UpdateDataReview(ListReview &list_review, AddressReviewer current_address_reviewer);
 // prosedur delete review
-void DeleteDataReview(ListReview list_review, AddressReviewer current_address_reviewer);
+void DeleteDataReview(ListReview &list_review, AddressReviewer current_address_reviewer);
 // prosedur view review history
 void ViewReviewHistory(ListReview list_review, AddressReviewer current_address_reviewer);
 // prosedur update account

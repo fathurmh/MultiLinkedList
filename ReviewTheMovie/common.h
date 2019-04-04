@@ -28,6 +28,8 @@ const char ADMIN_USERNAME[] = "admin";
 const char ADMIN_PASSWORD[] = "a";
 // maksimal mengulang kesalahan input
 const int MAX_RETRY_COUNT = 3;
+// maksimal nilai rating
+const int MAX_RATING = 5;
 
 // enum tipe login user
 enum LoginUser {

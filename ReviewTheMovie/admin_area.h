@@ -10,12 +10,12 @@
 using namespace std;
 
 // prosedur menu admin
-void MenuAdmin(ListReviewer &list_reviewer, ListMovie &list_movie, ListReview list_review);
+void MenuAdmin(ListReviewer &list_reviewer, ListMovie &list_movie, ListReview &list_review);
 
 // prosedur input data movie
-void InputDataMovie(ListMovie list_movie);
+void InputDataMovie(ListMovie &list_movie);
 // prosedur update data movie
-void UpdateDataMovie(ListMovie list_movie);
+void UpdateDataMovie(ListMovie &list_movie);
 // prosedur view data movie
 void ViewDataMovie(ListMovie list_movie, ListReview list_review);
 // prosedur delete data movie

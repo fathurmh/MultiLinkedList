@@ -824,9 +824,6 @@ void CetakReviewerWithReview(ListReview list_review, AddressReviewer address_rev
     // inisialisasi array review by reviewer id
     AddressReview *reviewer_reviews = FindByReviewerId(list_review, DATA(address_reviewer).id);
 
-    // inisialisasi panjang array
-    int length = Count(reviewer_reviews);
-
     // cetak reviewer
     Cetak(address_reviewer);
 
@@ -843,9 +840,6 @@ void CetakMovieWithReview(ListReview list_review, AddressMovie address_movie)
 {
     // inisialisasi array review by movie id
     AddressReview *movie_reviews = FindByMovieId(list_review, DATA(address_movie).id);
-
-    // inisialisasi panjang array
-    int length = Count(movie_reviews);
 
     // cetak movie
     Cetak(address_movie);

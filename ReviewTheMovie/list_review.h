@@ -83,6 +83,8 @@ void DeleteMovieWithReview(ListReview &list_review, ListMovie &list_movie, Addre
 AddressReview FindById(ListReview list_review, int id);
 // fungsi cari review by id pada array
 AddressReview FindById(AddressReview *array_review, int id);
+// fungsi cari review by reviewer id dan movie id pada array
+AddressReview *FindById(ListReview list_review, int reviewer_id, int movie_id);
 // fungsi cari review by movie id pada list
 AddressReview *FindByMovieId(ListReview list_review, int id);
 // fungsi cari review by reviewer id pada list
@@ -94,6 +96,9 @@ ListMovie TopTenMovies(ListMovie list_movie, ListReview list_review);
 int Count(ListReview list_review);
 // fungsi hitung total elemen pada array
 int Count(AddressReview *(&address_review));
+
+// prosedur sort array menggunakan algoritma bubble sort
+void SortById(AddressReview *(&address_review));
 
 // prosedur cetak data review
 void Cetak(AddressReview address_review);

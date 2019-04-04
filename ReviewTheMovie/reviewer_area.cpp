@@ -175,6 +175,20 @@ ViewLabel:
                 // cetak movie with review
                 CetakMovieWithReview(list_review, address_movie);
 
+                // cari apakah film sudah pernah direview oleh reviewer ini
+                AddressReview *reviewer_reviews = FindById(list_review, DATA(current_address_reviewer).id, DATA(address_movie).id);
+
+                // jika array tidak null, maka film sudah direview
+                if (reviewer_reviews != NULL && reviewer_reviews[0] != NULL)
+                {
+                    Warning("Anda sudah mereview film ini.");
+                    Warning("Silahkan pilih menu Update Data Review.");
+
+                    getch();
+
+                    goto ExitLabel;
+                }
+
                 PrintTitle("INPUT DATA REVIEW");
 
                 // inisialisasi variabel pengulangan input rating

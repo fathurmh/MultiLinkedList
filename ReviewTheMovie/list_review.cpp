@@ -422,6 +422,63 @@ AddressReview FindById(AddressReview *array_review, int id)
     return data_ketemu;
 }
 
+AddressReview *FindById(ListReview list_review, int reviewer_id, int movie_id)
+{
+    // Inisialisasi array hasil dengan null
+    AddressReview *result = NULL;
+    int reviewer_review_count = 0;
+    int movie_review_count = 0;
+    int min_count = 0;
+    int index = 0;
+
+    // Cari review by reviewer id
+    AddressReview *reviewer_reviews = FindByReviewerId(list_review, reviewer_id);
+    // Cari review by movie id
+    AddressReview *movie_reviews = FindByMovieId(list_review, movie_id);
+
+    // hitung total review
+    reviewer_review_count = Count(reviewer_reviews);
+    movie_review_count = Count(movie_reviews);
+
+    // cari total yang paling kecil
+    min_count = reviewer_review_count > movie_review_count ? movie_review_count : reviewer_review_count;
+
+    if (min_count > 0)
+    {
+        // alokasi array dengan ukuran array paling kecil
+        result = Allocate(min_count);
+
+        // sort array yang akan dibandingkan
+        SortById(reviewer_reviews);
+        SortById(movie_reviews);
+
+        // intersect array
+        int i = 0, j = 0;
+        while (i < reviewer_review_count && j < movie_review_count)
+        {
+            if (DATA(reviewer_reviews[i]).id < DATA(movie_reviews[j]).id)
+            {
+                i++;
+            }
+            else if (DATA(reviewer_reviews[i]).id > DATA(movie_reviews[j]).id)
+            {
+                j++;
+            }
+            else if (DATA(reviewer_reviews[i]).id == DATA(movie_reviews[j]).id)
+            {
+                result[index++] = movie_reviews[j++];
+                i++;
+            }
+        }
+    }
+
+    // dealokasi memory array karena sudah tidak digunakan
+    Deallocate(reviewer_reviews);
+    Deallocate(movie_reviews);
+
+    return result;
+}
+
 // fungsi cari review by movie id pada list
 AddressReview *FindByMovieId(ListReview list_review, int id)
 {
@@ -623,6 +680,38 @@ int Count(AddressReview *(&address_review))
     return count;
 }
 
+// prosedur sort array menggunakan algoritma bubble sort
+void SortById(AddressReview *(&address_review))
+{
+    // cari ukuran array
+    int size = Count(address_review);
+
+    // menggunakan algoritma bubble sort
+    bool swapped;
+    for (int i = 0; i < size; i++)
+    {
+        swapped = false;
+        for (int j = 0; j < size - i - 1; j++)
+        {
+            // cek jika review count ke j lebih kecil dari j+1 maka tukar
+            if (DATA(address_review[j]).id > DATA(address_review[j + 1]).id)
+            {
+                // tukar
+                AddressReview temp = address_review[j];
+                address_review[j] = address_review[j + 1];
+                address_review[j + 1] = temp;
+
+                // tandai sudah ditukar
+                swapped = true;
+            }
+        }
+
+        // jika tidak ada lagi yang ditukar
+        if (swapped == false)
+            break;
+    }
+}
+
 // prosedur cetak data review
 void Cetak(AddressReview address_review)
 {
@@ -635,12 +724,13 @@ void Cetak(AddressReview address_review)
 // prosedur cetak data review with reviewer
 void CetakWithReviewer(AddressReview address_review)
 {
-    // cetak data review with movie
+    // cetak data review with reviewer
     Cetak(address_review);
     RemoveLastLine();
     cout << "Reviewed by: " << DATA(REVIEWER(address_review)).name << endl << endl;
 }
 
+// prosedur cetak data array review with reviewer
 void CetakWithReviewer(AddressReview *address_review)
 {
     // inisialisasi panjang array
@@ -651,8 +741,8 @@ void CetakWithReviewer(AddressReview *address_review)
     {
         for (int i = 0; i < length; i++)
         {
-            // cetak review with movie
-            CetakWithMovie(address_review[i]);
+            // cetak review with reviewer
+            CetakWithReviewer(address_review[i]);
         }
 
         // cetak total review
@@ -673,6 +763,7 @@ void CetakWithMovie(AddressReview address_review)
     cout << "Reviews on : " << DATA(MOVIE(address_review)).title << endl << endl;
 }
 
+// prosedur cetak data array review with movie
 void CetakWithMovie(AddressReview *address_review)
 {
     // inisialisasi panjang array

@@ -40,9 +40,9 @@ enum LoginUser {
 };
 
 // alokasi array 2 dimensi
-int **Allocate(int row, int col);
+int *Allocate(int row, int col);
 // dealokasi array 2 dimensi
-void Deallocate(int **arr);
+void Deallocate(int *(&arr));
 
 // prosedur tukar nilai
 void Tukar(int *nilai_a, int *nilai_b);

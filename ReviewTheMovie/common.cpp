@@ -10,60 +10,18 @@
 using namespace std;
 
 // alokasi array 2 dimensi
-int **Allocate(int row, int col)
+int *Allocate(int row, int col)
 {
     // instansiasi baris array
-    int **arr = new int *[row];
-
-    // loop setiap baris array
-    for (int i = 0; i < row; i++)
-    {
-        // instansisasi kolom array
-        arr[i] = new int[col];
-    }
-
-    // inisialisasi elemen array dengan null
-    for (int i = 0; i < row; i++)
-    {
-        for (int j = 0; j < col; j++)
-        {
-            arr[i][j] = NULL;
-        }
-    }
+    int *arr = new int [row * col + 1];
 
     // kembalikan array
     return arr;
 }
 
 // dealokasi array 2 dimensi
-void Deallocate(int **arr)
+void Deallocate(int *(&arr))
 {
-    // inisialisasi variabel
-    int row_count = 0;
-    bool hitung = true;
-
-    // hitung baris array
-    while (hitung) {
-        // cek memory setiap baris array
-        int &p = arr[row_count][0];
-
-        // jika null, stop berhitung
-        if (&p == NULL)
-        {
-            hitung = false;
-        }
-        else
-        {
-            row_count++;
-        }
-    }
-
-    // dealokasi memory kolom array disetiap baris
-    for (int i = 0; i < row_count - 1; ++i)
-    {
-        delete[] arr[i];
-    }
-
     // dealokasi memory baris array
     delete[] arr;
 }

@@ -285,6 +285,7 @@ void DeleteReview(ListReview &list_review, AddressReview address_review)
     }
 }
 
+// prosedur delete all
 void DeleteAll(ListReview &list_review)
 {
     // cek jika elemen pertama null (list kosong)
@@ -422,62 +423,6 @@ AddressReview FindById(AddressReview *array_review, int id)
 }
 
 // fungsi cari review by movie id pada list
-void FindByMovieId(ListReview &result, ListReview list_review, int id)
-{
-    // cek jika elemen pertama tidak null (list berisi)
-    if (FIRST(list_review) != NULL)
-    {
-        // inisialisasi variabel current dengan elemen pertama pada list
-        AddressReview current = FIRST(list_review);
-        do
-        {
-            // variabel current diisi dengan elemen selanjutnya
-            current = NEXT(current);
-            
-            // inisialisasi current movie dan current reviewer
-            AddressMovie current_movie = MOVIE(current);
-            AddressReviewer current_reviewer = REVIEWER(current);
-
-            // jika movie id ketemu
-            if (DATA(current_movie).id == id)
-            {
-                // alokasi review dan insert pada list baru
-                AddressReview address_review = Allocate(DATA(current), current_reviewer, current_movie);
-                InsertLast(result, address_review);
-            }
-        } while (current != FIRST(list_review)); // loop selama current elemen tidak sama dengan elemen pertama
-    }
-}
-
-// fungsi cari review by reviewer id pada list
-void FindByReviewerId(ListReview &result, ListReview list_review, int id)
-{
-    // cek jika elemen pertama tidak null (list berisi)
-    if (FIRST(list_review) != NULL)
-    {
-        // inisialisasi variabel current dengan elemen pertama pada list
-        AddressReview current = FIRST(list_review);
-        do
-        {
-            // variabel current diisi dengan elemen selanjutnya
-            current = NEXT(current);
-
-            // inisialisasi current movie dan current reviewer
-            AddressMovie current_movie = MOVIE(current);
-            AddressReviewer current_reviewer = REVIEWER(current);
-
-            // jika reviewer id ketemu
-            if (DATA(current_reviewer).id == id)
-            {
-                // alokasi review dan insert pada list baru
-                AddressReview address_review = Allocate(DATA(current), current_reviewer, current_movie);
-                InsertLast(result, address_review);
-            }
-        } while (current != FIRST(list_review)); // loop selama current elemen tidak sama dengan elemen pertama
-    }
-}
-
-// fungsi cari review by movie id pada list
 AddressReview *FindByMovieId(ListReview list_review, int id)
 {
     // inisialisasi array hasil pencarian
@@ -553,7 +498,7 @@ ListMovie TopTenMovies(ListMovie list_movie, ListReview list_review)
         int total_movie = Count(list_movie);
 
         // alokasi array
-        int **movie_reviews_count = Allocate(total_movie, 2);
+        int *movie_reviews_count = Allocate(total_movie, 2);
         int index = 0;
 
         // inisialisasi variabel current dengan elemen pertama pada list
@@ -571,9 +516,9 @@ ListMovie TopTenMovies(ListMovie list_movie, ListReview list_review)
             int total_reviews = Count(current_movie_reviews);
 
             // masukan id movie kedalam array kolom 0
-            movie_reviews_count[index][0] = current_movie_id;
+            movie_reviews_count[index] = current_movie_id;
             // masukan total review kedalam array kolom 1
-            movie_reviews_count[index][1] = total_reviews;
+            movie_reviews_count[index + total_movie] = total_reviews;
 
             // dealokasi memory array
             Deallocate(current_movie_reviews);
@@ -591,13 +536,13 @@ ListMovie TopTenMovies(ListMovie list_movie, ListReview list_review)
             for (int j = 0; j < total_movie - i - 1; j++)
             {
                 // cek jika review count ke j lebih kecil dari j+1 maka tukar
-                if (movie_reviews_count[j][1] < movie_reviews_count[j + 1][1])
+                if (movie_reviews_count[j+total_movie] < movie_reviews_count[j + total_movie + 1])
                 {
                     // tukar movie id
-                    Tukar(&movie_reviews_count[j][0], &movie_reviews_count[j + 1][0]);
+                    Tukar(&movie_reviews_count[j], &movie_reviews_count[j + 1]);
 
                     // tukar review count
-                    Tukar(&movie_reviews_count[j][1], &movie_reviews_count[j + 1][1]);
+                    Tukar(&movie_reviews_count[j + total_movie], &movie_reviews_count[j + total_movie + 1]);
 
                     // tandai sudah ditukar
                     swapped = true;
@@ -610,10 +555,10 @@ ListMovie TopTenMovies(ListMovie list_movie, ListReview list_review)
         }
 
         // insert ke list baru
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < total_movie && i < 10; i++)
         {
             // address movie lama
-            AddressMovie address_movie = FindById(list_movie, movie_reviews_count[i][0]);
+            AddressMovie address_movie = FindById(list_movie, movie_reviews_count[i]);
             // alokasikan untuk list baru
             AddressMovie new_address_movie = Allocate(DATA(address_movie));
             // insert ke list top 10

@@ -353,7 +353,7 @@ void Cetak(AddressReviewer address_reviewer)
 {
     // cetak data reviewer
     cout << "ID      : " << DATA(address_reviewer).id << endl
-        << "Nama    : " << DATA(address_reviewer).name << endl
+        << "Name    : " << DATA(address_reviewer).name << endl
         << "Username: " << DATA(address_reviewer).username << endl << endl;
 }
 

@@ -15,12 +15,11 @@
 using namespace std;
 
 // fungsi sign in
-LoginUser SignIn(ListReviewer list_reviewer)
+LoginUser SignIn(ListReviewer list_reviewer, AddressReviewer &address_reviewer)
 {
     // deklarasi variabel
     string username;
     string password;
-    AddressReviewer reviewer;
 
     // inisialisasi login user guest
     LoginUser login_user = GUEST;
@@ -45,10 +44,10 @@ LoginUser SignIn(ListReviewer list_reviewer)
     else
     {
         // cari reviewer dengan username yang diinputkan
-        reviewer = FindByUsername(list_reviewer, username);
+        address_reviewer = FindByUsername(list_reviewer, username);
 
         // cek jika reviewer tidak sama dengan null dan passwordnya sama dengan yang diinputkan
-        if (reviewer != NULL && DATA(reviewer).password == password)
+        if (address_reviewer != NULL && DATA(address_reviewer).password == password)
         {
             // login user diisi reviewer
             login_user = REVIEWER;
@@ -80,18 +79,11 @@ void SignUp(ListReviewer &list_reviewer)
     PrintTitle("SIGN UP");
 
     // input name
-    cout << "Nama: ";
+    cout << "Name: ";
     getline(cin, name);
 
     // label input username
 InputUsernameLabel:
-
-    // cetak header akan menghapus console sebelumnya
-    PrintHeader();
-    PrintTitle("SIGN UP");
-
-    // cetak data yang diinputkan sebelumnya
-    cout << "Nama: " << name << endl;
 
     // input username
     cout << "Username: ";
@@ -120,6 +112,10 @@ InputUsernameLabel:
         // cek maksimal mengulang kesalahan input
         if (++retry_username_count < MAX_RETRY_COUNT)
         {
+            RemoveLastLine();
+            RemoveLastLine();
+            RemoveLastLine();
+
             // mengulang menginput username
             goto InputUsernameLabel;
         }
@@ -130,16 +126,8 @@ InputUsernameLabel:
         }
     }
 
-    // label input username
+    // label input password
 InputPasswordLabel:
-
-    // cetak header akan menghapus console sebelumnya
-    PrintHeader();
-    PrintTitle("SIGN UP");
-
-    // cetak data yang diinputkan sebelumnya
-    cout << "Nama: " << name << endl;
-    cout << "Username: " << username << endl;
 
     // input password
     password = GetPassword("Password: ");
@@ -167,7 +155,12 @@ InputPasswordLabel:
         // cek maksimal mengulang kesalahan input
         if (++retry_password_count < MAX_RETRY_COUNT)
         {
-            // mengulang menginput username
+            RemoveLastLine();
+            RemoveLastLine();
+            RemoveLastLine();
+            RemoveLastLine();
+
+            // mengulang menginput password
             goto InputPasswordLabel;
         }
         else

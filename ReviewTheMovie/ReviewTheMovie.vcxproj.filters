@@ -36,6 +36,9 @@
     <ClCompile Include="list_review.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="reviewer_area.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="admin_area.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="list_review.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reviewer_area.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

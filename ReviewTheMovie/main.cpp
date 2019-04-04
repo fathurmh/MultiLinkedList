@@ -10,6 +10,7 @@
 #include "list_review.h"
 #include "guest_area.h"
 #include "admin_area.h"
+#include "reviewer_area.h"
 
 // using namespace
 using namespace std;
@@ -27,6 +28,7 @@ int main()
     // deklarasi variabel
     char main_menu;
     LoginUser user_login;
+    AddressReviewer address_user_login;
 
     ListReviewer list_reviewer;
     ListMovie list_movie;
@@ -73,7 +75,7 @@ MainMenuLabel:
     case '2':
     { // Sign In
         // sign in user
-        user_login = SignIn(list_reviewer);
+        user_login = SignIn(list_reviewer, address_user_login);
 
         // cek user login
         if (user_login == ADMINISTRATOR)
@@ -91,6 +93,8 @@ MainMenuLabel:
             Success("\nSign in berhasil.");
             Success("Anda masuk sebagai Reviewer.");
             getch();
+            // masuk ke menu reviewer
+            MenuReviewer(list_reviewer, list_movie, list_review, address_user_login);
         }
         else
         {
@@ -154,7 +158,7 @@ void InitDataReviewer(ListReviewer &list_reviewer)
     address_reviewer = Allocate(reviewer);
     InsertLast(list_reviewer, address_reviewer);
 
-    reviewer = CreateReviewer("Fathur", "fathur", "fathur123");
+    reviewer = CreateReviewer("Fathur", "fathur", "a");
     address_reviewer = Allocate(reviewer);
     InsertLast(list_reviewer, address_reviewer);
 

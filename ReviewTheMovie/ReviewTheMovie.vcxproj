@@ -26,6 +26,7 @@
     <ClCompile Include="list_movie.cpp" />
     <ClCompile Include="list_review.cpp" />
     <ClCompile Include="list_reviewer.cpp" />
+    <ClCompile Include="reviewer_area.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="admin_area.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="list_movie.h" />
     <ClInclude Include="list_review.h" />
     <ClInclude Include="list_reviewer.h" />
+    <ClInclude Include="reviewer_area.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

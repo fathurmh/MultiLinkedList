@@ -81,6 +81,8 @@ void DeleteMovieWithReview(ListReview &list_review, ListMovie &list_movie, Addre
 
 // fungsi cari review by id pada list
 AddressReview FindById(ListReview list_review, int id);
+// fungsi cari review by id pada array
+AddressReview FindById(AddressReview *array_review, int id);
 // fungsi cari review by movie id pada list
 AddressReview *FindByMovieId(ListReview list_review, int id);
 // fungsi cari review by reviewer id pada list

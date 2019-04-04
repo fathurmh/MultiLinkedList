@@ -86,6 +86,8 @@ void ClearScreen()
 void RemoveLastLine()
 {
     std::cout << "\x1b[A";
+    cout << "                                                                           ";
+    cout << "\r";
 }
 
 // prosedur cetak text header

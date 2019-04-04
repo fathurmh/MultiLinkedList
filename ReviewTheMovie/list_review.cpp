@@ -392,6 +392,35 @@ AddressReview FindById(ListReview list_review, int id)
     return data_ketemu;
 }
 
+// fungsi cari review by id pada array
+AddressReview FindById(AddressReview *array_review, int id)
+{
+    // inisialisasi variabel ketemu
+    bool ketemu = false;
+    // inisialisasi variabel data_ketemu dengan null
+    AddressReview data_ketemu = NULL;
+    // hitung total_review
+    int total_review = Count(array_review);
+
+    // cek review lebih dari 0
+    if (total_review > 0)
+    {
+        // loop selama tidak ketemu
+        for (int i = 0; i < total_review && !ketemu; i++)
+        {
+            // jika id current sama dengan parameter id yang dicari maka ketemu
+            if (DATA(array_review[i]).id == id)
+            {
+                ketemu = true;
+                data_ketemu = array_review[i];
+            }
+        }
+    }
+
+    // kembalikan data
+    return data_ketemu;
+}
+
 // fungsi cari review by movie id pada list
 void FindByMovieId(ListReview &result, ListReview list_review, int id)
 {

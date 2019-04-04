@@ -114,7 +114,6 @@ MainMenuLabel:
         goto MainMenuLabel;
     }
     }
-
 }
 
 // prosedur input data movie
@@ -363,7 +362,7 @@ ViewLabel:
                 }
 
                 // ensure
-                Warning("Anda yakin ingin mengupdate?");
+                Warning("\nAnda yakin ingin mengupdate?");
                 cout << "Jawaban (y/n): ";
                 getline(cin, ensure_update);
 

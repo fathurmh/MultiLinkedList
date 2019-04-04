@@ -220,7 +220,7 @@ ViewLabel:
     if (FIRST(top_movies) != NULL)
     {
         // info
-        Warning("\n- Masukan ID movie untuk melihat detail.");
+        Warning("- Masukan ID movie untuk melihat detail.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail

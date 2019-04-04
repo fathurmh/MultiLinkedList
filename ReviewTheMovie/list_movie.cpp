@@ -1,6 +1,7 @@
 // include library c++
 #include <conio.h>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 // include library buatan
@@ -121,7 +122,7 @@ void UpdateMovie(AddressMovie address_movie, string new_title, string new_direct
     // cek jika address_movie kosong
     if (address_movie == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -166,7 +167,7 @@ void DeleteFirst(ListMovie &list_movie)
     // cek jika elemen pertama null (list kosong)
     if (FIRST(list_movie) == NULL && LAST(list_movie) == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -200,7 +201,7 @@ void DeleteLast(ListMovie &list_movie)
     // cek jika elemen pertama null (list kosong)
     if (FIRST(list_movie) == NULL && LAST(list_movie) == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -234,7 +235,7 @@ void DeleteMovie(ListMovie &list_movie, AddressMovie address_movie)
     // cek jika list kosong
     if (FIRST(list_movie) == NULL && LAST(list_movie) == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else if (address_movie != NULL)
@@ -392,7 +393,7 @@ void Cetak(ListMovie list_movie)
     if (current == NULL)
     {
         // cetak info tidak ada data
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -409,6 +410,6 @@ void Cetak(ListMovie list_movie)
         }
 
         // cetak total movie
-        cout << "Total Movie: " << count << endl;
+        Success({ "Total Movie: ", to_string(count), "\n" });
     }
 }

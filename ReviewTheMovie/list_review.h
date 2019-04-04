@@ -99,8 +99,12 @@ int Count(AddressReview *(&address_review));
 void Cetak(AddressReview address_review);
 // prosedur cetak data review with reviewer
 void CetakWithReviewer(AddressReview address_review);
+// prosedur cetak data array review with reviewer
+void CetakWithReviewer(AddressReview *address_review);
 // prosedur cetak data review with movie
 void CetakWithMovie(AddressReview address_review);
+// prosedur cetak data array review with movie
+void CetakWithMovie(AddressReview *address_review);
 // prosedur cetak list data review
 void Cetak(ListReview list_review);
 // prosedur cetak list data review dan reviewernya

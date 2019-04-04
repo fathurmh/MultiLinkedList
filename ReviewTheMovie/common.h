@@ -3,6 +3,7 @@
 
 // include library c++
 #include <string>
+#include <vector>
 
 // using namespace
 using namespace std;
@@ -59,11 +60,15 @@ void PrintHeader();
 // prosedur cetak text title
 void PrintTitle(const char* text);
 // prosedur cetak text failed
-void Failed(const char* text);
+void Failed(const char *text);
 // prosedur cetak text success
-void Success(const char* text);
+void Success(const char *text);
+// prosedur cetak text success
+void Success(const std::vector<string> &params);
 // prosedur cetak text warning
 void Warning(const char* text);
+// prosedur cetak text warning
+void Warning(const std::vector<string> &params);
 // prosedur cetak text information
 void Information(const char* text);
 

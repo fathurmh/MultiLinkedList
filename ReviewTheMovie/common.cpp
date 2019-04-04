@@ -1,7 +1,9 @@
 // include library c++
 #include <conio.h>
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <vector>
 
 // include library buatan
 #include "common.h"
@@ -43,7 +45,7 @@ void ClearScreen()
 // https://stackoverflow.com/questions/10058050/how-to-go-up-a-line-in-console-programs-c
 void RemoveLastLine()
 {
-    std::cout << "\x1b[A";
+    cout << "\x1b[A";
     cout << "                                                                           ";
     cout << "\r";
 }
@@ -54,9 +56,9 @@ void PrintHeader()
     ClearScreen();
 
     // cetak header
-    std::cout << "============================" << std::endl
-        << "======= NUGI BANGSAT =======" << std::endl
-        << "============================" << std::endl << std::endl;
+    cout << "============================" << endl
+        << "======= NUGI BANGSAT =======" << endl
+        << "============================" << endl << endl;
 }
 
 // prosedur cetak text title
@@ -80,11 +82,33 @@ void Success(const char *text)
     printf("\x1B[32m%s\033[0m\n", text);
 }
 
+void Success(const vector<string> &params)
+{
+    stringstream stream;
+    for (size_t i = 0; i < params.size(); ++i)
+    {
+        stream << params[i];
+    }
+
+    Success(stream.str().c_str());
+}
+
 // prosedur cetak text warning
 void Warning(const char *text)
 {
     // cetak text berwarna jingga
     printf("\x1B[33m%s\033[0m\n", text);
+}
+
+void Warning(const vector<string> &params)
+{
+    stringstream stream;
+    for (size_t i = 0; i < params.size(); ++i)
+    {
+        stream << params[i];
+    }
+
+    Warning(stream.str().c_str());
 }
 
 // prosedur cetak text information
@@ -96,14 +120,14 @@ void Information(const char *text)
 
 // fungsi agar input password menjadi simbol *
 // http://www.cplusplus.com/articles/E6vU7k9E/
-std::string GetPassword(const char *prompt, bool show_asterisk)
+string GetPassword(const char *prompt, bool show_asterisk)
 {
     const char BACKSPACE = 8;
     const char RETURN = 13;
     unsigned char ch = 0;
 
-    std::string password;
-    std::cout << prompt;
+    string password;
+    cout << prompt;
 
     while ((ch = getch()) != RETURN)
     {
@@ -113,7 +137,7 @@ std::string GetPassword(const char *prompt, bool show_asterisk)
             {
                 if (show_asterisk)
                 {
-                    std::cout << "\b \b";
+                    cout << "\b \b";
                 }
                 password.resize(password.length() - 1);
             }
@@ -128,12 +152,12 @@ std::string GetPassword(const char *prompt, bool show_asterisk)
             password += ch;
             if (show_asterisk)
             {
-                std::cout << '*';
+                cout << '*';
             }
         }
     }
 
-    std::cout << std::endl;
+    cout << endl;
 
     return password;
 }

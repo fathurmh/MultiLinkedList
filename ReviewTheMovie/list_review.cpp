@@ -141,7 +141,7 @@ void UpdateReview(AddressReview address_review, int new_rating, string new_descr
     // cek jika address_review kosong
     if (address_review == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -164,7 +164,7 @@ void DeleteFirst(ListReview &list_review)
     // cek jika elemen pertama null (list kosong)
     if (FIRST(list_review) == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -203,7 +203,7 @@ void DeleteLast(ListReview &list_review)
     // cek jika elemen pertama null (list kosong)
     if (FIRST(list_review) == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -241,7 +241,7 @@ void DeleteReview(ListReview &list_review, AddressReview address_review)
     // cek jika elemen pertama null (list kosong)
     if (FIRST(list_review) == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else if (address_review != NULL)
@@ -636,16 +636,64 @@ void Cetak(AddressReview address_review)
 void CetakWithReviewer(AddressReview address_review)
 {
     // cetak data review with movie
-    cout << "Reviewed by: " << DATA(REVIEWER(address_review)).name << endl;
     Cetak(address_review);
+    RemoveLastLine();
+    cout << "Reviewed by: " << DATA(REVIEWER(address_review)).name << endl << endl;
+}
+
+void CetakWithReviewer(AddressReview *address_review)
+{
+    // inisialisasi panjang array
+    int length = Count(address_review);
+
+    // jika panjang lebih dari 0
+    if (length > 0)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            // cetak review with movie
+            CetakWithMovie(address_review[i]);
+        }
+
+        // cetak total review
+        Success({ "Total Review: ", to_string(length), "\n" });
+    }
+    else
+    {
+        Warning("Tidak ada data.\n");
+    }
 }
 
 // prosedur cetak data review with movie
 void CetakWithMovie(AddressReview address_review)
 {
     // cetak data review with movie
-    cout << "Reviews on : " << DATA(MOVIE(address_review)).title << endl;
     Cetak(address_review);
+    RemoveLastLine();
+    cout << "Reviews on : " << DATA(MOVIE(address_review)).title << endl << endl;
+}
+
+void CetakWithMovie(AddressReview *address_review)
+{
+    // inisialisasi panjang array
+    int length = Count(address_review);
+
+    // jika panjang lebih dari 0
+    if (length > 0)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            // cetak review with movie
+            CetakWithMovie(address_review[i]);
+        }
+
+        // cetak total review
+        Success({ "Total Review: ", to_string(length) , "\n" });
+    }
+    else
+    {
+        Warning("Tidak ada data.\n");
+    }
 }
 
 // prosedur cetak list data review
@@ -658,7 +706,7 @@ void Cetak(ListReview list_review)
     if (FIRST(list_review) == NULL)
     {
         // cetak info tidak ada data
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -675,7 +723,7 @@ void Cetak(ListReview list_review)
         } while (current != FIRST(list_review)); // loop selama tidak ketemu dan current elemen tidak sama dengan elemen pertama
 
         // cetak total review
-        cout << "Total Review: " << count << endl;
+        Success({ "Total Review: ", to_string(count), "\n" });
     }
 }
 
@@ -691,15 +739,9 @@ void CetakReviewerWithReview(ListReview list_review, AddressReviewer address_rev
     // cetak reviewer
     Cetak(address_reviewer);
 
+    // cetak review with movie
     PrintTitle("LIST REVIEW");
-    for (int i = 0; i < length; i++)
-    {
-        // cetak review with movie
-        CetakWithMovie(reviewer_reviews[i]);
-    }
-
-    // cetak total review
-    cout << "Total Review: " << length << endl << endl;
+    CetakWithMovie(reviewer_reviews);
 
     // dealokasi memory array karena sudah tidak digunakan
     Deallocate(reviewer_reviews);
@@ -717,15 +759,9 @@ void CetakMovieWithReview(ListReview list_review, AddressMovie address_movie)
     // cetak movie
     Cetak(address_movie);
 
+    // cetak review with reviewer
     PrintTitle("LIST REVIEW");
-    for (int i = 0; i < length; i++)
-    {
-        // cetak review with reviewer
-        CetakWithReviewer(movie_reviews[i]);
-    }
-
-    // cetak total review
-    cout << "Total Review: " << length << endl << endl;
+    CetakWithReviewer(movie_reviews);
 
     // dealokasi memory array karena sudah tidak digunakan
     Deallocate(movie_reviews);

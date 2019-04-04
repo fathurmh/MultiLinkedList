@@ -253,7 +253,7 @@ ViewLabel:
     if (FIRST(list_movie) != NULL)
     {
         // info
-        Warning("\n- Masukan ID movie yang akan diupdate.");
+        Warning("- Masukan ID movie yang akan diupdate.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
@@ -415,7 +415,7 @@ ViewLabel:
     if (FIRST(list_movie) != NULL)
     {
         // info
-        Warning("\n- Masukan ID movie untuk melihat detail.");
+        Warning("- Masukan ID movie untuk melihat detail.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
@@ -493,7 +493,7 @@ ViewLabel:
     if (FIRST(list_movie) != NULL)
     {
         // info
-        Warning("\n- Masukan ID movie yang akan dihapus.");
+        Warning("- Masukan ID movie yang akan dihapus.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
@@ -534,7 +534,7 @@ ViewLabel:
                 CetakMovieWithReview(list_review, address_movie);
 
                 // ensure
-                Warning("\nReview yang telah diberikan akan terhapus.");
+                Warning("Review yang telah diberikan akan terhapus.");
                 Warning("Anda yakin ingin menghapus?");
                 cout << "Jawaban (y/n): ";
                 getline(cin, ensure_update);
@@ -588,7 +588,7 @@ ViewLabel:
     if (FIRST(list_reviewer) != NULL)
     {
         // info
-        Warning("\n- Masukan ID reviewer untuk melihat detail.");
+        Warning("- Masukan ID reviewer untuk melihat detail.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
@@ -666,7 +666,7 @@ ViewLabel:
     if (FIRST(list_reviewer) != NULL)
     {
         // info
-        Warning("\n- Masukan ID reviewer yang akan dihapus.");
+        Warning("- Masukan ID reviewer yang akan dihapus.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
@@ -707,7 +707,7 @@ ViewLabel:
                 CetakReviewerWithReview(list_review, address_reviewer);
 
                 // ensure
-                Warning("\nReview yang telah diberikan akan terhapus.");
+                Warning("Review yang telah diberikan akan terhapus.");
                 Warning("Anda yakin ingin menghapus?");
                 cout << "Jawaban (y/n): ";
                 getline(cin, ensure_update);

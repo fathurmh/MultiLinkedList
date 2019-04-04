@@ -118,7 +118,7 @@ void UpdateReviewer(AddressReviewer address_reviewer, string new_name, string ne
     // cek jika address_reviewer kosong
     if (address_reviewer == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -148,7 +148,7 @@ void DeleteFirst(ListReviewer &list_reviewer)
     // cek jika elemen pertama null (list kosong)
     if (FIRST(list_reviewer) == NULL && LAST(list_reviewer) == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -182,7 +182,7 @@ void DeleteLast(ListReviewer &list_reviewer)
     // cek jika elemen pertama null (list kosong)
     if (FIRST(list_reviewer) == NULL && LAST(list_reviewer) == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -216,7 +216,7 @@ void DeleteReviewer(ListReviewer &list_reviewer, AddressReviewer address_reviewe
     // cek jika list kosong
     if (FIRST(list_reviewer) == NULL && LAST(list_reviewer) == NULL)
     {
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else if (address_reviewer != NULL)
@@ -371,7 +371,7 @@ void Cetak(ListReviewer list_reviewer)
     if (current == NULL)
     {
         // cetak info tidak ada data
-        Warning("Tidak ada data.");
+        Warning("Tidak ada data.\n");
         getch();
     }
     else
@@ -388,6 +388,6 @@ void Cetak(ListReviewer list_reviewer)
         }
 
         // cetak total reviewer
-        cout << "Total Reviewer: " << count << endl;
+        Success({ "Total Review: ", to_string(count), "\n" });
     }
 }

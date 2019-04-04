@@ -129,8 +129,9 @@ ViewLabel:
     PrintHeader();
 
     // cetak list movie
-    Cetak(list_movie);// jika terdapat movie dalam list
+    Cetak(list_movie);
 
+    // jika terdapat movie dalam list
     if (FIRST(list_movie) != NULL)
     {
         // info
@@ -300,6 +301,7 @@ ViewLabel:
             goto ViewLabel;
         }
     }
+
 ExitLabel:;
 }
 
@@ -326,18 +328,12 @@ ViewLabel:
     // inisialisasi panjang array
     int length = Count(reviewer_reviews);
 
+    // cetak review with movie
+    CetakWithMovie(reviewer_reviews);
+
     // jika terdapat review dalam array
     if (length > 0)
     {
-        for (int i = 0; i < length; i++)
-        {
-            // cetak review with movie
-            CetakWithMovie(reviewer_reviews[i]);
-        }
-
-        // cetak total review
-        cout << "Total Review: " << length << endl;
-
         // info
         Warning("\n- Masukan ID review yang akan diupdate.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
@@ -406,9 +402,7 @@ ViewLabel:
                     if (rating <= 0 || rating > MAX_RATING)
                     {
                         // cetak bahwa rating harus diantara 1 - Max
-                        stringstream msg;
-                        msg << "\nMasukan rating hanya angka 1 sampai " << MAX_RATING << ".";
-                        Warning(msg.str().c_str());
+                        Warning({ "\nMasukan rating hanya angka 1 sampai ", to_string(MAX_RATING), "." });
 
                         getch();
 
@@ -480,13 +474,8 @@ ViewLabel:
             goto ViewLabel;
         }
     }
-    else
-    {
-        Warning("Tidak ada data.");
 
-        getch();
-    }
-
+    getch();
 
 ExitLabel:;
     // dealokasi memory array karena sudah tidak digunakan
@@ -512,18 +501,12 @@ ViewLabel:
     // inisialisasi panjang array
     int length = Count(reviewer_reviews);
 
+    // cetak review with movie
+    CetakWithMovie(reviewer_reviews);
+
     // jika terdapat review dalam array
     if (length > 0)
     {
-        for (int i = 0; i < length; i++)
-        {
-            // cetak review with movie
-            CetakWithMovie(reviewer_reviews[i]);
-        }
-
-        // cetak total review
-        cout << "Total Review: " << length << endl;
-
         // info
         Warning("\n- Masukan ID review yang akan dihapus.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
@@ -593,13 +576,8 @@ ViewLabel:
             goto ViewLabel;
         }
     }
-    else
-    {
-        Warning("Tidak ada data.");
 
-        getch();
-    }
-
+    getch();
 
 ExitLabel:;
     // dealokasi memory array karena sudah tidak digunakan
@@ -615,26 +593,8 @@ void ViewReviewHistory(ListReview list_review, AddressReviewer current_address_r
     // inisialisasi array review by reviewer id
     AddressReview *reviewer_reviews = FindByReviewerId(list_review, DATA(current_address_reviewer).id);
 
-    bool x = reviewer_reviews == NULL;
-
-    // inisialisasi panjang array
-    int length = Count(reviewer_reviews);
-
-    if (length > 0)
-    {
-        for (int i = 0; i < length; i++)
-        {
-            // cetak review with movie
-            CetakWithMovie(reviewer_reviews[i]);
-        }
-
-        // cetak total review
-        cout << "Total Review: " << length << endl;
-    }
-    else
-    {
-        Warning("Tidak ada data.");
-    }
+    // cetak review with movie
+    CetakWithMovie(reviewer_reviews);
 
     // dealokasi memory array karena sudah tidak digunakan
     Deallocate(reviewer_reviews);

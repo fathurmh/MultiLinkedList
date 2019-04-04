@@ -135,7 +135,7 @@ ViewLabel:
     if (FIRST(list_movie) != NULL)
     {
         // info
-        Warning("\n- Masukan ID movie yang akan direview.");
+        Warning("- Masukan ID movie yang akan direview.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
@@ -205,7 +205,7 @@ ViewLabel:
                     else
                     {
                         // cetak bahwa rating harus diantara 1 - 5
-                        Warning("\nMasukan rating hanya angka 1 sampai " + MAX_RATING + '.');
+                        Warning({ "\nMasukan rating hanya angka 1 sampai ", to_string(MAX_RATING), "." });
                     }
 
                     getch();
@@ -335,7 +335,7 @@ ViewLabel:
     if (length > 0)
     {
         // info
-        Warning("\n- Masukan ID review yang akan diupdate.");
+        Warning("- Masukan ID review yang akan diupdate.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail
@@ -358,9 +358,6 @@ ViewLabel:
         }
         else if (pilih_id == stream.str() && id > 0)
         {
-            // cetak header
-            PrintHeader();
-            PrintTitle("UPDATE DATA REVIEW");
 
             // cari review by id
             address_review = FindById(reviewer_reviews, id);
@@ -368,14 +365,26 @@ ViewLabel:
             // cek pointer review
             if (address_review == NULL)
             {
+                // cetak header
+                PrintHeader();
+                PrintTitle("UPDATE DATA REVIEW");
                 Warning("Review tidak ditemukan.");
             }
             else
             {
+                // cetak header
+                PrintHeader();
+                PrintTitle("VIEW DETAIL DATA MOVIE");
+
+                // cetak movie
+                Cetak(MOVIE(address_review));
+
+                PrintTitle("UPDATE DATA REVIEW");
+
                 // cetak detail review
                 Warning("Jangan inputkan data untuk mengisi field seperti default.\n");
                 Warning("Default data:");
-                CetakWithMovie(address_review);
+                Cetak(address_review);
 
                 // inisialisasi variabel pengulangan input rating
                 retry_rating_count = 0;
@@ -508,7 +517,7 @@ ViewLabel:
     if (length > 0)
     {
         // info
-        Warning("\n- Masukan ID review yang akan dihapus.");
+        Warning("- Masukan ID review yang akan dihapus.");
         Warning("- Masukan 0 untuk kembali ke menu sebelumnya.\n");
 
         // input nomor untuk detail

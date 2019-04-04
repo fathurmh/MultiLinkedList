@@ -209,7 +209,7 @@ ViewLabel:
                 stream << rating;
 
                 // cek jika inputan kosong
-                if (pilih_rating.empty() || rating <= 0 || rating > MAX_RATING)
+                if (pilih_rating.empty() || pilih_rating != stream.str() || rating <= 0 || rating > MAX_RATING)
                 {
                     if (pilih_rating.empty())
                     {
@@ -422,7 +422,7 @@ ViewLabel:
                     int_stream >> rating;
 
                     // cek jika inputan kosong
-                    if (rating <= 0 || rating > MAX_RATING)
+                    if (pilih_rating != stream.str() || rating <= 0 || rating > MAX_RATING)
                     {
                         // cetak bahwa rating harus diantara 1 - Max
                         Warning({ "\nMasukan rating hanya angka 1 sampai ", to_string(MAX_RATING), "." });

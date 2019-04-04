@@ -93,7 +93,7 @@ ListMovie TopTenMovies(ListMovie list_movie, ListReview list_review);
 // fungsi hitung total elemen pada list
 int Count(ListReview list_review);
 // fungsi hitung total elemen pada array
-int Count(AddressReview *address_review);
+int Count(AddressReview *(&address_review));
 
 // prosedur cetak data review
 void Cetak(AddressReview address_review);

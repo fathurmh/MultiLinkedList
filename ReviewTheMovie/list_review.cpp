@@ -425,12 +425,15 @@ AddressReview FindById(AddressReview *array_review, int id)
 // fungsi cari review by movie id pada list
 AddressReview *FindByMovieId(ListReview list_review, int id)
 {
-    // inisialisasi array hasil pencarian
-    AddressReview *result = Allocate(Count(list_review));
+    // Inisialisasi array hasil dengan null
+    AddressReview *result = NULL;
 
-    // cek jika elemen pertama tidak null (list berisi)
-    if (FIRST(list_review) != NULL)
+    int review_count = Count(list_review);
+    if (review_count > 0)
     {
+        // inisialisasi array hasil pencarian
+        result = Allocate(review_count);
+
         // inisialisasi variabel current dengan elemen pertama pada list
         AddressReview current = FIRST(list_review);
         int index = 0;
@@ -457,12 +460,15 @@ AddressReview *FindByMovieId(ListReview list_review, int id)
 // fungsi cari review by reviewer id pada list
 AddressReview *FindByReviewerId(ListReview list_review, int id)
 {
-    // inisialisasi array hasil pencarian
-    AddressReview *result = Allocate(Count(list_review));
+    // Inisialisasi array hasil dengan null
+    AddressReview *result = NULL;
 
-    // cek jika elemen pertama tidak null (list berisi)
-    if (FIRST(list_review) != NULL)
+    int review_count = Count(list_review);
+    if (review_count > 0)
     {
+        // inisialisasi array hasil pencarian
+        result = Allocate(review_count);
+
         // inisialisasi variabel current dengan elemen pertama pada list
         AddressReview current = FIRST(list_review);
         int index = 0;
@@ -597,14 +603,22 @@ int Count(ListReview list_review)
 }
 
 // fungsi hitung total elemen pada array
-int Count(AddressReview *address_review)
+int Count(AddressReview *(&address_review))
 {
     // inisialisasi count
     int count = 0;
-    // hitung elemen array
-    while (address_review[count++] != NULL) { }
+
+    if (address_review != NULL && address_review[count] != NULL)
+    {
+        // hitung elemen array
+        do
+        {
+            count++;
+        } while (address_review[count] != NULL);
+    }
+
     // kembalikan hasil hitung
-    return --count;
+    return count;
 }
 
 // prosedur cetak data review

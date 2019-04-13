@@ -56,9 +56,9 @@ void PrintHeader()
     ClearScreen();
 
     // cetak header
-    cout << "============================" << endl
-        << "======= NUGI BANGSAT =======" << endl
-        << "============================" << endl << endl;
+    cout << "================================" << endl
+        << "======= REVIEW THE MOVIE =======" << endl
+        << "================================" << endl << endl;
 }
 
 // prosedur cetak text title
